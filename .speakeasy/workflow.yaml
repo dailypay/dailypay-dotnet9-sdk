@@ -1,0 +1,19 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    openapi:
+        inputs:
+            - location: https://raw.githubusercontent.com/dailypay/xapi/devrel-546/api/api-docs/out/sdks.openapi.yaml
+              authHeader: Authorization
+              authSecret: $OAUTH_TOKEN
+        registry:
+            location: registry.speakeasyapi.dev/dailypay/dailypay/openapi
+targets:
+    csharp-9:
+        target: csharp
+        source: openapi
+        output: sdk
+        codeSamples:
+            output: codeSamples.yaml
+            registry:
+                location: registry.speakeasyapi.dev/dailypay/dailypay/openapi-csharp-code-samples
