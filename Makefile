@@ -1,8 +1,8 @@
 .PHONY: generate-sdk update-token sync-csharp-version
-MONOREPO_ROOT := $(shell git rev-parse --show-toplevel)
-SDK_DIR := ${MONOREPO_ROOT}/sdk
-OAUTH_TOKEN := Bearer $(shell gh auth token)
-export OAUTH_TOKEN
+ROOT_DIR := $(shell git rev-parse --show-toplevel)
+SDK_DIR := ${ROOT_DIR}/sdk
+GITHUB_ACCESS_TOKEN:= Bearer $(shell gh auth token)
+export GITHUB_ACCESS_TOKEN
 update-token:
 	@echo "Updating GH auth token"
 	@echo "Token is: $$OAUTH_TOKEN"
