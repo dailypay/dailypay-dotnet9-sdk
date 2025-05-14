@@ -1,8 +1,8 @@
-speakeasyVersion: 1.543.3
+speakeasyVersion: 1.544.0
 sources:
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:e4b543d284e1a2e2d82905c670186bad6a3e404939c490edbc33b032e46b941d
+        sourceRevisionDigest: sha256:4b190dcef64e2c96305902d67de9f02687c5f356d785a7af43685e447a9e0073
         sourceBlobDigest: sha256:141038212a95b5a054c2b959dee6f79dbcbdb5fd58bb2843a8f4de44eea583c9
         tags:
             - latest
@@ -18,10 +18,10 @@ targets:
     csharp-9:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:e4b543d284e1a2e2d82905c670186bad6a3e404939c490edbc33b032e46b941d
+        sourceRevisionDigest: sha256:4b190dcef64e2c96305902d67de9f02687c5f356d785a7af43685e447a9e0073
         sourceBlobDigest: sha256:141038212a95b5a054c2b959dee6f79dbcbdb5fd58bb2843a8f4de44eea583c9
         codeSamplesNamespace: openapi-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:c797ad3c661323566b9d584f4c2aaaba895bcddddbad7096670958e972f27a3e
+        codeSamplesRevisionDigest: sha256:a3ef3e6b505f3c4f6103d930d6af0dff7eb60c85083f3a4d77a9da9c4ca016cb
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -30,7 +30,7 @@ workflow:
             inputs:
                 - location: https://raw.githubusercontent.com/dailypay/xapi/devrel-546/api/api-docs/out/sdks.openapi.yaml
                   authHeader: Authorization
-                  authSecret: $OAUTH_TOKEN
+                  authSecret: $GITHUB_ACCESS_TOKEN
             registry:
                 location: registry.speakeasyapi.dev/dailypay/dailypay/openapi
     targets:
