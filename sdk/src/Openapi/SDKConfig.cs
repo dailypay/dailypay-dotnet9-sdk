@@ -52,7 +52,7 @@ namespace Openapi
                 },
             };
             Version = null;
-            UserAgent = "speakeasy-sdk/csharp 0.1.0 2.634.2 3.0.0-beta01 Openapi";
+            UserAgent = "speakeasy-sdk/csharp 0.1.1 2.634.2 3.0.0-beta01 Openapi";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;
