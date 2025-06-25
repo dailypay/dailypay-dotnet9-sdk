@@ -15,4 +15,3 @@ targets:
             output: codeSamples.yaml
             registry:
                 location: registry.speakeasyapi.dev/dailypay/dailypay/openapi-csharp-code-samples
-

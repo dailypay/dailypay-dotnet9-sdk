@@ -1,5 +1,12 @@
-speakeasyVersion: 1.544.0
+speakeasyVersion: 1.568.3
 sources:
+    local:
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:52248b01dfadaa09d1800547004fbd99d1872aeb920fc2dafe58e6174770dda5
+        sourceBlobDigest: sha256:159fc444ec50ff75e5c5e090a882462d5d0c8172d55227aa865701214a1f8264
+        tags:
+            - latest
+            - 3.0.0-beta01
     openapi:
         sourceNamespace: openapi
         sourceRevisionDigest: sha256:4b190dcef64e2c96305902d67de9f02687c5f356d785a7af43685e447a9e0073
@@ -16,27 +23,25 @@ targets:
         codeSamplesNamespace: openapi-csharp-code-samples
         codeSamplesRevisionDigest: sha256:c797ad3c661323566b9d584f4c2aaaba895bcddddbad7096670958e972f27a3e
     csharp-9:
-        source: openapi
+        source: local
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:4b190dcef64e2c96305902d67de9f02687c5f356d785a7af43685e447a9e0073
-        sourceBlobDigest: sha256:141038212a95b5a054c2b959dee6f79dbcbdb5fd58bb2843a8f4de44eea583c9
+        sourceRevisionDigest: sha256:52248b01dfadaa09d1800547004fbd99d1872aeb920fc2dafe58e6174770dda5
+        sourceBlobDigest: sha256:159fc444ec50ff75e5c5e090a882462d5d0c8172d55227aa865701214a1f8264
         codeSamplesNamespace: openapi-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:a3ef3e6b505f3c4f6103d930d6af0dff7eb60c85083f3a4d77a9da9c4ca016cb
+        codeSamplesRevisionDigest: sha256:f0f31fd00763ea91042bf8db3f667d4885fc47995af5dade7d5712c1d8ff114a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        openapi:
+        local:
             inputs:
-                - location: https://raw.githubusercontent.com/dailypay/xapi/devrel-546/api/api-docs/out/sdks.openapi.yaml
-                  authHeader: Authorization
-                  authSecret: $GITHUB_ACCESS_TOKEN
+                - location: source/sdks.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/dailypay/dailypay/openapi
     targets:
         csharp-9:
             target: csharp
-            source: openapi
+            source: local
             output: sdk
             codeSamples:
                 output: codeSamples.yaml
