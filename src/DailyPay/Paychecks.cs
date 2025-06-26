@@ -23,73 +23,83 @@ namespace DailyPay
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The _people_ endpoint allows you to see information related to who owns <br/>
+    /// The _paychecks_ endpoint provides detailed information about paychecks. <br/>
     /// 
     /// <remarks>
-    /// resources such as jobs and accounts.<br/>
+    /// You can retrieve individual paycheck details, including the<br/>
+    /// person and job associated with the paycheck, its status, pay period,<br/>
+    /// expected deposit date, total debited amount, withholdings, earnings, and<br/>
+    /// currency.<br/>
     /// <br/>
-    /// **Functionality:** Retrieve limited details about a person, including<br/>
-    /// their name, global status, and state of residence.<br/>
+    /// **Functionality:** Retrieve specific paycheck details, including payee and<br/>
+    /// job information, and monitor the status and financial details of each<br/>
+    /// paycheck.<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public interface IPeople
+    public interface IPaychecks
     {
 
         /// <summary>
-        /// Get a person object
+        /// Get a Paycheck object
         /// 
         /// <remarks>
-        /// Returns details about a person.
+        /// Returns details about a paycheck object.
         /// </remarks>
         /// </summary>
-        Task<ReadPersonResponse> ReadAsync(string personId, long? version = 3);
+        Task<ReadPaycheckResponse> ReadAsync(string paycheckId, long? version = 3);
 
         /// <summary>
-        /// Update a person
+        /// Get a list of paycheck objects
         /// 
         /// <remarks>
-        /// Update a person object.
+        /// Returns a collection of paycheck objects. This object details a person&apos;s pay and pay period.<br/>
+        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Paychecks</a> for a description of filterable fields.<br/>
+        /// 
         /// </remarks>
         /// </summary>
-        Task<UpdatePersonResponse> UpdateAsync(string personId, PersonDataInput personData, long? version = 3);
+        Task<ListPaychecksResponse> ListAsync(ListPaychecksRequest? request = null);
     }
 
     /// <summary>
-    /// The _people_ endpoint allows you to see information related to who owns <br/>
+    /// The _paychecks_ endpoint provides detailed information about paychecks. <br/>
     /// 
     /// <remarks>
-    /// resources such as jobs and accounts.<br/>
+    /// You can retrieve individual paycheck details, including the<br/>
+    /// person and job associated with the paycheck, its status, pay period,<br/>
+    /// expected deposit date, total debited amount, withholdings, earnings, and<br/>
+    /// currency.<br/>
     /// <br/>
-    /// **Functionality:** Retrieve limited details about a person, including<br/>
-    /// their name, global status, and state of residence.<br/>
+    /// **Functionality:** Retrieve specific paycheck details, including payee and<br/>
+    /// job information, and monitor the status and financial details of each<br/>
+    /// paycheck.<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public class People: IPeople
+    public class Paychecks: IPaychecks
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.2";
-        private const string _sdkGenVersion = "2.638.1";
+        private const string _sdkVersion = "0.0.3";
+        private const string _sdkGenVersion = "2.638.5";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
-        public People(SDKConfig config)
+        public Paychecks(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ReadPersonResponse> ReadAsync(string personId, long? version = 3)
+        public async Task<ReadPaycheckResponse> ReadAsync(string paycheckId, long? version = 3)
         {
-            var request = new ReadPersonRequest()
+            var request = new ReadPaycheckRequest()
             {
-                PersonId = personId,
+                PaycheckId = paycheckId,
                 Version = version,
             };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/people/{person_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/paychecks/{paycheck_id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -100,7 +110,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readPerson", new List<string> { "client:admin", "client:admin" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readPaycheck", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -140,8 +150,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<PersonData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new ReadPersonResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<PaycheckData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ReadPaycheckResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -149,7 +159,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.PersonData = obj;
+                    response.PaycheckData = obj;
                     return response;
                 }
 
@@ -242,35 +252,23 @@ namespace DailyPay
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdatePersonResponse> UpdateAsync(string personId, PersonDataInput personData, long? version = 3)
+        public async Task<ListPaychecksResponse> ListAsync(ListPaychecksRequest? request = null)
         {
-            var request = new UpdatePersonRequest()
-            {
-                PersonId = personId,
-                PersonData = personData,
-                Version = version,
-            };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/people/{person_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/paychecks", request);
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
-
-            var serializedBody = RequestBodySerializer.Serialize(request, "PersonData", "json", false, false);
-            if (serializedBody != null)
-            {
-                httpRequest.Content = serializedBody;
-            }
 
             if (SDKConfiguration.SecuritySource != null)
             {
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updatePerson", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listPaychecks", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -280,7 +278,7 @@ namespace DailyPay
                 httpResponse = await SDKConfiguration.Client.SendAsync(httpRequest);
                 int _statusCode = (int)httpResponse.StatusCode;
 
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
                 {
                     var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
                     if (_httpResponse != null)
@@ -310,8 +308,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<PersonData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new UpdatePersonResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<PaychecksData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var response = new ListPaychecksResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -319,7 +317,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.PersonData = obj;
+                    response.PaychecksData = obj;
                     return response;
                 }
 
@@ -329,7 +327,7 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorBadRequest>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorBadRequest>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -344,7 +342,7 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -359,22 +357,7 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorNotFound>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,
@@ -389,7 +372,7 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,

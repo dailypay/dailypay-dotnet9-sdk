@@ -23,86 +23,96 @@ namespace DailyPay
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The _jobs_ endpoint provides access to comprehensive information <br/>
+    /// The _accounts_ endpoint provides comprehensive information about money<br/>
     /// 
     /// <remarks>
-    /// about a person&apos;s employment. It enables you to retrieve details about<br/>
-    /// individual jobs, including information about the organization<br/>
-    /// they work for, status, wage rate, job title, location,<br/>
-    /// paycheck settings, and related links to associated accounts.<br/>
+    /// accounts. You can retrieve account details, including the<br/>
+    /// account&apos;s unique ID, a link to the account holder, type, subtype,<br/>
+    /// verification status, balance details, transfer capabilities, and<br/>
+    /// user-specific information such as names, routing numbers, and partial<br/>
+    /// account numbers.<br/>
+    /// <br/>
+    /// <br/>
+    /// **Functionality:** Access detailed user account information, verify<br/>
+    /// account balances, view transfer capabilities, and access user-specific<br/>
+    /// details associated with each account.<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public interface IJobs
+    public interface IAccounts
     {
 
         /// <summary>
-        /// Get a job object
+        /// Get an Account object
         /// 
         /// <remarks>
-        /// Returns details about a person&apos;s employment.
+        /// Returns details about an account. This object represents a person&apos;s bank accounts, debit and pay cards, and earnings balance accounts.
         /// </remarks>
         /// </summary>
-        Task<ReadJobResponse> ReadAsync(string jobId, long? version = 3);
+        Task<ReadAccountResponse> ReadAsync(string accountId, long? version = 3);
 
         /// <summary>
-        /// Update paycheck settings or deactivate a job
+        /// Get a list of Account objects
         /// 
         /// <remarks>
-        /// Update this job to set where pay should be deposited for paychecks related to this job,  or deactivate on-demand pay for this job. <br/>
-        /// Returns the job object if the update succeeded. Returns an error if update parameters are invalid.<br/>
+        /// Returns a list of account objects. An account object represents a person&apos;s bank accounts, debit and pay cards, and earnings balance accounts.<br/>
+        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Accounts</a> for a description of filterable fields.<br/>
         /// 
         /// </remarks>
         /// </summary>
-        Task<UpdateJobResponse> UpdateAsync(string jobId, JobUpdateData jobUpdateData, long? version = 3);
+        Task<ListAccountsResponse> ListAsync(ListAccountsRequest? request = null);
 
         /// <summary>
-        /// Get a list of job objects
+        /// Create an Account object
         /// 
         /// <remarks>
-        /// Returns a collection of job objects. This object represents a person&apos;s employment details.<br/>
-        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Jobs</a> for a description of filterable fields.<br/>
-        /// 
+        /// Create an account object to store a person&apos;s bank or card information as a destination for funds.
         /// </remarks>
         /// </summary>
-        Task<ListJobsResponse> ListAsync(ListJobsRequest? request = null);
+        Task<CreateAccountResponse> CreateAsync(AccountDataInput accountData, long? version = 3);
     }
 
     /// <summary>
-    /// The _jobs_ endpoint provides access to comprehensive information <br/>
+    /// The _accounts_ endpoint provides comprehensive information about money<br/>
     /// 
     /// <remarks>
-    /// about a person&apos;s employment. It enables you to retrieve details about<br/>
-    /// individual jobs, including information about the organization<br/>
-    /// they work for, status, wage rate, job title, location,<br/>
-    /// paycheck settings, and related links to associated accounts.<br/>
+    /// accounts. You can retrieve account details, including the<br/>
+    /// account&apos;s unique ID, a link to the account holder, type, subtype,<br/>
+    /// verification status, balance details, transfer capabilities, and<br/>
+    /// user-specific information such as names, routing numbers, and partial<br/>
+    /// account numbers.<br/>
+    /// <br/>
+    /// <br/>
+    /// **Functionality:** Access detailed user account information, verify<br/>
+    /// account balances, view transfer capabilities, and access user-specific<br/>
+    /// details associated with each account.<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public class Jobs: IJobs
+    public class Accounts: IAccounts
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.2";
-        private const string _sdkGenVersion = "2.638.1";
+        private const string _sdkVersion = "0.0.3";
+        private const string _sdkGenVersion = "2.638.5";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
-        public Jobs(SDKConfig config)
+        public Accounts(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ReadJobResponse> ReadAsync(string jobId, long? version = 3)
+        public async Task<ReadAccountResponse> ReadAsync(string accountId, long? version = 3)
         {
-            var request = new ReadJobRequest()
+            var request = new ReadAccountRequest()
             {
-                JobId = jobId,
+                AccountId = accountId,
                 Version = version,
             };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/jobs/{job_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/accounts/{account_id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -113,7 +123,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readJob", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readAccount", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -153,8 +163,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<JobData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new ReadJobResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountDataOutput>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ReadAccountResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -162,7 +172,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.JobData = obj;
+                    response.AccountData = obj;
                     return response;
                 }
 
@@ -255,182 +265,12 @@ namespace DailyPay
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<UpdateJobResponse> UpdateAsync(string jobId, JobUpdateData jobUpdateData, long? version = 3)
-        {
-            var request = new UpdateJobRequest()
-            {
-                JobId = jobId,
-                JobUpdateData = jobUpdateData,
-                Version = version,
-            };
-            request.Version ??= SDKConfiguration.Version;
-            
-            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/jobs/{job_id}", request);
-
-            var httpRequest = new HttpRequestMessage(HttpMethod.Patch, urlString);
-            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
-            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
-
-            var serializedBody = RequestBodySerializer.Serialize(request, "JobUpdateData", "json", false, false);
-            if (serializedBody != null)
-            {
-                httpRequest.Content = serializedBody;
-            }
-
-            if (SDKConfiguration.SecuritySource != null)
-            {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
-            }
-
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateJob", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
-
-            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
-
-            HttpResponseMessage httpResponse;
-            try
-            {
-                httpResponse = await SDKConfiguration.Client.SendAsync(httpRequest);
-                int _statusCode = (int)httpResponse.StatusCode;
-
-                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode == 404 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
-                {
-                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
-                    if (_httpResponse != null)
-                    {
-                        httpResponse = _httpResponse;
-                    }
-                }
-            }
-            catch (Exception error)
-            {
-                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
-                if (_httpResponse != null)
-                {
-                    httpResponse = _httpResponse;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
-
-            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
-            int responseStatusCode = (int)httpResponse.StatusCode;
-            if(responseStatusCode == 200)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<JobData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new UpdateJobResponse()
-                    {
-                        HttpMeta = new Models.Components.HTTPMetadata()
-                        {
-                            Response = httpResponse,
-                            Request = httpRequest
-                        }
-                    };
-                    response.JobData = obj;
-                    return response;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 400)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<JobUpdateError>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 401)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 403)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 404)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorNotFound>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode == 500)
-            {
-                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
-                {
-                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
-                    {
-                        Response = httpResponse,
-                        Request = httpRequest
-                    };
-                    throw obj!;
-                }
-
-                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 400 && responseStatusCode < 500)
-            {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
-            }
-            else if(responseStatusCode >= 500 && responseStatusCode < 600)
-            {
-                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
-            }
-
-            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
-        }
-
-        public async Task<ListJobsResponse> ListAsync(ListJobsRequest? request = null)
+        public async Task<ListAccountsResponse> ListAsync(ListAccountsRequest? request = null)
         {
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/jobs", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/accounts", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -441,7 +281,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listJobs", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listAccounts", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -481,8 +321,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<JobsData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    var response = new ListJobsResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountsData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var response = new ListAccountsResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -490,7 +330,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.JobsData = obj;
+                    response.AccountsData = obj;
                     return response;
                 }
 
@@ -546,6 +386,161 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+                    throw obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 400 && responseStatusCode < 500)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode >= 500 && responseStatusCode < 600)
+            {
+                throw new Models.Errors.APIException("API error occurred", httpRequest, httpResponse);
+            }
+
+            throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
+        }
+
+        public async Task<CreateAccountResponse> CreateAsync(AccountDataInput accountData, long? version = 3)
+        {
+            var request = new CreateAccountRequest()
+            {
+                AccountData = accountData,
+                Version = version,
+            };
+            request.Version ??= SDKConfiguration.Version;
+            
+            string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
+
+            var urlString = baseUrl + "/rest/accounts";
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
+            httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
+            HeaderSerializer.PopulateHeaders(ref httpRequest, request);
+
+            var serializedBody = RequestBodySerializer.Serialize(request, "AccountData", "json", false, false);
+            if (serializedBody != null)
+            {
+                httpRequest.Content = serializedBody;
+            }
+
+            if (SDKConfiguration.SecuritySource != null)
+            {
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+            }
+
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createAccount", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
+
+            httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
+
+            HttpResponseMessage httpResponse;
+            try
+            {
+                httpResponse = await SDKConfiguration.Client.SendAsync(httpRequest);
+                int _statusCode = (int)httpResponse.StatusCode;
+
+                if (_statusCode == 400 || _statusCode == 401 || _statusCode == 403 || _statusCode >= 400 && _statusCode < 500 || _statusCode == 500 || _statusCode >= 500 && _statusCode < 600)
+                {
+                    var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), httpResponse, null);
+                    if (_httpResponse != null)
+                    {
+                        httpResponse = _httpResponse;
+                    }
+                }
+            }
+            catch (Exception error)
+            {
+                var _httpResponse = await this.SDKConfiguration.Hooks.AfterErrorAsync(new AfterErrorContext(hookCtx), null, error);
+                if (_httpResponse != null)
+                {
+                    httpResponse = _httpResponse;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            httpResponse = await this.SDKConfiguration.Hooks.AfterSuccessAsync(new AfterSuccessContext(hookCtx), httpResponse);
+
+            var contentType = httpResponse.Content.Headers.ContentType?.MediaType;
+            int responseStatusCode = (int)httpResponse.StatusCode;
+            if(responseStatusCode == 200)
+            {
+                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountDataOutput>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CreateAccountResponse()
+                    {
+                        HttpMeta = new Models.Components.HTTPMetadata()
+                        {
+                            Response = httpResponse,
+                            Request = httpRequest
+                        }
+                    };
+                    response.AccountData = obj;
+                    return response;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode == 400)
+            {
+                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<AccountCreateError>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+                    throw obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode == 401)
+            {
+                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+                    throw obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode == 403)
+            {
+                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
+                    throw obj!;
+                }
+
+                throw new Models.Errors.APIException("Unknown content type received", httpRequest, httpResponse);
+            }
+            else if(responseStatusCode == 500)
+            {
+                if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
+                {
+                    var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,

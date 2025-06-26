@@ -23,96 +23,90 @@ namespace DailyPay
     using System.Threading.Tasks;
 
     /// <summary>
-    /// The _accounts_ endpoint provides comprehensive information about money<br/>
+    /// The _transfers_ endpoint allows you to initiate and track money movement.  You can access transfer details, including the transfer&apos;s unique ID, amount, currency, status, schedule, submission and resolution times, fees, and related links to the involved parties.<br/>
     /// 
     /// <remarks>
-    /// accounts. You can retrieve account details, including the<br/>
-    /// account&apos;s unique ID, a link to the account holder, type, subtype,<br/>
-    /// verification status, balance details, transfer capabilities, and<br/>
-    /// user-specific information such as names, routing numbers, and partial<br/>
-    /// account numbers.<br/>
     /// <br/>
+    /// **Functionality** Retrieve transfer information, monitor transfer statuses, view transfer schedules, and access relevant links for the source, destination, and origin of the transfer.<br/>
     /// <br/>
-    /// **Functionality:** Access detailed user account information, verify<br/>
-    /// account balances, view transfer capabilities, and access user-specific<br/>
-    /// details associated with each account.<br/>
+    /// **Important** - Account origin: a user initiated movement of money from one account to another - Paycheck origin: an automatic (system-generated) movement of money as part of payroll<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public interface IAccounts
+    public interface ITransfers
     {
 
         /// <summary>
-        /// Get an Account object
+        /// Get a transfer object
         /// 
         /// <remarks>
-        /// Returns details about an account. This object represents a person&apos;s bank accounts, debit and pay cards, and earnings balance accounts.
+        /// Returns details about a transfer of money from one account to another. <br/>
+        /// <br/>
+        /// Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.<br/>
+        /// 
         /// </remarks>
         /// </summary>
-        Task<ReadAccountResponse> ReadAsync(string accountId, long? version = 3);
+        Task<ReadTransferResponse> ReadAsync(string transferId, long? version = 3, string? include = null);
 
         /// <summary>
-        /// Get a list of Account objects
+        /// Get a list of transfers
         /// 
         /// <remarks>
-        /// Returns a list of account objects. An account object represents a person&apos;s bank accounts, debit and pay cards, and earnings balance accounts.<br/>
-        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Accounts</a> for a description of filterable fields.<br/>
+        /// Returns a list of transfer objects.<br/>
+        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Transfers</a> for a description of filterable fields.<br/>
         /// 
         /// </remarks>
         /// </summary>
-        Task<ListAccountsResponse> ListAsync(ListAccountsRequest? request = null);
+        Task<ListTransfersResponse> ListAsync(long? version = 3, string? filterPersonId = null, string? include = null, string? filterBy = null);
 
         /// <summary>
-        /// Create an Account object
+        /// Request a transfer
         /// 
         /// <remarks>
-        /// Create an account object to store a person&apos;s bank or card information as a destination for funds.
+        /// Request transfer of funds from an `EARNINGS_BALANCE` account to a<br/>
+        /// personal `DEPOSITORY` or `CARD` account.<br/>
+        /// 
         /// </remarks>
         /// </summary>
-        Task<CreateAccountResponse> CreateAsync(AccountDataInput accountData, long? version = 3);
+        Task<CreateTransferResponse> CreateAsync(string idempotencyKey, TransferCreateData transferCreateData, long? version = 3, string? include = null);
     }
 
     /// <summary>
-    /// The _accounts_ endpoint provides comprehensive information about money<br/>
+    /// The _transfers_ endpoint allows you to initiate and track money movement.  You can access transfer details, including the transfer&apos;s unique ID, amount, currency, status, schedule, submission and resolution times, fees, and related links to the involved parties.<br/>
     /// 
     /// <remarks>
-    /// accounts. You can retrieve account details, including the<br/>
-    /// account&apos;s unique ID, a link to the account holder, type, subtype,<br/>
-    /// verification status, balance details, transfer capabilities, and<br/>
-    /// user-specific information such as names, routing numbers, and partial<br/>
-    /// account numbers.<br/>
     /// <br/>
+    /// **Functionality** Retrieve transfer information, monitor transfer statuses, view transfer schedules, and access relevant links for the source, destination, and origin of the transfer.<br/>
     /// <br/>
-    /// **Functionality:** Access detailed user account information, verify<br/>
-    /// account balances, view transfer capabilities, and access user-specific<br/>
-    /// details associated with each account.<br/>
+    /// **Important** - Account origin: a user initiated movement of money from one account to another - Paycheck origin: an automatic (system-generated) movement of money as part of payroll<br/>
     /// 
     /// </remarks>
     /// </summary>
-    public class Accounts: IAccounts
+    public class Transfers: ITransfers
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.2";
-        private const string _sdkGenVersion = "2.638.1";
+        private const string _sdkVersion = "0.0.3";
+        private const string _sdkGenVersion = "2.638.5";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
-        public Accounts(SDKConfig config)
+        public Transfers(SDKConfig config)
         {
             SDKConfiguration = config;
         }
 
-        public async Task<ReadAccountResponse> ReadAsync(string accountId, long? version = 3)
+        public async Task<ReadTransferResponse> ReadAsync(string transferId, long? version = 3, string? include = null)
         {
-            var request = new ReadAccountRequest()
+            var request = new ReadTransferRequest()
             {
-                AccountId = accountId,
+                TransferId = transferId,
                 Version = version,
+                Include = include,
             };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/accounts/{account_id}", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/transfers/{transfer_id}", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -123,7 +117,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readAccount", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readTransfer", new List<string> { "client:admin", "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -163,8 +157,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<AccountDataOutput>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new ReadAccountResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<TransferData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new ReadTransferResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -172,7 +166,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.AccountData = obj;
+                    response.TransferData = obj;
                     return response;
                 }
 
@@ -265,12 +259,19 @@ namespace DailyPay
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<ListAccountsResponse> ListAsync(ListAccountsRequest? request = null)
+        public async Task<ListTransfersResponse> ListAsync(long? version = 3, string? filterPersonId = null, string? include = null, string? filterBy = null)
         {
+            var request = new ListTransfersRequest()
+            {
+                Version = version,
+                FilterPersonId = filterPersonId,
+                Include = include,
+                FilterBy = filterBy,
+            };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-            var urlString = URLBuilder.Build(baseUrl, "/rest/accounts", request);
+            var urlString = URLBuilder.Build(baseUrl, "/rest/transfers", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Get, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
@@ -281,7 +282,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listAccounts", new List<string> { "client:admin", "client:admin", "client:lookup" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listTransfers", new List<string> { "client:admin", "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -321,8 +322,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<AccountsData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
-                    var response = new ListAccountsResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<TransfersData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    var response = new ListTransfersResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -330,7 +331,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.AccountsData = obj;
+                    response.TransfersData = obj;
                     return response;
                 }
 
@@ -408,24 +409,25 @@ namespace DailyPay
             throw new Models.Errors.APIException("Unknown status code received", httpRequest, httpResponse);
         }
 
-        public async Task<CreateAccountResponse> CreateAsync(AccountDataInput accountData, long? version = 3)
+        public async Task<CreateTransferResponse> CreateAsync(string idempotencyKey, TransferCreateData transferCreateData, long? version = 3, string? include = null)
         {
-            var request = new CreateAccountRequest()
+            var request = new CreateTransferRequest()
             {
-                AccountData = accountData,
+                IdempotencyKey = idempotencyKey,
+                TransferCreateData = transferCreateData,
                 Version = version,
+                Include = include,
             };
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
-
-            var urlString = baseUrl + "/rest/accounts";
+            var urlString = URLBuilder.Build(baseUrl, "/rest/transfers", request);
 
             var httpRequest = new HttpRequestMessage(HttpMethod.Post, urlString);
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "AccountData", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "TransferCreateData", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
@@ -436,7 +438,7 @@ namespace DailyPay
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createAccount", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createTransfer", new List<string> { "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -476,8 +478,8 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<AccountDataOutput>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
-                    var response = new CreateAccountResponse()
+                    var obj = ResponseBodyDeserializer.Deserialize<TransferData>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var response = new CreateTransferResponse()
                     {
                         HttpMeta = new Models.Components.HTTPMetadata()
                         {
@@ -485,7 +487,7 @@ namespace DailyPay
                             Request = httpRequest
                         }
                     };
-                    response.AccountData = obj;
+                    response.TransferData = obj;
                     return response;
                 }
 
@@ -495,7 +497,7 @@ namespace DailyPay
             {
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
-                    var obj = ResponseBodyDeserializer.Deserialize<AccountCreateError>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    var obj = ResponseBodyDeserializer.Deserialize<TransferCreateError>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
                     obj!.HttpMeta = new Models.Components.HTTPMetadata()
                     {
                         Response = httpResponse,

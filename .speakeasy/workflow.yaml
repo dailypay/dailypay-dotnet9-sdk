@@ -10,7 +10,6 @@ targets:
     csharp-9:
         target: csharp
         source: local
-        output: sdk
         codeSamples:
             output: codeSamples.yaml
             registry:
