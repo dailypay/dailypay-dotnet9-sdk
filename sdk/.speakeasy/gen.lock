@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: b142109e-3ccd-4529-b03f-c95dc073f68b
+id: a3ce02d1-4cdc-4011-9063-1786bb5402ed
 management:
   docChecksum: 7b2e2347da7bcd3987915e585cc4425c
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.570.0
-  generationVersion: 2.638.0
-  releaseVersion: 0.1.2
-  configChecksum: 2fa05563975edb119828e068fbca276c
+  speakeasyVersion: 1.570.1
+  generationVersion: 2.638.1
+  releaseVersion: 0.0.2
+  configChecksum: a5180547a12a5f6c34e9126496effbaa
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -182,7 +182,6 @@ generatedFiles:
   - docs/Models/Errors/AccountCreateError.md
   - docs/Models/Errors/BadRequestException.md
   - docs/Models/Errors/ErrorBadRequest.md
-  - docs/Models/Errors/ErrorCode.md
   - docs/Models/Errors/ErrorForbidden.md
   - docs/Models/Errors/ErrorNotFound.md
   - docs/Models/Errors/ErrorUnauthorized.md
@@ -198,6 +197,7 @@ generatedFiles:
   - docs/Models/Requests/CreateGenericCardTokenResponseBody.md
   - docs/Models/Requests/CreateTransferRequest.md
   - docs/Models/Requests/CreateTransferResponse.md
+  - docs/Models/Requests/ErrorCode.md
   - docs/Models/Requests/GetHealthResponse.md
   - docs/Models/Requests/GrantType.md
   - docs/Models/Requests/ListAccountsRequest.md
@@ -400,7 +400,6 @@ generatedFiles:
   - src/DailyPay/Models/Errors/AccountCreateError.cs
   - src/DailyPay/Models/Errors/BadRequestException.cs
   - src/DailyPay/Models/Errors/ErrorBadRequest.cs
-  - src/DailyPay/Models/Errors/ErrorCode.cs
   - src/DailyPay/Models/Errors/ErrorForbidden.cs
   - src/DailyPay/Models/Errors/ErrorNotFound.cs
   - src/DailyPay/Models/Errors/ErrorUnauthorized.cs
@@ -416,6 +415,7 @@ generatedFiles:
   - src/DailyPay/Models/Requests/CreateGenericCardTokenResponseBody.cs
   - src/DailyPay/Models/Requests/CreateTransferRequest.cs
   - src/DailyPay/Models/Requests/CreateTransferResponse.cs
+  - src/DailyPay/Models/Requests/ErrorCode.cs
   - src/DailyPay/Models/Requests/GetHealthResponse.cs
   - src/DailyPay/Models/Requests/GrantType.cs
   - src/DailyPay/Models/Requests/ListAccountsRequest.cs
@@ -807,4 +807,3 @@ examples:
         "500":
           application/vnd.api+json: {"errors": []}
 examplesVersion: 1.0.2
-generatedTests: {}

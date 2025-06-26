@@ -10,7 +10,7 @@
 namespace DailyPay.Models.Errors
 {
     using DailyPay.Models.Components;
-    using DailyPay.Models.Errors;
+    using DailyPay.Models.Requests;
     using DailyPay.Utils;
     using Newtonsoft.Json;
     using System;

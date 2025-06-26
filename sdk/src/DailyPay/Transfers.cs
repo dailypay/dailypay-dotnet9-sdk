@@ -86,8 +86,8 @@ namespace DailyPay
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.1.2";
-        private const string _sdkGenVersion = "2.638.0";
+        private const string _sdkVersion = "0.0.2";
+        private const string _sdkGenVersion = "2.638.1";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
         public Transfers(SDKConfig config)
@@ -177,6 +177,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorBadRequest>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -187,6 +192,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -197,6 +207,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -207,6 +222,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorNotFound>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -217,6 +237,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -317,6 +342,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorBadRequest>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -327,6 +357,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -337,6 +372,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -347,6 +387,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Include);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -453,6 +498,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<TransferCreateError>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -463,6 +513,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnauthorized>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -473,6 +528,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorForbidden>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 
@@ -483,6 +543,11 @@ namespace DailyPay
                 if(Utilities.IsContentTypeMatch("application/vnd.api+json", contentType))
                 {
                     var obj = ResponseBodyDeserializer.Deserialize<ErrorUnexpected>(await httpResponse.Content.ReadAsStringAsync(), NullValueHandling.Ignore);
+                    obj!.HttpMeta = new Models.Components.HTTPMetadata()
+                    {
+                        Response = httpResponse,
+                        Request = httpRequest
+                    };
                     throw obj!;
                 }
 

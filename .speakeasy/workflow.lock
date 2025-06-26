@@ -1,34 +1,20 @@
-speakeasyVersion: 1.570.0
+speakeasyVersion: 1.570.1
 sources:
     local:
-        sourceNamespace: openapi
-        sourceRevisionDigest: sha256:d6cd4c0a13cb2c63d81ec464dd21d534488c664e53bf3d18d6a91ebbd3c2a0ea
+        sourceNamespace: xapi
+        sourceRevisionDigest: sha256:11f11af9e306c602dc9a1cc81c19a0a966c4b19b1d207fa4bf218730a18e5a60
         sourceBlobDigest: sha256:159fc444ec50ff75e5c5e090a882462d5d0c8172d55227aa865701214a1f8264
-        tags:
-            - latest
-            - 3.0.0-beta01
-    openapi:
-        sourceNamespace: openapi
-        sourceRevisionDigest: sha256:4b190dcef64e2c96305902d67de9f02687c5f356d785a7af43685e447a9e0073
-        sourceBlobDigest: sha256:141038212a95b5a054c2b959dee6f79dbcbdb5fd58bb2843a8f4de44eea583c9
         tags:
             - latest
             - 3.0.0-beta01
 targets:
-    csharp-8:
-        source: openapi
-        sourceNamespace: openapi
-        sourceRevisionDigest: sha256:e4b543d284e1a2e2d82905c670186bad6a3e404939c490edbc33b032e46b941d
-        sourceBlobDigest: sha256:141038212a95b5a054c2b959dee6f79dbcbdb5fd58bb2843a8f4de44eea583c9
-        codeSamplesNamespace: openapi-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:c797ad3c661323566b9d584f4c2aaaba895bcddddbad7096670958e972f27a3e
     csharp-9:
         source: local
-        sourceNamespace: openapi
-        sourceRevisionDigest: sha256:d6cd4c0a13cb2c63d81ec464dd21d534488c664e53bf3d18d6a91ebbd3c2a0ea
+        sourceNamespace: xapi
+        sourceRevisionDigest: sha256:11f11af9e306c602dc9a1cc81c19a0a966c4b19b1d207fa4bf218730a18e5a60
         sourceBlobDigest: sha256:159fc444ec50ff75e5c5e090a882462d5d0c8172d55227aa865701214a1f8264
-        codeSamplesNamespace: openapi-csharp-code-samples
-        codeSamplesRevisionDigest: sha256:94e5dc600b20d3a900dd97aa8daedeb90d84807ab1df0d93db8d459c855fd243
+        codeSamplesNamespace: xapi
+        codeSamplesRevisionDigest: sha256:a49b38a8f1394c9be713825f45c0fb753b89ffaa13c77c34ad5855d107c8cc32
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -37,7 +23,7 @@ workflow:
             inputs:
                 - location: source/sdks.openapi.yaml
             registry:
-                location: registry.speakeasyapi.dev/dailypay/dailypay/openapi
+                location: registry.speakeasyapi.dev/dailypay/dailypay/xapi
     targets:
         csharp-9:
             target: csharp
@@ -46,4 +32,4 @@ workflow:
             codeSamples:
                 output: codeSamples.yaml
                 registry:
-                    location: registry.speakeasyapi.dev/dailypay/dailypay/openapi-csharp-code-samples
+                    location: registry.speakeasyapi.dev/dailypay/dailypay/xapi

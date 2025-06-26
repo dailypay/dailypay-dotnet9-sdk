@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 #nullable enable
-namespace DailyPay.Models.Errors
+namespace DailyPay.Models.Requests
 {
     using DailyPay.Utils;
     using Newtonsoft.Json;

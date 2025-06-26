@@ -26,5 +26,8 @@ namespace DailyPay.Models.Errors
         /// </summary>
         [JsonProperty("errors")]
         public List<ErrorNotFoundError> Errors { get; set; } = default!;
+
+        [JsonProperty("-")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
     }
 }
