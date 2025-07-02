@@ -21,8 +21,8 @@ Returns a 200 status code if the API is up and running.
 ### Example Usage
 
 ```csharp
-using DailyPay;
-using DailyPay.Models.Components;
+using DailyPay.Dotnet9;
+using DailyPay.Dotnet9.Models.Components;
 
 var sdk = new SDK(security: new Security() {
     OauthUserToken = "<YOUR_OAUTH_USER_TOKEN_HERE>",
@@ -39,8 +39,8 @@ var res = await sdk.Health.GetHealthAsync();
 
 ### Errors
 
-| Error Type                               | Status Code                              | Content Type                             |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| DailyPay.Models.Errors.ErrorUnauthorized | 401                                      | application/vnd.api+json                 |
-| DailyPay.Models.Errors.ErrorUnexpected   | 500                                      | application/vnd.api+json                 |
-| DailyPay.Models.Errors.APIException      | 4XX, 5XX                                 | \*/\*                                    |
+| Error Type                                       | Status Code                                      | Content Type                                     |
+| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
+| DailyPay.Dotnet9.Models.Errors.ErrorUnauthorized | 401                                              | application/vnd.api+json                         |
+| DailyPay.Dotnet9.Models.Errors.ErrorUnexpected   | 500                                              | application/vnd.api+json                         |
+| DailyPay.Dotnet9.Models.Errors.APIException      | 4XX, 5XX                                         | \*/\*                                            |

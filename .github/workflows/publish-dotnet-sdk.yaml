@@ -17,11 +17,13 @@ jobs:
         with:
           dotnet-version: '9.0.x'
       - name: Restore dependencies
-        run: dotnet restore ./src/DailyPay/DailyPay.csproj
+        run: dotnet restore ./src/DailyPay/DailyPay.Dotnet9.csproj
       - name: Build SDK
-        run: dotnet build ./src/DailyPay/DailyPay.csproj --configuration Release --no-restore
+        run: dotnet build ./src/DailyPay/DailyPay.Dotnet9.csproj --configuration Release --no-restore
+      - name: Show nuget sources
+        run: dotnet nuget list source
       - name: Pack SDK
-        run: dotnet pack ./src/DailyPay/DailyPay.csproj --configuration Release --no-build --output ./nupkg
+        run: dotnet pack ./src/DailyPay/DailyPay.Dotnet9.csproj --configuration Release --no-build --output ./nupkg
       - name: Publish to GitHub Packages
         run: |
           dotnet nuget add source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
