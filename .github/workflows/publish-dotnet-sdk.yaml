@@ -1,4 +1,4 @@
-name: 'Publish .NET 8 SDK'
+name: 'Publish .NET 9 SDK'
 on:
   push:
     branches:
