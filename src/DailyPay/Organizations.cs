@@ -72,7 +72,7 @@ namespace DailyPay
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.6";
+        private const string _sdkVersion = "0.0.7";
         private const string _sdkGenVersion = "2.648.7";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
