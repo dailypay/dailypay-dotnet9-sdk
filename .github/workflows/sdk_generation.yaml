@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # :warning: Necesario para poder comparar con HEAD correctamente
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -26,17 +28,22 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/speakeasy-api/speakeasy/main/install.sh | bash
           echo "$HOME/.speakeasy/bin" >> $GITHUB_PATH
-      - name: Generate SDK using Make
-        run: make generate-sdk
       - name: Set up Git
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-      - name: Checkout current branch and generate SDK
+      - name: Generate SDK using Make
+        run: make generate-sdk
+      - name: Check for changes
+        id: check_changes
         run: |
-          git checkout ${{ github.ref_name }}
-          make generate-sdk
+          git status
+          if git diff --quiet; then
+            echo "no_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "no_changes=false" >> $GITHUB_OUTPUT
       - name: Create new branch and commit changes
+        if: steps.check_changes.outputs.no_changes == 'false'
         run: |
           BRANCH_NAME="sdk-regenerate-$(date +%s)"
           git checkout -b $BRANCH_NAME
@@ -45,6 +52,7 @@ jobs:
           git push origin $BRANCH_NAME
           echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
       - name: Create Pull Request
+        if: steps.check_changes.outputs.no_changes == 'false'
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
