@@ -26,11 +26,11 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/speakeasy-api/speakeasy/main/install.sh | bash
           echo "$HOME/.speakeasy/bin" >> $GITHUB_PATH
-      - name: Configure Git
+      - name: Set up Git
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-      - name: Create new branch
+      - name: Create new branch from current
         run: |
           BRANCH_NAME="sdk-regenerate-$(date +%s)"
           git checkout -b $BRANCH_NAME
@@ -40,8 +40,7 @@ jobs:
       - name: Check for changes
         id: check_changes
         run: |
-          git status
-          if [ -n "$(git status --porcelain)" ]; then
+          if [[ -n "$(git status --porcelain)" ]]; then
             echo "no_changes=false" >> "$GITHUB_OUTPUT"
           else
             echo "no_changes=true" >> "$GITHUB_OUTPUT"
@@ -49,8 +48,9 @@ jobs:
       - name: Commit and push changes
         if: steps.check_changes.outputs.no_changes == 'false'
         run: |
+          git status
           git add .
-          git commit -m "chore: regenerate .NET 9 SDK" || echo "No changes to commit"
+          git commit -m "chore: regenerate .NET 9 SDK"
           git push origin ${{ env.branch_name }}
       - name: Create Pull Request
         if: steps.check_changes.outputs.no_changes == 'false'
