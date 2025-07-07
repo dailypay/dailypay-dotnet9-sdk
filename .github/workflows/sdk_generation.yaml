@@ -51,7 +51,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: sdk-auto-gen-dotnet9-${{ github.run_id }}
-          base: DEVREL-539
+          base: main
           commit-message: "chore: regenerate .NET 9 SDK"
           title: "chore: regenerate .NET 9 SDK"
           body: "This PR was auto-generated to include regenerated .NET 9 SDK files."
