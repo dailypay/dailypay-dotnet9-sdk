@@ -1,4 +1,4 @@
-speakeasyVersion: 1.575.5
+speakeasyVersion: 1.576.0
 sources:
     local:
         sourceNamespace: xapi
@@ -15,7 +15,7 @@ targets:
         sourceRevisionDigest: sha256:c041bed8d6a5828db13adf491888150092b3fc595d87bd7c3e05873eda1c7c1d
         sourceBlobDigest: sha256:eef3458946ba2ceb9a52f944e08595e01cab38790bdf5e2e4980c050fc659afb
         codeSamplesNamespace: xapi
-        codeSamplesRevisionDigest: sha256:53271ba71b1ec2a207d9e2822e1763c590d59fc2cde6c995db5a3214aa2e4b13
+        codeSamplesRevisionDigest: sha256:a407e7c71617f8c6495668f09b836d79700f88f2e5b54c7ae84df4de00378982
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
