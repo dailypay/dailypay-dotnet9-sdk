@@ -26,6 +26,7 @@ jobs:
             echo "SKIP=true" >> $GITHUB_ENV
           else
             echo "SKIP=false" >> $GITHUB_ENV
+          fi
       - name: Stop if last commit was auto-generated
         if: env.SKIP == 'true'
         run: |
