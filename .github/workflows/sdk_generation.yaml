@@ -26,12 +26,15 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/speakeasy-api/speakeasy/main/install.sh | bash
           echo "$HOME/.speakeasy/bin" >> $GITHUB_PATH
-      - name: Set up Git config
+      - name: Set up Git
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-      - name: Checkout current branch
-        run: git checkout ${{ github.ref_name }}
+      - name: Create and switch to new branch
+        run: |
+          BRANCH_NAME="sdk-regenerate-$(date +%s)"
+          git checkout -b $BRANCH_NAME
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
       - name: Generate SDK using Make
         run: make generate-sdk
       - name: Check for changes
@@ -43,15 +46,12 @@ jobs:
           else
             echo "no_changes=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Create new branch and commit changes
+      - name: Commit and push changes
         if: steps.check_changes.outputs.no_changes == 'false'
         run: |
-          BRANCH_NAME="sdk-regenerate-$(date +%s)"
-          git checkout -b $BRANCH_NAME
           git add .
           git commit -m "chore: regenerate .NET 9 SDK"
-          git push origin $BRANCH_NAME
-          echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+          git push origin ${{ env.branch_name }}
       - name: Create Pull Request
         if: steps.check_changes.outputs.no_changes == 'false'
         uses: peter-evans/create-pull-request@v5
