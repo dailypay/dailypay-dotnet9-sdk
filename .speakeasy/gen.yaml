@@ -22,7 +22,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.0.7
+  version: 0.0.8
   additionalDependencies: []
   author: DailyPay, Inc.
   baseErrorName: DailyPayError
@@ -46,7 +46,7 @@ csharp:
   maxMethodParams: 4
   methodArguments: infer-optional-args
   outputModelSuffix: output
-  packageName: DailyPay
+  packageName: DailyPay.SDK.DotNet9
   packageTags: ""
   responseFormat: envelope-http
   sourceDirectory: src

@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ```csharp
-using DailyPay;
-using DailyPay.Models.Requests;
+using DailyPay.SDK.DotNet9;
+using DailyPay.SDK.DotNet9.Models.Requests;
 
 var sdk = new SDK();
 
