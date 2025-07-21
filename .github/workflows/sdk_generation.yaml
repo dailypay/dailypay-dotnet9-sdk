@@ -2,7 +2,7 @@ name: 'Generate .NET 9 SDK'
 on:
   push:
     branches:
-      - main
+      - DEVREL-643
   workflow_dispatch:
 permissions:
   id-token: write
