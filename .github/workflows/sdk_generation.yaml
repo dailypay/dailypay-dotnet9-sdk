@@ -9,7 +9,7 @@ on:
         default: false
   push:
     branches:
-      - DEVREL-643
+      - main
 permissions:
   id-token: write
   contents: write

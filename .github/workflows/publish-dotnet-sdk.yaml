@@ -2,7 +2,7 @@ name: 'Publish .NET 9 SDK'
 on:
   push:
     branches:
-      - DEVREL-643
+      - main
   workflow_dispatch:
 permissions:
   contents: read
