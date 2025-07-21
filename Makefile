@@ -6,3 +6,4 @@ generate-sdk:
 	@echo "Generating .NET 9 SDK"
 	@speakeasy run -t csharp-9
 	@$(MAKE) sync-csharp-version
+	
