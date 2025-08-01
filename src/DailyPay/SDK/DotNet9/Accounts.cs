@@ -93,8 +93,8 @@ namespace DailyPay.SDK.DotNet9
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.0.9";
-        private const string _sdkGenVersion = "2.661.4";
+        private const string _sdkVersion = "0.1.0";
+        private const string _sdkGenVersion = "2.672.0";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
         public Accounts(SDKConfig config)

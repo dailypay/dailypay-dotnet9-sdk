@@ -14,7 +14,7 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     /// <summary>
     /// An empty object for earnings balance accounts.
     /// </summary>
-    public class AccountAttributesEarningsBalanceDetails
+    public class Details
     {
     }
 }
