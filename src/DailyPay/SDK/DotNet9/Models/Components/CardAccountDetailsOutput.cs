@@ -12,8 +12,23 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     
-    public class AccountDebitCardOutput
+    /// <summary>
+    /// The banking details of the account and account holder.
+    /// </summary>
+    public class CardAccountDetailsOutput
     {
+
+        /// <summary>
+        /// Last four digits of the card number.
+        /// </summary>
+        [JsonProperty("last_four")]
+        public string LastFour { get; set; } = default!;
+
+        /// <summary>
+        /// The issuer of the card.
+        /// </summary>
+        [JsonProperty("issuer")]
+        public string Issuer { get; set; } = default!;
 
         /// <summary>
         /// The first name of the account holder.
@@ -38,17 +53,5 @@ namespace DailyPay.SDK.DotNet9.Models.Components
         /// </summary>
         [JsonProperty("expiration_year")]
         public string ExpirationYear { get; set; } = default!;
-
-        /// <summary>
-        /// Last four digits of the card number.
-        /// </summary>
-        [JsonProperty("last_four")]
-        public string LastFour { get; set; } = default!;
-
-        /// <summary>
-        /// The issuer of the card.
-        /// </summary>
-        [JsonProperty("issuer")]
-        public string Issuer { get; set; } = default!;
     }
 }
