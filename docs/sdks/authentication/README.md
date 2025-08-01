@@ -240,6 +240,7 @@ Request a Dailypay user access token, as described in the <a href='https://datat
 
 ### Example Usage
 
+<!-- UsageSnippet language="csharp" operationID="requestToken" method="post" path="/oauth2/token" -->
 ```csharp
 using DailyPay.SDK.DotNet9;
 using DailyPay.SDK.DotNet9.Models.Requests;

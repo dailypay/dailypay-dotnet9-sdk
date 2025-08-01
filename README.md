@@ -15,7 +15,6 @@ Developer-friendly & type-safe Csharp SDK specifically catered to leverage *Dail
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [DailyPay.SDK.DotNet9](#dailypaysdkdotnet9)
-  * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)

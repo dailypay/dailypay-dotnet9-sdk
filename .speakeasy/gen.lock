@@ -3,15 +3,15 @@ id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
   docChecksum: 7b2e2347da7bcd3987915e585cc4425c
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.586.0
-  generationVersion: 2.661.4
-  releaseVersion: 0.0.9
-  configChecksum: 45841221a42646ff592dbafae76d24b4
+  speakeasyVersion: 1.596.0
+  generationVersion: 2.672.0
+  releaseVersion: 0.0.10
+  configChecksum: ab77d49e0b66a4faff43a9da80cb049d
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.11.1
+    core: 3.11.2
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.7
