@@ -45,10 +45,10 @@ jobs:
         id: check_spec
         run: |
           mkdir -p /tmp/openapi
-          curl -s -o /tmp/openapi/current_spec.yaml https://s3.amazonaws.com/dp-devportal-images/sdk/openapi.yaml
-          if [ -f "openapi_spec_cache.yaml" ]; then
+          curl -s -o /tmp/openapi/current_spec.yml https://s3.amazonaws.com/dp-devportal-images/oas/openapi.yml
+          if [ -f "openapi_spec_cache.yml" ]; then
             echo "Found cached spec, comparing..."
-            if cmp -s "openapi_spec_cache.yaml" "/tmp/openapi/current_spec.yaml"; then
+            if cmp -s "openapi_spec_cache.yml" "/tmp/openapi/current_spec.yml"; then
               echo "No changes detected in OpenAPI spec"
               echo "SPEC_CHANGED=false" >> $GITHUB_ENV
             else
@@ -59,7 +59,7 @@ jobs:
             echo "No cached spec found, treating as changed"
             echo "SPEC_CHANGED=true" >> $GITHUB_ENV
           fi
-          cp "/tmp/openapi/current_spec.yaml" "openapi_spec_cache.yaml"
+          cp "/tmp/openapi/current_spec.yml" "openapi_spec_cache.yml"
       - name: Stop if no OpenAPI changes
         if: env.SKIP == 'false' && env.SPEC_CHANGED == 'false' && github.event.inputs.force != 'true'
         run: |
@@ -90,4 +90,4 @@ jobs:
           body: |
             This PR was auto-generated due to changes in the OpenAPI specification.
             
-            Changes detected in: https://s3.amazonaws.com/dp-devportal-images/sdk/openapi.yaml
+            Changes detected in: https://s3.amazonaws.com/dp-devportal-images/oas/openapi.yml
