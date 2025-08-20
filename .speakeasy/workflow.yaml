@@ -1,7 +1,7 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    local:
+    cloud:
         inputs:
             - location: https://s3.amazonaws.com/dp-devportal-images/oas/openapi.yml
         registry:
@@ -9,7 +9,7 @@ sources:
 targets:
     csharp-9:
         target: csharp
-        source: local
+        source: cloud
         codeSamples:
             output: codeSamples.yaml
             registry:
