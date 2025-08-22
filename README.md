@@ -151,8 +151,9 @@ var res = await sdk.Jobs.ReadAsync(req);
 You can use a callback to automatically refresh and retrieve user access tokens from secure storage. Pass a callback as a security source when initializing the SDK:
 
 ```csharp
-using DailyPay.SDK.DotNet8;
-using DailyPay.SDK.DotNet8.Models.Components;
+using DailyPay.SDK.DotNet9;
+using DailyPay.SDK.DotNet9.Models.Components;
+using DailyPay.SDK.DotNet9.Models.Requests;
 
 // Example callback function to retrieve the latest access token
 Func<Security> tokenSource = () =>
