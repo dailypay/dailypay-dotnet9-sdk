@@ -1,20 +1,20 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: e98ec2843f59af8ed4d7565f52cd7f26
+  docChecksum: 6765ef129459f05e37d840f9f002ebaf
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.598.1
-  generationVersion: 2.674.3
-  releaseVersion: 0.2.0
-  configChecksum: 532314ea75c4af5a43a9e9aa534d15c4
+  speakeasyVersion: 1.615.1
+  generationVersion: 2.698.4
+  releaseVersion: 0.3.0
+  configChecksum: 6d8fc1cbd9eb12dae5faecc47716bffc
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.11.2
+    core: 3.12.2
     deprecations: 2.81.2
     examples: 2.81.6
-    globalSecurity: 2.83.7
+    globalSecurity: 2.83.8
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.4
     globals: 2.82.1
@@ -152,7 +152,6 @@ generatedFiles:
   - docs/Models/Components/PersonRelationshipReadOnly.md
   - docs/Models/Components/PersonResource.md
   - docs/Models/Components/PersonResourceInput.md
-  - docs/Models/Components/Product.md
   - docs/Models/Components/SchemeOauthClientCredentialsToken.md
   - docs/Models/Components/Security.md
   - docs/Models/Components/TransferAttributes.md
@@ -352,7 +351,6 @@ generatedFiles:
   - src/DailyPay/SDK/DotNet9/Models/Components/PersonRelationshipReadOnly.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/PersonResource.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/PersonResourceInput.cs
-  - src/DailyPay/SDK/DotNet9/Models/Components/Product.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/SchemeOauthClientCredentialsToken.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/Security.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/TransferAttributes.cs
@@ -374,12 +372,14 @@ generatedFiles:
   - src/DailyPay/SDK/DotNet9/Models/Components/WageRate.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/APIException.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/AccountCreateError.cs
+  - src/DailyPay/SDK/DotNet9/Models/Errors/DailyPayError.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorBadRequest.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorForbidden.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorNotFound.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorUnauthorized.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorUnexpected.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/JobUpdateError.cs
+  - src/DailyPay/SDK/DotNet9/Models/Errors/ResponseValidationException.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/TransferCreateError.cs
   - src/DailyPay/SDK/DotNet9/Models/Requests/CreateAccountRequest.cs
   - src/DailyPay/SDK/DotNet9/Models/Requests/CreateAccountResponse.cs
