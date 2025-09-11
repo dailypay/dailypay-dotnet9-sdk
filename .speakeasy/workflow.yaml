@@ -12,7 +12,3 @@ targets:
     csharp-9:
         target: csharp
         source: cloud
-        codeSamples:
-            output: codeSamples.yaml
-            registry:
-                location: registry.speakeasyapi.dev/dailypay/dailypay/xapi-dotnet9-code-samples
