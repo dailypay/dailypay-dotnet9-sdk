@@ -14,13 +14,10 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// The request contained an error
-    /// </summary>
-    public class AccountCreateError : Exception
-    {
+    using System.Net.Http;
 
+    public class AccountCreateErrorPayload
+    {
         /// <summary>
         /// A list of errors that occurred.
         /// </summary>
@@ -30,4 +27,37 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
+
+    /// <summary>
+    /// The request contained an error
+    /// </summary>
+    public class AccountCreateError : DailyPayError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public AccountCreateErrorPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use AccountCreateError.Payload.Errors instead.")]
+        public List<ErrorAccountCreateError> Errors { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use AccountCreateError.Payload.HttpMeta instead.")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        public AccountCreateError(
+            AccountCreateErrorPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Errors = payload.Errors;
+           HttpMeta = payload.HttpMeta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }
