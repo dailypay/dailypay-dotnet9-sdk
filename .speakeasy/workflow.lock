@@ -1,5 +1,13 @@
-speakeasyVersion: 1.598.1
+speakeasyVersion: 1.615.2
 sources:
+    cloud:
+        sourceNamespace: xapi
+        sourceRevisionDigest: sha256:f279333a64ab18ef322b085ce8ba49b17a74ba346a248569c1abf5dbe1272142
+        sourceBlobDigest: sha256:b26a795a9ad86da23865c74a5e671acd57d1986d84ab9ee27e0033ffe50e629d
+        tags:
+            - latest
+            - DBI-532
+            - 3.0.0-beta01
     local:
         sourceNamespace: xapi
         sourceRevisionDigest: sha256:22ac5fa45f8a149986459f020e3272b727a32b0c6a7078e5c0b371bf7939e7d6
@@ -10,26 +18,28 @@ sources:
             - 3.0.0-beta01
 targets:
     csharp-9:
-        source: local
+        source: cloud
         sourceNamespace: xapi
-        sourceRevisionDigest: sha256:22ac5fa45f8a149986459f020e3272b727a32b0c6a7078e5c0b371bf7939e7d6
-        sourceBlobDigest: sha256:3ddf92b54817366bce1bfff769b02c2b01d2aead268b0b98ad5ce423240689ce
-        codeSamplesNamespace: xapi
-        codeSamplesRevisionDigest: sha256:7b648e24fc956bf64f9c842385795055862cc60b30d167108d181a4abec33033
+        sourceRevisionDigest: sha256:f279333a64ab18ef322b085ce8ba49b17a74ba346a248569c1abf5dbe1272142
+        sourceBlobDigest: sha256:b26a795a9ad86da23865c74a5e671acd57d1986d84ab9ee27e0033ffe50e629d
+        codeSamplesNamespace: xapi-dotnet9-code-samples
+        codeSamplesRevisionDigest: sha256:8395b3d30d59f07cb4728a5de233245ee846ee1845b21529145a630e8fb572f7
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
-        local:
+        cloud:
             inputs:
-                - location: source/sdks.openapi.yaml
+                - location: https://s3.amazonaws.com/dp-devportal-images/oas/openapi.yml
+            overlays:
+                - location: source/description_overlay.yaml
             registry:
                 location: registry.speakeasyapi.dev/dailypay/dailypay/xapi
     targets:
         csharp-9:
             target: csharp
-            source: local
+            source: cloud
             codeSamples:
                 output: codeSamples.yaml
                 registry:
-                    location: registry.speakeasyapi.dev/dailypay/dailypay/xapi
+                    location: registry.speakeasyapi.dev/dailypay/dailypay/xapi-dotnet9-code-samples
