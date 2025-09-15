@@ -14,13 +14,10 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
-    /// <summary>
-    /// Bad Request
-    /// </summary>
-    public class JobUpdateError : Exception
-    {
+    using System.Net.Http;
 
+    public class JobUpdateErrorPayload
+    {
         /// <summary>
         /// A list of errors that occurred.
         /// </summary>
@@ -30,4 +27,37 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
     }
+
+    /// <summary>
+    /// Bad Request
+    /// </summary>
+    public class JobUpdateError : DailyPayError
+    {
+        /// <summary>
+        ///  The original data that was passed to this exception.
+        /// </summary>
+        public JobUpdateErrorPayload Payload { get; }
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use JobUpdateError.Payload.Errors instead.")]
+        public List<ErrorJobUpdateError> Errors { get; set; } = default!;
+
+        [Obsolete("This field will be removed in a future release, please migrate away from it as soon as possible. Use JobUpdateError.Payload.HttpMeta instead.")]
+        public HTTPMetadata HttpMeta { get; set; } = default!;
+
+        public JobUpdateError(
+            JobUpdateErrorPayload payload,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            string body
+        ): base("API error occurred", request, response, body)
+        {
+           Payload = payload;
+
+           #pragma warning disable CS0618
+           Errors = payload.Errors;
+           HttpMeta = payload.HttpMeta;
+           #pragma warning restore CS0618
+        }
+    }
+
 }
