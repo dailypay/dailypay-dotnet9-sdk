@@ -11,14 +11,26 @@ namespace DailyPay.SDK.DotNet9.Models.Components
 {
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
+    using Newtonsoft.Json;
     
-    public class Security
+    /// <summary>
+    /// Products that the person is enrolled in or eligible for.<br/>
+    /// 
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// </summary>
+    public class Products
     {
 
-        [SpeakeasyMetadata("security:scheme=true,type=oauth2,subType=client_credentials")]
-        public SchemeOauthClientCredentialsToken? OauthClientCredentialsToken { get; set; }
-
-        [SpeakeasyMetadata("security:scheme=true,type=oauth2,name=Authorization")]
-        public string? OauthUserToken { get; set; }
+        /// <summary>
+        /// The DailyPay Visa®️ Prepaid Card program.<br/>
+        /// 
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// </summary>
+        [JsonProperty("dailypay_card")]
+        public DailyPayCardProductEntitlement DailyPayCardProductEntitlement { get; set; } = default!;
     }
 }
