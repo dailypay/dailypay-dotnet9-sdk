@@ -63,10 +63,18 @@ namespace DailyPay.SDK.DotNet9
     }
 
     /// <summary>
-    /// DailyPay Public Rest API: (Pre-release SDK, not fully supported yet)<br/>
+    /// DailyPay Public Rest API: # Welcome<br/>
     /// 
     /// <remarks>
-    /// Developer-friendly &amp; type-safe C# SDK for the DailyPay Public API, built for .Net 9.
+    /// <br/>
+    /// This site contains information on basic DailyPay concepts and instructions for using the endpoints of each API. We are just now getting started with our public documentation - please let us know if you have any feedback or questions via Suggested Edits, where you can suggest changes to the documentation directly from the portal.<br/>
+    /// <br/>
+    /// Here are some links to help you get familiar with the DailyPay basics:<br/>
+    /// <br/>
+    /// <a href="/tag/Getting-Started#section/DailyPay&apos;s-API-Versioning">API Versioning</a> — Find out how we version our APIs.  <br/>
+    /// <a href="/tag/Getting-Started#section/Environments">Environments</a> — Get an overview of the different environments in the DailyPay API.  <br/>
+    /// <a href="/tag/Glossary">Glossary</a> — Explore a list of terms used in the DailyPay API.<br/>
+    /// 
     /// </remarks>
     /// </summary>
     public interface ISDK
@@ -237,10 +245,18 @@ namespace DailyPay.SDK.DotNet9
 
 
     /// <summary>
-    /// DailyPay Public Rest API: (Pre-release SDK, not fully supported yet)<br/>
+    /// DailyPay Public Rest API: # Welcome<br/>
     /// 
     /// <remarks>
-    /// Developer-friendly &amp; type-safe C# SDK for the DailyPay Public API, built for .Net 9.
+    /// <br/>
+    /// This site contains information on basic DailyPay concepts and instructions for using the endpoints of each API. We are just now getting started with our public documentation - please let us know if you have any feedback or questions via Suggested Edits, where you can suggest changes to the documentation directly from the portal.<br/>
+    /// <br/>
+    /// Here are some links to help you get familiar with the DailyPay basics:<br/>
+    /// <br/>
+    /// <a href="/tag/Getting-Started#section/DailyPay&apos;s-API-Versioning">API Versioning</a> — Find out how we version our APIs.  <br/>
+    /// <a href="/tag/Getting-Started#section/Environments">Environments</a> — Get an overview of the different environments in the DailyPay API.  <br/>
+    /// <a href="/tag/Glossary">Glossary</a> — Explore a list of terms used in the DailyPay API.<br/>
+    /// 
     /// </remarks>
     /// </summary>
     public class SDK: ISDK
@@ -248,8 +264,8 @@ namespace DailyPay.SDK.DotNet9
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.2";
-        private const string _sdkGenVersion = "2.702.0";
+        private const string _sdkVersion = "0.4.0";
+        private const string _sdkGenVersion = "2.723.11";
         private const string _openapiDocVersion = "3.0.0-beta01";
         public IJobs Jobs { get; private set; }
         public IAccounts Accounts { get; private set; }

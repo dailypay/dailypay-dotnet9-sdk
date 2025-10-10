@@ -93,8 +93,8 @@ namespace DailyPay.SDK.DotNet9
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.2";
-        private const string _sdkGenVersion = "2.702.0";
+        private const string _sdkVersion = "0.4.0";
+        private const string _sdkGenVersion = "2.723.11";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
         public Accounts(SDKConfig config)
@@ -122,7 +122,7 @@ namespace DailyPay.SDK.DotNet9
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readAccount", new List<string> { "client:admin", "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readAccount", new List<string> { "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
@@ -345,7 +345,7 @@ namespace DailyPay.SDK.DotNet9
                 httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
             }
 
-            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listAccounts", new List<string> { "client:admin", "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
+            var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listAccounts", new List<string> { "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
 
             httpRequest = await this.SDKConfiguration.Hooks.BeforeRequestAsync(new BeforeRequestContext(hookCtx), httpRequest);
 
