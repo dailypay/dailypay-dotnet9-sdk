@@ -63,10 +63,18 @@ namespace DailyPay.SDK.DotNet9
     }
 
     /// <summary>
-    /// DailyPay Public Rest API: (Pre-release SDK, not fully supported yet)<br/>
+    /// DailyPay Public Rest API: # Welcome<br/>
     /// 
     /// <remarks>
-    /// Developer-friendly &amp; type-safe C# SDK for the DailyPay Public API, built for .Net 9.
+    /// <br/>
+    /// This site contains information on basic DailyPay concepts and instructions for using the endpoints of each API. We are just now getting started with our public documentation - please let us know if you have any feedback or questions via Suggested Edits, where you can suggest changes to the documentation directly from the portal.<br/>
+    /// <br/>
+    /// Here are some links to help you get familiar with the DailyPay basics:<br/>
+    /// <br/>
+    /// <a href="/tag/Getting-Started#section/DailyPay&apos;s-API-Versioning">API Versioning</a> — Find out how we version our APIs.  <br/>
+    /// <a href="/tag/Getting-Started#section/Environments">Environments</a> — Get an overview of the different environments in the DailyPay API.  <br/>
+    /// <a href="/tag/Glossary">Glossary</a> — Explore a list of terms used in the DailyPay API.<br/>
+    /// 
     /// </remarks>
     /// </summary>
     public interface ISDK
@@ -237,10 +245,18 @@ namespace DailyPay.SDK.DotNet9
 
 
     /// <summary>
-    /// DailyPay Public Rest API: (Pre-release SDK, not fully supported yet)<br/>
+    /// DailyPay Public Rest API: # Welcome<br/>
     /// 
     /// <remarks>
-    /// Developer-friendly &amp; type-safe C# SDK for the DailyPay Public API, built for .Net 9.
+    /// <br/>
+    /// This site contains information on basic DailyPay concepts and instructions for using the endpoints of each API. We are just now getting started with our public documentation - please let us know if you have any feedback or questions via Suggested Edits, where you can suggest changes to the documentation directly from the portal.<br/>
+    /// <br/>
+    /// Here are some links to help you get familiar with the DailyPay basics:<br/>
+    /// <br/>
+    /// <a href="/tag/Getting-Started#section/DailyPay&apos;s-API-Versioning">API Versioning</a> — Find out how we version our APIs.  <br/>
+    /// <a href="/tag/Getting-Started#section/Environments">Environments</a> — Get an overview of the different environments in the DailyPay API.  <br/>
+    /// <a href="/tag/Glossary">Glossary</a> — Explore a list of terms used in the DailyPay API.<br/>
+    /// 
     /// </remarks>
     /// </summary>
     public class SDK: ISDK
@@ -248,8 +264,8 @@ namespace DailyPay.SDK.DotNet9
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.3.2";
-        private const string _sdkGenVersion = "2.702.0";
+        private const string _sdkVersion = "0.4.0";
+        private const string _sdkGenVersion = "2.728.0";
         private const string _openapiDocVersion = "3.0.0-beta01";
         public IJobs Jobs { get; private set; }
         public IAccounts Accounts { get; private set; }
@@ -282,6 +298,19 @@ namespace DailyPay.SDK.DotNet9
             Health = new Health(SDKConfiguration);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the SDK with optional configuration parameters.
+        /// </summary>
+        /// <param name="security">The security configuration to use for API requests. If provided, this will be used as a static security configuration.</param>
+        /// <param name="securitySource">A function that returns the security configuration dynamically. This takes precedence over the static security parameter if both are provided.</param>
+        /// <param name="version">The version of the DailyPay API to use for this request. If not provided, the latest version of the API will be used.<br/></param>
+        /// <param name="serverIndex">The index of the server to use from the predefined server list. Must be between 0 and the length of the server list. Defaults to 0 if not specified.</param>
+        /// <param name="environment">Server variable for environment. This will replace the {environment} placeholder in server URLs.</param>
+        /// <param name="serverUrl">A custom server URL to use instead of the predefined server list. If provided with urlParams, the URL will be templated with the provided parameters.</param>
+        /// <param name="urlParams">A dictionary of parameters to use for templating the serverUrl. Only used when serverUrl is provided.</param>
+        /// <param name="client">A custom HTTP client implementation to use for making API requests. If not provided, the default SpeakeasyHttpClient will be used.</param>
+        /// <param name="retryConfig">Configuration for retry behavior when API requests fail. Defines retry strategies, backoff policies, and maximum retry attempts.</param>
+        /// <exception cref="Exception">Thrown when the serverIndex is out of range (less than 0 or greater than or equal to the server list length).</exception>
         public SDK(DailyPay.SDK.DotNet9.Models.Components.Security? security = null, Func<DailyPay.SDK.DotNet9.Models.Components.Security>? securitySource = null, long? version = null, int? serverIndex = null, ServerEnvironment? environment = null, string? serverUrl = null, Dictionary<string, string>? urlParams = null, ISpeakeasyHttpClient? client = null, RetryConfig? retryConfig = null)
         {
             if (serverIndex != null)

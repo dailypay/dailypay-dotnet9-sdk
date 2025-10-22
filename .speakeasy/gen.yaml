@@ -18,12 +18,14 @@ generation:
     oAuth2PasswordEnabled: false
     hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.3.2
+  version: 0.4.0
   additionalDependencies: []
   author: DailyPay, Inc.
   baseErrorName: DailyPayError
@@ -31,6 +33,7 @@ csharp:
   defaultErrorName: APIException
   disableNamespacePascalCasingApr2024: true
   dotnetVersion: net8.0
+  enableCancellationToken: false
   enableSourceLink: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
@@ -52,3 +55,4 @@ csharp:
   packageTags: ""
   responseFormat: envelope-http
   sourceDirectory: src
+  useNodatime: true

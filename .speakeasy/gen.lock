@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: d202b13d3bffb75687b019b5970cccf9
+  docChecksum: e46e93532757c919514e87097084dba4
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.618.0
-  generationVersion: 2.702.0
-  releaseVersion: 0.3.2
-  configChecksum: 727c1995d411736cf95b3559531d5bb7
+  speakeasyVersion: 1.638.0
+  generationVersion: 2.728.0
+  releaseVersion: 0.4.0
+  configChecksum: b0f7674d01dc5899152fc62daf07be7f
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.12.2
+    core: 3.15.1
     deprecations: 2.81.2
     examples: 2.81.6
     globalSecurity: 2.83.8
@@ -24,10 +24,10 @@ features:
     methodServerURLs: 2.82.1
     nameOverrides: 2.81.2
     nullables: 0.1.1
-    oauth2ClientCredentials: 0.3.3
+    oauth2ClientCredentials: 1.1.0
     responseFormat: 0.0.4
     sdkHooks: 0.2.0
-    unions: 0.2.2
+    unions: 1.1.0
 generatedFiles:
   - .gitattributes
   - DailyPay.SDK.DotNet9.sln
@@ -222,7 +222,6 @@ generatedFiles:
   - docs/sdks/organizations/README.md
   - docs/sdks/paychecks/README.md
   - docs/sdks/people/README.md
-  - docs/sdks/sdk/README.md
   - docs/sdks/transfers/README.md
   - global.json
   - src/DailyPay/SDK/DotNet9/Accounts.cs
