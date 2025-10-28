@@ -23,7 +23,7 @@ targets:
         sourceRevisionDigest: sha256:15080505fed7751d9669c0205dcbaf1f47613b1e94c531c3a07a57e570a265b4
         sourceBlobDigest: sha256:df79c6083ab50b27bf086799275b969de4047372361572a07a3df33a89318a8a
         codeSamplesNamespace: xapi-dotnet9-code-samples
-        codeSamplesRevisionDigest: sha256:91233249ebd08f319852f640f8e9ea73242731c210dd3087e2feafe7f86ad05f
+        codeSamplesRevisionDigest: sha256:0991e541d01a61e432701e64f0aea06ab0e7fdfbeaf23532c165883fb09ad623
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
