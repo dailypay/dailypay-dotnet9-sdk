@@ -5,8 +5,8 @@ management:
   docVersion: 3.0.0-beta01
   speakeasyVersion: 1.642.2
   generationVersion: 2.731.6
-  releaseVersion: 0.4.5
-  configChecksum: 3dd3d73670161742d0d51033f6996ca3
+  releaseVersion: 0.4.6
+  configChecksum: d81923e8e6f8cb282f04edf560154bd6
 features:
   csharp:
     additionalDependencies: 0.1.0
