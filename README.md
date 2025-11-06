@@ -355,6 +355,7 @@ using DailyPay.SDK.DotNet9.Models.Components;
 using DailyPay.SDK.DotNet9.Models.Requests;
 
 var sdk = new SDK(
+    serverIndex: 0,
     environment: "dailypayuat",
     version: 3,
     security: new Security() {
