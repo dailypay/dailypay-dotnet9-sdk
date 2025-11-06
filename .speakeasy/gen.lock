@@ -3,20 +3,20 @@ id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
   docChecksum: e46e93532757c919514e87097084dba4
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.642.2
-  generationVersion: 2.731.6
-  releaseVersion: 0.4.6
-  configChecksum: d81923e8e6f8cb282f04edf560154bd6
+  speakeasyVersion: 1.650.0
+  generationVersion: 2.743.2
+  releaseVersion: 0.5.0
+  configChecksum: d08217168991b1e0b90e4c1ae0a5ceba
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.15.1
+    core: 3.15.3
     deprecations: 2.81.2
     examples: 2.81.6
     globalSecurity: 2.83.8
     globalSecurityCallbacks: 0.1.0
-    globalServerURLs: 2.82.4
+    globalServerURLs: 2.83.0
     globals: 2.82.1
     inputOutputModels: 2.83.0
     intellisenseMarkdownSupport: 0.1.0
