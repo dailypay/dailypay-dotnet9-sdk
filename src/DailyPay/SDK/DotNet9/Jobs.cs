@@ -61,7 +61,6 @@ namespace DailyPay.SDK.DotNet9
         /// 
         /// <remarks>
         /// Returns a collection of job objects. This object represents a person&apos;s employment details.<br/>
-        /// See <a href="https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters">Filtering Jobs</a> for a description of filterable fields.<br/>
         /// 
         /// </remarks>
         /// </summary>
@@ -83,8 +82,8 @@ namespace DailyPay.SDK.DotNet9
     {
         public SDKConfig SDKConfiguration { get; private set; }
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.0";
-        private const string _sdkGenVersion = "2.743.2";
+        private const string _sdkVersion = "0.5.1";
+        private const string _sdkGenVersion = "2.753.6";
         private const string _openapiDocVersion = "3.0.0-beta01";
 
         public Jobs(SDKConfig config)
