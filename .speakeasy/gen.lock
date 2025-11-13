@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: e46e93532757c919514e87097084dba4
+  docChecksum: 2d24d99543d5376427756737ba505990
   docVersion: 3.0.0-beta01
-  speakeasyVersion: 1.650.0
-  generationVersion: 2.743.2
-  releaseVersion: 0.5.0
-  configChecksum: d08217168991b1e0b90e4c1ae0a5ceba
+  speakeasyVersion: 1.656.2
+  generationVersion: 2.753.6
+  releaseVersion: 0.5.1
+  configChecksum: eea633e2be134f8f256263d884854f30
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.15.3
+    core: 3.15.4
     deprecations: 2.81.2
     examples: 2.81.6
     globalSecurity: 2.83.8
@@ -77,6 +77,10 @@ generatedFiles:
   - docs/Models/Components/ErrorBadRequestErrorLinks.md
   - docs/Models/Components/ErrorBadRequestErrorMeta.md
   - docs/Models/Components/ErrorBadRequestErrorSource.md
+  - docs/Models/Components/ErrorConflictError.md
+  - docs/Models/Components/ErrorConflictErrorLinks.md
+  - docs/Models/Components/ErrorConflictErrorMeta.md
+  - docs/Models/Components/ErrorConflictErrorSource.md
   - docs/Models/Components/ErrorForbiddenError.md
   - docs/Models/Components/ErrorForbiddenErrorCode.md
   - docs/Models/Components/ErrorForbiddenErrorLinks.md
@@ -175,6 +179,7 @@ generatedFiles:
   - docs/Models/Components/WageRate.md
   - docs/Models/Errors/AccountCreateError.md
   - docs/Models/Errors/ErrorBadRequest.md
+  - docs/Models/Errors/ErrorConflict.md
   - docs/Models/Errors/ErrorForbidden.md
   - docs/Models/Errors/ErrorNotFound.md
   - docs/Models/Errors/ErrorUnauthorized.md
@@ -216,7 +221,7 @@ generatedFiles:
   - docs/Models/Requests/UpdatePersonRequest.md
   - docs/Models/Requests/UpdatePersonResponse.md
   - docs/sdks/accounts/README.md
-  - docs/sdks/cards/README.md
+  - docs/sdks/cardtokenization/README.md
   - docs/sdks/health/README.md
   - docs/sdks/jobs/README.md
   - docs/sdks/organizations/README.md
@@ -225,7 +230,7 @@ generatedFiles:
   - docs/sdks/transfers/README.md
   - global.json
   - src/DailyPay/SDK/DotNet9/Accounts.cs
-  - src/DailyPay/SDK/DotNet9/Cards.cs
+  - src/DailyPay/SDK/DotNet9/CardTokenization.cs
   - src/DailyPay/SDK/DotNet9/DailyPay.SDK.DotNet9.csproj
   - src/DailyPay/SDK/DotNet9/Health.cs
   - src/DailyPay/SDK/DotNet9/Hooks/ClientCredentials/ClientCredentials.cs
@@ -277,6 +282,10 @@ generatedFiles:
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorBadRequestErrorLinks.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorBadRequestErrorMeta.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorBadRequestErrorSource.cs
+  - src/DailyPay/SDK/DotNet9/Models/Components/ErrorConflictError.cs
+  - src/DailyPay/SDK/DotNet9/Models/Components/ErrorConflictErrorLinks.cs
+  - src/DailyPay/SDK/DotNet9/Models/Components/ErrorConflictErrorMeta.cs
+  - src/DailyPay/SDK/DotNet9/Models/Components/ErrorConflictErrorSource.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorForbiddenError.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorForbiddenErrorCode.cs
   - src/DailyPay/SDK/DotNet9/Models/Components/ErrorForbiddenErrorLinks.cs
@@ -377,6 +386,7 @@ generatedFiles:
   - src/DailyPay/SDK/DotNet9/Models/Errors/AccountCreateError.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/DailyPayError.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorBadRequest.cs
+  - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorConflict.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorForbidden.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorNotFound.cs
   - src/DailyPay/SDK/DotNet9/Models/Errors/ErrorUnauthorized.cs
@@ -640,6 +650,8 @@ examples:
           application/vnd.api+json: {"errors": []}
         "500":
           application/vnd.api+json: {"errors": []}
+        "409":
+          application/vnd.api+json: {"errors": [{"code": "IDEMPOTENCY_KEY_LOCKED", "status": "400", "detail": "The request failed because it was not in the correct format or did not contain valid data.", "links": {"about": "https://developer.dailypay.com/tag/Errors"}, "source": {"parameter": "filter[first_name]", "pointer": "/data/attributes/first_name", "header": "Accept"}, "meta": {"request_id": "3c526bf4-f3c0-4c4a-a4cb-95f7db8b3bbe", "trace_id": "4016616108459136584"}}]}
   readPaycheck:
     speakeasy-default-read-paycheck:
       parameters:

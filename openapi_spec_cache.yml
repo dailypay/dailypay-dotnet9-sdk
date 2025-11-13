@@ -1,23 +1,17 @@
 openapi: 3.1.0
 info:
   version: 3.0.0-beta01
-  title: DailyPay Public Rest API
+  termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
+  title: DailyPay Rest API
   x-logo:
-    url: https://s3.amazonaws.com/dp-devportal-images/svgs/dp_text.svg
+    url: https://developer.dailypay.com/static/svgs/dp_text.svg
   contact:
-    name: '@xapi'
-  description: |
-    # Welcome
-
-    This site contains information on basic DailyPay concepts and instructions for using the endpoints of each API. We are just now getting started with our public documentation - please let us know if you have any feedback or questions via Suggested Edits, where you can suggest changes to the documentation directly from the portal.
-
-    Here are some links to help you get familiar with the DailyPay basics:
-
-    [API Versioning](/tag/Getting-Started#section/DailyPay's-API-Versioning) — Find out how we version our APIs.  
-    [Environments](/tag/Getting-Started#section/Environments) — Get an overview of the different environments in the DailyPay API.  
-    [Glossary](/tag/Glossary) — Explore a list of terms used in the DailyPay API.
+    name: DailyPay Developer Support
+    url: https://developer.dailypay.com
+  description: Embed DailyPay and On Demand Pay features into your application.
 servers:
   - url: https://api.{environment}.com
+    description: DailyPay REST API server
     variables:
       environment:
         default: dailypay
@@ -30,1049 +24,21 @@ security:
   - oauth_user_token:
       - user:read
 tags:
-  - name: Getting Started
-    description: |
-      This API reference is your guide to understanding the DailyPay Public REST API and how to embed DailyPay functionality and Earned Wage Access into your application.
-
-      For an overview of the DailyPay Public REST API functionality, see the [DailyPay Public REST API Introduction](/tag/REST-API-Introduction).
-
-      ## Standards
-
-      - The DailyPay Public REST API is a [RESTful API](https://en.wikipedia.org/wiki/Representational_state_transfer), and HTTPS is required for all requests. All request and response bodies are represented with JSON.
-      - OAuth 2.0 is used for authentication and authorization with the DailyPay Public REST API. See the [OAuth 2.0 RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749) reference for more information.
-      - The DailyPay APIs adhere to OpenAPI 3.1.0 standards. See the [OpenAPI Specification](https://spec.openapis.org/oas/v3.1.0) for more information.
-
-      ## Understanding Authentication
-
-      The DailyPay Public REST API uses OAuth 2.0 for authentication. The [DailyPay Public REST API OAuth Overview](/tag/Authentication) provides a detailed explanation of the OAuth 2.0 Authorization Code Grant and Client Credentials Flow.
-
-      ## Try It
-
-      Code Samples are provided for each endpoint in the DailyPay Public REST API Reference. The **_Try It_** feature allows you to test the API endpoints directly from the developer portal and is only available in the UAT environment.
-
-      - When using the **_Try It_** feature on an endpoint:
-        - Make sure you have proper UAT Credentials.
-        - Scrub any data that contains real employee phone, email, or other PII.
-        - Use non-production data.
-
-      ## DailyPay Public REST API Changelogs
-
-      Check back soon for DailyPay Public REST API Changelogs for a list of changes, features, and updates to the DailyPay Public REST API.
-
-      ## API Status
-
-      Make sure you subscribe to or keep an eye on the [DailyPay Status Page](https://status.dailypay.com/) for the current status of the DailyPay Public REST API.
-
-      # Environments
-
-      In general, DailyPay APIs have two environments per API and follow the naming structure of `api.dailypay.com` for the Production environment and `api.dailypayuat.com` for the UAT environment.
-
-      ## Table of DailyPay APIs and their respective environments
-
-      | API Name                 | Production URL                      | UAT URL                                |
-      | ------------------------ | ----------------------------------- | -------------------------------------- |
-      | DailyPay Public REST API | `https://api.dailypay.com`          | `https://api.dailypayuat.com`          |
-      | Data Exchange API        | `https://api.dailypay.com`          | `https://api.dailypayuat.com`          |
-      | Payments API             | `https://payments-api.dailypay.com` | `https://payments-api.dailypayuat.com` |
-
-      ## Key differences between the Production and UAT environments:
-
-      | Environment | Purpose                                                                       | Access                                                  | Data                                                    |
-      | ----------- | ----------------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-      | Production  | Live environment for processing production API Traffic                        | Restricted access for authorized clients and users only | Real production data exchanges including money movement |
-      | UAT         | Staging environment for developers to test new features, updates, and changes | Less restricted access for both developers and testers  | Test data and exchanges without money movement          |
-
-      ## Function
-
-      | Function                                            | UAT | Production |
-      | --------------------------------------------------- | --- | ---------- |
-      | Testing user data without PII                       | ✓   |            |
-      | Ability to mock transfer of funds                   | ✓   |            |
-      | Ability to integrate with custom code               | ✓   | ✓          |
-      | Access to real-world transactions like ACH Deposits |     | ✓          |
-      | Live customer data                                  |     | ✓          |
-      | Live transactions moving real funds                 |     | ✓          |
-
-      # DailyPay's API Versioning
-
-      - Each API at DailyPay adheres to [semver standards](https://semver.org/) for versioning, represented as `MAJOR.MINOR.PATCH`:
-        - The `MAJOR` version is incremented for breaking changes.
-        - The `MINOR` version is incremented for backwards compatible changes.
-        - The `PATCH` version is incremented for backwards compatible bug fixes.
-
-      - DailyPay will issue a new major API version when a breaking change occurs.
-
-      - To avoid breaking your code, developers are responsible for updating their API calls to interact with new versions of the DailyPay APIs.
-
-      - Communication about API changes will be in the changelogs for the APIs or available from your DailyPay representatives.
-
-      ## DailyPay views the following items as backwards compatible non-breaking changes:
-
-      - New resources
-      - New optional query parameters
-      - New optional body properties on PATCH, POST, PUT
-      - New properties on existing API responses
-      - Property order changes on existing API responses
-      - Changes to the content, length, or format of error messages and other human-readable strings
-
-      ## Selecting the API Version
-
-      Your API version controls the API behavior, properties in responses, available parameters in requests, and so on.
-
-      If you want to use API version `v3` of the DailyPay Public REST API, specify the URL `https://api.dailypay.com/rest` or `https://api.dailypayuat.com/rest`.
-  - name: Concepts
-    description: |
-      # Payment Flows
-
-      ## Continuous Pay Access?
-
-      Continuous Pay Access (formerly called Rolling Balance) allows a user to access earnings for a pay period that has already ended but has not yet been paid.
-
-      **Consider the following definitions:**
-
-      - `current pay period` - a pay period that has started but not yet ended
-      - `unsettled pay period` - a pay period that has ended but has not yet had a payday
-      - `settled pay period` - a pay period whose payday is today or prior
-
-      While a pay period is unsettled, the employee has a percentage of their paycheck available for transfer ahead of payday. Once settled, any pay that was not transferred ahead of payday is deposited into an employee’s bank account and no longer available as Earned Wages.
-
-      Earned Wage Access (EWA) is designed to maximize the available balance for each employee. The employee must have access to earnings from both the current and the unsettled pay period as both represent wages the employee has already earned.
-
-      This is where the concept of continuous pay access comes into play. If continuous pay access is not enabled at a client, a user will not be able to access their earned wages between pay period end date and payday.
-
-      ---
-
-      ## Continuous Pay Access Example
-
-      In this example, we have overlapping pay periods in July (7):
-
-      - Continuous Pay Access Starts on 7/14 as `Pay Period 1` Ends and `Pay Period 2` Begins.
-      - Continuous Pay Access Ends on 7/20 as `Pay Period 1` has settled, and only `Pay Period 2` funds are now available for transfer.
-
-      ![Continuous Pay Access Example](https://s3.amazonaws.com/dp-devportal-images/pngs/ContinuousPayAccess/ContinuousPayAccessExample.png)
-
-      ### Transfer Logic
-
-      Transfers follow the "First In, First Out" logic. As such, transfers will be tied to Pay Period 1 until the earnings from Pay Period 1 have been exhausted.
-
-      If earnings from Pay Period 1 are exhausted, transfers will be tied to Pay Period 2. This is determined by taking each pay period’s payday and sorting them in an ascending order.
-
-      - With continuous pay access enabled, it is possible within Pay Period 2 to make a transfer that exclusively draws upon earnings from the unsettled Pay Period 1.
-
-      - Continuous pay access also enables transfers spanning two pay periods. If a requested transfer amount exceeds what is available from Pay Period 1, the earnings to satisfy the transfer will span both pay periods. In effect, the user will be accessing earnings from both pay periods simultaneously with one transfer.
-
-      ### DailyPay Public REST API Transfer Example
-
-      The image below is an example transfer accessing earnings from both pay periods simultaneously with one transfer.
-
-      - A user has two paychecks, `Paycheck 1` and `Paycheck 2` throughout two pay periods.
-      - The user's first paycheck represents $100.00 of earnings, and the second paycheck represents $120.00 of earnings.
-      - During the Continuous Pay Access Window, the user will have a total of $222.00 earned wages across two paychecks.
-      - Assuming a 50% transfer rate, the user will have an Available Balance of $110.00 during the continuous pay access window.
-
-      ![Transfer during continuous pay access window](https://s3.amazonaws.com/dp-devportal-images/pngs/ContinuousPayAccess/TransferDuringCPA.png)
   - name: Filtering
     description: |
-      Efficiently retrieve DailyPay REST API resources with filtering queries by specifying query parameters in the request URL. This guide outlines how to build your queries.
-
-      > The request URL for a filtered query is structured as follows:
-      >
-      > ```
-      > https://api.dailypay.com/{endpoint}?filter[{field}]={value}
-      > ```
-
-      ## Terminology
-
-      Each filter is a standard URL query parameter key-value pair. Filter parameters follow the jsonapi specification of a [query parameter family](https://jsonapi.org/format/#query-parameters-families), where the parameter key is the base name `filter` followed by a square-bracketed (`[]`) field name.
-
-      - The `{endpoint}` is the resource you want to filter, such as [organizations](/tag/Organizations), [transfers](/tag/Transfers), or [paychecks](/tag/Paychecks).
-      - A `{field}` is the attribute of a resource you want to filter by, such as a person's _employee ID_ or a transfer's _status_.
-      - A `{value}` is any value that could be a valid payload for the attribute, such as **"DailyPay"** for an organization name, or **"PROCESSING"** for a transfer status.
-
-      ---
-
-      ## URL Encoding
-
-      The symbols used in DailyPay's filter strings MUST be urlencoded.
-
-      :::info
-
-      When using one of our published SDKs, you do _not_ have to transform or urlencode the keys or values for operations with filters.
-
-      :::
-
-      For example, a curl would look like:
-
-      ```
-      curl  \
-        --get 'https://api.dailypayuat.com/rest/jobs' \
-        --header "Authorization: Bearer ${ACCESS_TOKEN}" \
-        --data-urlencode "filter[external_identifiers.primary_identifier]=040919553433" \
-        --include
-      ```
-
-      ## Practical Examples
-
-      ### Exact Match
-
-      Filter for a paycheck with the status "IN_TRANSIT".
-
-      ```
-      GET https://api.dailypay.com/paychecks?filter[status]=IN_TRANSIT
-      ```
-
-      ### Multiple Filters: ALL
-
-      Use multiple query parameters across different fields `filter[{field}]={value}` at the same time to fine tune the response. Each result will match **all** filters.
-
-      ```
-      GET https://api.dailypay.com/paychecks?filter[job.id]=12345&filter[status]=PROCESSING
-      ```
-
-      ---
-
-      ## Supported Endpoint Filters
-
-      ### accounts
-
-      The filter is required when requests are made using `oauth_client_credentials_token` but optional when using `oauth_user_token`.
-
-      See [List Accounts](/tag/Accounts#operation/listAccounts) for a list of available filters
-
-      ```
-      GET https://api.dailypay.com/accounts?filter[person_id]=aa860051-c411-4709-9685-c1b716df611b
-      ```
-
-      ---
-
-      ### jobs
-
-      See [List Jobs](/tag/Jobs#operation/listJobs) for a list of available filters
-
-      ```
-      GET https://api.dailypay.com/jobs?filter[external_identifiers.employee_id]=aa860051-c411-4709-9685-c1b716df611b&filter[external_identifiers.group]=Weekly
-      ```
-
-      ---
-
-      ### paychecks
-
-      See [List Paychecks](/tag/Paychecks#operation/listPaychecks) for a list of available filters
-
-      ```
-      GET https://api.dailypay.com/paychecks?filter[job_id]=aa860051-c411-4709-9685-c1b716df611b&filter[status]=DEPOSITED
-      ```
-
-      ---
-
-      ### transfers
-
-      See [List Transfers](/tag/Transfers#operation/listTransfers) for a list of available filters
-
-      ```
-      GET https://api.dailypay.com/transfers?filter[person_id]=aa860051-c411-4709-9685-c1b716df611b
-      ```
-  - name: Errors
+      {% partial file="/_partials/filtering.md" /%}
+  - name: Environments
     description: |
-      # 400 Bad Request
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/BadRequest"}/>
-
-      # 400 Unprocessable Account
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/UnprocessableAccount"} />
-
-      # 400 Unprocessable Transfer
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/UnprocessableTransfer"} />
-
-      # 401 Unauthorized
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/Unauthorized"} />
-
-      # 403 Forbidden
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/Forbidden"} />
-
-      # 404 Not Found
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/NotFound"} />
-
-      # 500 Unexpected Error
-
-      ---
-
-      <RedocResponse pointer={"#/components/responses/Unexpected"} />
-  - name: Troubleshooting
+      {% partial file="/_partials/environments.md" /%}
+  - name: Idempotency
     description: |
-      ## API Troubleshooting Guide
-
-      If you are experiencing issues or encountering errors while using the API endpoints for on-demand pay functionality, refer to the following troubleshooting steps:
-
-      1. **Verify API Endpoint Access:**
-         - Ensure that you are using the correct Base URL for accessing the API endpoints. Double-check the appropriate base URL and endpoint paths:
-           - Production: `https://api.dailypay.com/rest`
-           - UAT: `https://api.dailypayuat.com/rest`
-
-         For API calls made from the developer portal to the DailyPay UAT environment:
-         - Ensure you have a UAT API key.
-         - Scrub any data containing employee phone, email, and direct deposit information.
-         - Use non-production data.
-
-      2. **Check Authentication and Authorization:**
-         - Confirm that you are providing the correct authentication credentials to access protected API resources.
-         - Verify that the access token is valid and has the necessary permissions for the desired actions.
-
-         Refer to the [Authentication Overview](Authentication) guide for assistance in confirming these details.
-
-      3. **Review Endpoint Parameters:**
-
-         See the [endpoint references](Getting-Started) with examples listed under relevant categories, e.g., _Users_ or _Organizations_.
-
-      4. **Handle Response Codes and Error Messages:**
-         - Pay attention to the response codes returned by the API. HTTP status codes in the 2xx range generally indicate success, while codes in the 4xx or 5xx range indicate errors.
-         - Refer to the API documentation for a comprehensive list of error codes and their meanings. Error messages returned by the API can provide valuable insights into the cause of the issue.
-
-         Error codes and their meanings are included under each endpoint description.
-
-      5. **Test in the Sandbox Environment:**
-         - Test your integration in the sandbox environment to troubleshoot and debug without affecting live production data. Refer to the [environments setup guide](tag/Getting-Started#section/Environments) for assistance.
-
-      6. **Logging and Error Tracking:**
-         - Implement logging mechanisms in your application to capture relevant information, such as request and response details, error messages, and stack traces.
-         - Use proper error tracking tools or services to centralize and monitor error occurrences. This can help identify patterns and provide insights for resolution.
-
-      7. **Reach Out to Developer Support:**
-         - If you have exhausted the troubleshooting steps and are still unable to resolve the issue, reach out to the developer support team for assistance.
-         - Provide detailed information about the problem, including the API endpoints, request parameters, and any error messages received.
-
-      Remember, troubleshooting steps may vary depending on the specific API endpoints and implementation details. Consult the [DailyPay Public REST API documentation](REST-API-Introduction), error code references, and support resources provided by the API provider for further guidance and assistance in resolving any issues you encounter.
-  - name: FAQs
+      {% partial file="/_partials/idempotency.md" /%}
+  - name: Versioning
     description: |
-      Welcome to our Frequently Asked Questions (FAQ) page dedicated to the integration of the DailyPay Public REST API. Here, we have compiled a list of common queries along with their respective answers to assist developers in seamlessly understanding and implementing the REST API.
-
-      We cover various topics, including _user management_, _pay cycles_, _authentication_, and more. If you can't find the answer to your specific question, please don't hesitate to contact our dedicated developer support team for personalized assistance.
-
-      # User-related Questions:
-
-      <div>
-        <div class="accordion__item">
-          <input type="checkbox" id="user-1">
-          <label class="label" for="user-1">
-            What is a user, and what can a user do?
-           <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-          </label>
-          <div class="content">
-            An individual who interacts with the workforce management system integrated with the API. Users are typically employees or workers within an organization. The RESP API empowers clients to create new user accounts and retrieve or update user information. These actions may include enrolling for on-demand pay, accessing and managing payroll-related information and initiating transfers of funds. It is important to note that the specific functionalities and capabilities available to users can vary depending on the particular implementation.
-          </div>
-
-        </div>
-        <div class="accordion__item">
-          <input type="checkbox" id="user-2">
-          <label class="label" for="user-2">
-            How many employers can a user have?
-            <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-          </label>
-          <div class="content">
-            Currently, while users can have multiple employers, only one can be associated with their on-demand pay options and integrated with our REST API.
-          </div>
-        </div>
-        </div>
-
-      # Employer-related Questions:
-
-        <div>
-        <div class="accordion__item">
-            <input type="checkbox" id="employer-1">
-            <label class="label" for="employer-1">
-              What is an employer, and what can employers do?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              An employer represents an organization that uses the integrated workforce management system. Employers can often manage employee profiles, approve on-demand pay requests, generate payroll reports, monitor workforce analytics, and configure pay cycles and schedules. The REST API empowers employers to streamline workforce management tasks and efficiently handle employee compensation and administration.
-            </div>
-          </div>
-        </div>
-
-      # Pay Cycle and Scheduling Questions:
-
-        <div>
-        <div class="accordion__item">
-            <input type="checkbox" id="pay-1">
-            <label class="label" for="pay-1">
-              What does a typical pay cycle look like for clients?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              <ul>
-              <li>The specific details of a pay cycle can vary among clients and organizations. However, a typical pay cycle for clients often follows a regular schedule, such as weekly, bi-weekly (every two weeks), semi-monthly (twice a month), or monthly.</li>
-              <li>During a pay cycle, employees' working hours, wages, and other factors relevant to compensation are recorded and processed by their employer. For on-demand pay to work, payroll calculations are performed on a shift-by-shift basis, and employees have visibility and access to their current earned income at that point in the given pay period.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="pay-2">
-            <label class="label" for="pay-2">
-              What are the types of pay schedules our clients might have?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-            Clients utilizing the REST API may have various types of pay schedules based on their specific needs and requirements. Some common types of pay schedules include:
-              <ol>
-                <li>Weekly: Employees are paid weekly, typically every seven days.</li>
-                <li>Bi-weekly: Payroll is processed every two weeks, resulting in 26 pay periods per year.</li>
-                <li>Semi-monthly: Employees receive paychecks twice a month, often on specific dates such as the 15th and the last day of the month.</li>
-                <li>Monthly: Payroll is processed once a month, usually on a fixed date.</li>
-                <li>Customized: Clients may have unique pay schedules tailored to their business needs. These schedules can include irregular intervals or specific dates based on the company's pay policies.</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-      # API Functionality and Integration Questions:
-
-        <div>
-        <div class="accordion__item">
-            <input type="checkbox" id="func-1">
-            <label class="label" for="func-1">
-              How do I get started with the integration process?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              To get started, please refer to the API documentation available on our <a href='Getting-Started'>Getting Started page</a>. It provides step-by-step instructions, code examples, and guidelines for implementing the API endpoints.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-2">
-            <label class="label" for="func-2">
-              What authentication method does the API use?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-                The API leverages OAuth 2.0 for authentication. To interact with user-based operations that require an individual's consent, you'll need to obtain access tokens using the authorization grant flow. For non-user-specific operations that involve accessing endpoints such as 'organization search', you will utilize client credentials for authentication.
-                <br></br>
-                <a href='OAuth'>Read this guide to learn more about getting access tokens and the authorization grant flow.</a>
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-3">
-            <label class="label" for="func-3">
-              How can I search for users within my application?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-                You can use the <a href='Users#operation/readUserDetails'>user details endpoint</a> provided by the API. It allows you to search for users based on various criteria, such as name, email, or employee ID.
-                <br></br><a href="Users#operation/readUserDetails](tag/Users#operation/readUserDetails"><img src="https://img.shields.io/badge/GET-/v1/users/{user_id}-brightgreen" alt="GET" /></a>
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-4">
-            <label class="label" for="func-4">
-              Can I retrieve payroll-related information for users?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-                Yes, you can retrieve payroll-related information using the <a href="Users#operation/readPaycheck">paychecks endpoint</a>. It allows you to fetch user paychecks based on specified parameters, such as user ID and date range.
-                <br></br><a href="tag/Users#operation/readPaycheck"><img src="https://img.shields.io/badge/GET-/v1/users/{user_id}/paychecks/{paycheck_id}-brightgreen" alt="GET" /></a>
-              </ul>
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-5">
-            <label class="label" for="func-5">
-              How can I initiate funds transfers using the API?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-            You can use the <a href="Users#operation/makeTransfer">transfers endpoint</a> to initiate funds transfers between accounts. Provide the necessary parameters, such as the destination account and the transfer amount.
-                <br><br/>
-                <a href="Users#operation/makeTransfer"><img src="https://img.shields.io/badge/POST-/v1/users/{user_id}/transfers-blue" alt="POST" /></a>
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-6">
-            <label class="label" for="func-6">
-              Can I manage debit and bank cards using the API?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, you can manage debit and bank cards using the card management endpoint. It enables you to add, update, or remove debit and bank cards for users. However, to add or update Debit Cards from within your application, you must be PCI-E compliant and communicate this with your DailyPay representative.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-7">
-            <label class="label" for="func-7">
-              Is the card management feature PCI-E compliant?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, the card management functionality provided by the API adheres to PCI-E (PCIE) compliance standards. It ensures the secure handling of card information during tokenization and storage processes.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-8">
-            <label class="label" for="func-8">
-              Can I customize the UI to display available balance and other related information to end users?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, the API allows you to customize the user interface (UI) of your application to display available balance and other relevant information to end users. However, DailyPay has some rules for displaying and explaining available balance. You can leverage the API data to design a user-friendly and visually appealing UI.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-9">
-            <label class="label" for="func-9">
-              Are there any sandbox or testing environments available for API integration?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, we provide testing environments to facilitate API integration and testing. These environments have full API functionality but simulate transfers, which allows you to test an integration without affecting production data.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-10">
-            <label class="label" for="func-10">
-              Are there any compliance or regulatory considerations when integrating with this API?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, compliance and regulatory considerations might apply, such as data privacy, security, and financial regulations. Ensure that your integration follows relevant compliance standards and guidelines to protect user data and comply with applicable regulations.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-11">
-            <label class="label" for="func-11">
-             How can I stay updated on API changes, updates, and new features?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              We provide notifications, release notes, and changelogs on our developer portal to keep you informed about API changes, updates, and new features. Regularly check the portal for announcements or subscribe to our developer newsletter for updates.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-12">
-            <label class="label" for="func-12">
-             Can a person have multiple accounts for remainder pay?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              Yes, people can have one depository and one card account designated for remainder pay, set when updating a job's paycheck settings. DailyPay will always attempt to send remainder pay to the depository account first.
-            </div>
-          </div>
-          <div class="accordion__item">
-            <input type="checkbox" id="func-13">
-            <label class="label" for="func-13">
-             How is the remainder of the paycheck determined?
-               <span class="toggle-icon">
-            <img src="https://s3.amazonaws.com/dp-devportal-images/svgs/chevron.svg" alt="ChevronIcon">
-          </span>
-            </label>
-            <div class="content">
-              The remainder is the amount left after deductions for the other specified accounts. Generally speaking, remainder pay is the net_earnings minus total_debited on each paycheck.
-            </div>
-          </div>
-        </div>
-
-        <!-- According Styles -->
-        <style>
-        .accordion {
-          max-width: 600px;
-          margin: 50px auto;
-        }
-
-        .accordion__item {
-          margin-bottom: 10px;
-          border: 1px solid #FEDBCC;
-          border-radius: 5px;
-          overflow: hidden;
-        }
-
-        input[type="checkbox"] {
-          display: none;
-        }
-
-        .label {
-          background-color: white;
-          color: black;
-          padding: 10px;
-          border-radius: 5px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          cursor: pointer;
-          transition: background-color 0.3s ease-in-out;
-          font-weight: semi-bold;
-          font-size: 18px;
-        }
-
-        .content {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.5s ease-out, margin 0.5s ease-out;
-          margin: 0px 10px 0px 10px;
-        }
-
-        input:checked + label {
-          background-color: #FFF4F0;
-        }
-
-        input:checked + label + .content {
-          max-height: 1000px; /* Adjust the value to fit your content */
-          margin: 15px;
-        }
-
-        /* Add styles for the chevron icon */
-        .toggle-icon img {
-          width: 14px; /* Adjust the width as needed */
-          height: 14px; /* Adjust the height as needed */
-          transition: transform 0.3s ease-out;
-        }
-
-        /* Rotate the chevron icon when the accordion item is open */
-        input:checked + label .toggle-icon img {
-          transform: rotate(180deg);
-        }
-      </style>
-  - name: Glossary
+      {% partial file="/_partials/versioning.md" /%}
+  - name: API Status
     description: |
-      Welcome to the glossary of key terms and concepts. This page provides definitions of commonly used terms in the payroll industry as well as some DailyPay concepts. This resource covers everything from basic terminology and acronymns to advanced concepts and will continue to improve as we add more public documentation.
-
-      | Term                             | Description                                                                                                                                                                                                                                                                                                     |
-      | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      | **Available Balance (AB)**       | Balance made available for the Client to transfer from.                                                                                                                                                                                                                                                         |
-      | **Advance Rate (AR)**            | Percentage applied to the client’s Gross Earnings to calculate the Available Balance.                                                                                                                                                                                                                           |
-      | **DailyPay Account (DPA)**       | Each active enrolled employee receives a unique DailyPay Account, or “DPA.” Their DPA is linked to their primary bank account, and their DPA is also input into their company's payroll system. DailyPay can receive their paychecks from the employer and also send reminders to the employee through the DPA. |
-      | **DailyPay User (User)**         | Any person who has registered (agreed to Terms & Conditions) for a DailyPay Consumer Service and has not yet been forgotten. (“Forgotten” refers to the privacy practice or “right to be forgotten.”)                                                                                                           |
-      | **On Demand Pay**                | On-demand pay gives employees access to their earned pay before the traditional, scheduled payday. [Learn More](https://www.dailypay.com/earned-wage-access/)                                                                                                                                                   |
-      | **Employee/Worker**              | Any person submitted to DailyPay from an employer/partner as a payroll participant for that organization.                                                                                                                                                                                                       |
-      | **Gross Earnings/Pay**           | The earnings employees would receive before taxes and deductions are taken out. Generally, it’s the employee’s hourly wage multiplied by hours worked.                                                                                                                                                          |
-      | **Net Earnings/Pay**             | The employee’s take-home pay, after all taxes and deductions (the actual amount of the check the employee receives). Commonly referred to as a payroll journal or payroll register.                                                                                                                             |
-      | **Time Management System (TMS)** | The system where employees record their hours worked.                                                                                                                                                                                                                                                           |
-      | **Transfer**                     | The movement of money from a User's Available Balance to his/her bank account.                                                                                                                                                                                                                                  |
-      | **Vault Check**                  | When the DailyPay system checks the last 4 digits of an account number to confirm that the bank account on record in your payroll system is the DailyPay account (and not the employee's personal bank account).                                                                                                |
-  - name: Authentication
-    description: |
-      # DailyPay API Access
-
-      ---
-
-      DailyPay adheres to the [OAuth 2.0 RFC 6749](https://datatracker.ietf.org/doc/html/rfc6749) and [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) specifications. This document will walk you through the steps to get an _access token_ your application can use to make requests to the DailyPay Public REST API.
-
-      We support the following methods:
-
-      - [Authorization Code Flow](https://www.rfc-editor.org/rfc/rfc6749#section-4.1): This method is suitable when access to resources requires user consent, such as bank account information or the ability to initiate transfers on behalf of the user.
-
-        > It allows your application to get `access` and `refresh` tokens, facilitating user consent and enabling your application to perform actions on their behalf.
-
-      - [Client Credential Flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4): This method is suitable for server-to-server operations, where additional levels of user consent may not be required.
-        > The client credentials grant facilitates the acquisition of an access token independent of a user's protected resources. For instance, you can utilize [the _Organizations_ endpoint](/tag/v3/Organizations#operation/readOrganization).
-
-      # Authorization Code Flow
-
-      The purpose of following the OAuth2 flow is to help you retrieve an authorization <strong><code>code</code></strong>
-      and exchange it for an <strong><code>access_token</code></strong> via the <a href="/tag/Authentication#operation/requestOauthAccessToken">request access token</a> endpoint.
-
-      ## 1. Register your Application
-
-      Your DailyPay contact will ask you to provide
-
-      - a callback url that can receive the <strong><code>code</code></strong> result of the OAuth 2.0 authorization code flow
-      - links to your privacy policy and terms of service
-      - optionally, a logo for use on the OAuth consent screen
-
-      <details>
-      <summary>OpenID Connect (OIDC)</summary>
-
-      - For additional security, you may be asked to provide DailyPay with a JSON Web Key Set (JWKS) or url for retrieving your JWKS to utilize signed <a href="https://openid.net/specs/openid-connect-core-1_0.html#JWTRequests">OIDC requests</a>.</p>
-      </details>
-
-      ## 2. Configure
-
-      <p>DailyPay will provide configuration values for your application:</p>
-      <ul>
-          <li><code>client_id</code></li>
-          <li><code>client_secret</code>, if applicable</li>
-          <li><code>scope</code>a list of scopes your application can request, which may include "offline_access" and "openid"</li>
-          <li><code>redirect_uri</code> the registered callback url you provided</li>
-      </ul>
-
-      You may wish to use a client library (https://oauth.net/code/) to perform the next steps, using the configuration values above.
-
-      ## 3. Initiate an OAuth2 request
-
-      Construct the request url using the template below, replacing the <strong><code>{scope}</code></strong>, <strong><code>{client_id}</code></strong>, and <strong><code>{redirect_uri}</code></strong> parameters with the configuration values accordingly.
-
-      Additionally, generate a <strong><code>state</code></strong> parameter for the specific request, and a code challenge and verifier (used in a later step) for <a href="https://oauth.net/2/pkce/">Proof Key Code Exchange</a>.
-
-        <pre><code>https://auth.dailypay.com/oauth2/auth
-          ?response_type=code
-          &scope={scope}
-          &client_id={client_id}
-          &redirect_uri={redirect_uri}
-          &state={state}
-          &code_challenge={code_challenge}
-          &code_challenge_method=S256
-        </code></pre>
-
-        <details>
-        <summary>Example</summary>
-        
-        <pre><code>https://auth.dailypay.com/oauth2/auth
-          ?response_type=code
-          &scope=user%3aread_write%20openid
-          &client_id=your-client-id
-          &redirect_uri=https%3A%2F%2Fexample.com%2Fcallback
-          &state=9876543fghijklm
-          &code_challenge=hKpKupTM391pE10xfQiorMxXarRKAHRhTfH_xkGf7U4
-          &code_challenge_method=S256
-        </code></pre>
-        
-        Make sure to url-encode each parameter e.g. <code>user:read_write</code> becomes <code>user%3aread_write</code>
-        </details>
-        <br>
-
-      ## 4. Open a browser window, tab, or secure mobile view to the constructed URL.
-
-      The user will be prompted to log in or create a new DailyPay account and will be prompted to allow your application to act on their behalf.
-
-      <img src="https://s3.amazonaws.com/dp-devportal-images/pngs/OAuthAllowFlow.png">
-
-      ## 5. Handle the code
-
-      Users will be redirected in the open tab to your callback url with a `code` query parameter,
-      or an `error` and `error_description` if the user did not consent to your application's request or otherwise encountered an error.
-      You will also be returned the `state` parameter.
-
-      ## 6. Exchange the code for an Access Token
-
-      As also specified in our [token endpoint documentation](Authentication#operation/requestToken),
-      send the following parameters www-form-encoded in the request body to https://auth.dailypay.com/oauth2/token.
-
-      <table>
-      <thead>
-      <tr>
-      <th>Parameter</th>
-      <th>Required</th>
-      <th>Description</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>grant_type</td>
-      <td>Yes</td>
-      <td>Must be set to <code>authorization_code</code>.</td>
-      </tr>
-      <tr>
-      <td>client_id</td>
-      <td>Yes</td>
-      <td>Your client id provided by DailyPay.</td>
-      </tr>
-      <tr>
-      <td>code</td>
-      <td>Yes</td>
-      <td>The authorization code received from the authorization server.</td>
-      </tr>
-      <tr>
-      <td>redirect_uri</td>
-      <td>Yes</td>
-      <td>MUST be the redirection URI used in the initial authorization request.</td>
-      </tr>
-      <tr>
-      <td>client_secret</td>
-      <td>Varies</td>
-      <td>Your client secret, if provided by DailyPay.</td>
-      </tr>
-      <tr>
-      <td>code_verifier</td>
-      <td>Varies</td>
-      <td>The PKCE verifier matching the code_challenge generated earlier.</td>
-      </tr>
-      </tbody>
-      </table>
-
-      Example Request to the Token Endpoint
-
-      <pre><code>curl --request POST \
-          --url https://auth.dailypay.com/oauth2/token \
-          --header 'accept: application/json' \
-          --header 'content-type: application/x-www-form-urlencoded' \
-          --data "grant_type=authorization_code" \
-          --data "client_id={client_id}" \
-          --data "code={code}" \
-          --data "redirect_uri={redirect_uri}" \
-          --data "code_verifier={verifier}"
-      </code></pre>
-
-      The resulting access token can be used to make requests to the DailyPay Public REST API:
-
-      <pre><code>{
-          "access_token": "dpo_38347Ae178B4a16C7e42F292c6912E7710c8",
-          "token_type": "bearer",
-          "expires_in": 3600,
-          "created_at": 1669741580
-      }
-      </code></pre>
-
-      > The authorization code, access token, and refresh tokens can vary in size but will typically remain under 4096 btyes.
-
-      # Client Credentials Flow
-
-      As also specified in our [token endpoint documentation](Authentication#operation/requestToken),
-      send the following parameters www-form-encoded in the request body to https://auth.dailypay.com/oauth2/token.
-
-      <table>
-      <thead>
-      <tr>
-      <th>Parameter</th>
-      <th>Required</th>
-      <th>Description</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>grant_type</td>
-      <td>Yes</td>
-      <td>Must be set to <code>client_credentials</code>.</td>
-      </tr>
-      <tr>
-      <td>scope</td>
-      <td>Yes</td>
-      <td>The space-delimited list of requested scopes</td>
-      </tr>
-      <tr>
-      <td>client_id</td>
-      <td>Yes</td>
-      <td>Your client id provided by DailyPay.</td>
-      </tr>
-      <tr>
-      <td>client_secret</td>
-      <td>Yes</td>
-      <td>Your client secret provided by DailyPay.</td>
-      </tr>
-      </tbody>
-      </table>
-
-      Example Request to the Token Endpoint
-
-      <pre><code>curl --request POST \
-          --url https://auth.dailypay.com/oauth2/token \
-          --header 'accept: application/json' \
-          --header 'content-type: application/x-www-form-urlencoded' \
-          --data "grant_type=client_credentials" \
-          --data "scope={scopes}" \
-          --data "client_id={client_id}" \
-          --data "client_secret={client_secret}"
-      </code></pre>
-
-      The resulting access token can be used to make requests to the DailyPay Public REST API:
-
-      <pre><code>{
-          "access_token": "dpo_38347Ae178B4a16C7e42F292c6912E7710c8",
-          "token_type": "bearer",
-          "expires_in": 3600,
-          "created_at": 1669741580
-      }
-      </code></pre>
-
-      > The authorization code, access token, and refresh tokens can vary in size but will typically remain under 4096 btyes.
-
-      ---
-  - name: Client Portal
-    description: |
-      The client portal is a tool that enables you to effectively manage users as you build and test your DailyPay API integration. The portal provides access to upload, download, and track data exchanges for files like user rosters, gross and net earnings, and allows for admin management.
-
-      ![ProviderPortalOverview](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_overview.png)
-
-      This page will provide an overview of the following high-level metrics:
-
-      - **Dollars Transferred** from DailyPay to employees in the past 7 days
-      - **Gross Earnings** Reported for all users in the past 24 hours
-      - **Enrollment** of eligible Users (% of employees enrolled in the DailyPay Program)
-      - **Adoption** % of eligible users (% of eligible employees that have made 2 or more transfers with DailyPay)
-
-      It also calls attention to important action items related to the Data Exchange (for example, if updates to employee direct deposit information are needed). You will have quick access to the following manual tasks:
-
-      - Download Direct Deposit Updates
-      - Upload the most recent Gross Earnings, Net Earnings (Payroll Journal), and User Roster Files
-
-      > The Search Bar at the top of the screen allows you to locate employee accounts by name or User ID #.
-
-      ---
-
-      # User Tab
-
-      ![ProviderPortalUserTab](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_user_tab.png)
-      Here you can see how many employees are enrolled, how many have yet to enroll, and how many
-      have a canceled status. By using the top search bar, you can also locate employee accounts by name or User ID #, or you can filter the employees based on status or pay group. Below are the different user statuses:
-
-      - **Active**: An employee who has enrolled in DailyPay, but may or may not have made a transfer yet.
-      - **Canceled**: Users who have opted out of DailyPay or a user who has been terminated.
-      - **Pending**: DailyPay has created accounts for these users, but they have not yet completed the enrollment.
-      - **Review**: User who signed up for the DailyPay Program but may require actions before moving to the Active status.
-
-      Below are some _Review_ examples:
-
-      - The user enters an invalid bank account, and the DailyPay support team will work directly with the employee to resolve the issue. (Most Common)
-      - The user changed their details like first and last name, email or phone number, and the support team needs to review and reconfirm updates with the user.
-      - Unusual user activity, such as fraud or frequent cancelation/reactivation.
-      - Client-reported accounting or timekeeping issues.
-
-      ## Users Tab: What information can be seen for each employee
-
-      ![WhatEachEmployeeSees](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_whatEmployeeSees.png)
-
-      When selecting a user, you’ll have visibility into the following data:
-
-      - **General Information** such as Contact information and User ID.
-      - **Banking**:
-        - You can see which DailyPay account is on file in your payroll system.
-        - You can see which Bank account is on file in the user’s DailyPay Account
-          Settings as their primary account (where they would like to receive their
-          paycheck on payday).
-
-      > You will also have the ability to report an employee termination and/or disable their DailyPay account.
-
-      - To report an employee termination, click _Report Termination_ and then indicate how the employee will receive the final paycheck.
-
-      ![ReportTermination](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_report_termination.png)
-
-      - **No Change** (final pay only through direct deposit to DailyPay account):
-        - If an employee will be paid via direct deposit, choose this option, regardless if the final paycheck is sent off-cycle or on payday.
-      - **Paper Check** (deductions allowed with invoice request from DailyPay):
-        - If the employee is in a state that allows “wage discounting” and will be paid via paper check, choose this option.
-        - You’ll be prompted to enter the termed employee’s final net pay amount (according to their payroll system), and the portal will return the outstanding DailyPay transfers (amount owed), and the dollar amount that should be given on the final paper check.
-        - You then have the option of the remittance to DailyPay, either an invoice or through the DailyPay Account via direct deposit.
-      - **Paper Check** (no deductions allowed):
-        - If an employee must receive full pay immediately via paper check only, choose this option. DailyPay will work with the user to recoup the outstanding balance.
-      - If you’d like to disable a user, please click **Disable Account**.
-
-      ## User Statements
-
-      Within the User’s Account, you will also have the option to view the employee’s _Statements_
-
-      ![UserAccountStatements](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_user_account_statements.png)
-
-      You can select the current or previous pay periods, and you’ll see the following
-      payment information:
-
-      - The employee's full paycheck, and which amount was transferred before payday
-        and received on payday.
-      - All DailyPay transfers the user took within the pay period when they occurred, what
-        type of transfer it was (instant vs. next-day ACH), fees, and which account the
-        payment was transferred to.
-      - All payments the user received from the client.
-
-      ---
-
-      # Reporting Tab
-
-      ![ReportingTab](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_reporting_tab.png)
-
-      Under the Reporting tab, you will have visibility to the following information:
-
-      - **Enrollment** shows trends of users who have enrolled and adopted the DailyPay benefit.
-      - **Usage** shows the details regarding usage data, such as transfer reason and payment type:
-        - ACH transfers
-        - Next Business Day Transfers
-        - Instant Transfer - Real-Time Payments (or “RTP” for short), is a form of instant transfer that can be sent directly to bank accounts.
-      - **Compliance** shows with full transparency a User’s consent and what is being transferred to the employee.
-      - **Payday Exclusions** shows a list of all users whose remainder payment was not pre-funded for the selected pay date before payday.
-      - Within the **Other** section of the Reporting tab, you can export the following reports which will be sent to the email address associated with the
-        account login:
-        - **User Report**: Shows the user information, status, pay period earnings, available balance, payments, and the associated DPA (DailyPay Account), if applicable.
-        - **Balance Report**: This shows the details of the employee’s DailyPay balance information.
-
-      ---
-
-      # Data Exchange
-
-      ![DateExchangeDirectDepositUpdate](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_data_exchange_dd.png)
-
-      Within the _Data Exchange_ Tab, you have visibility into seeing the file transmissions with the option to manually upload or download a file for the following:
-
-      - User Roster
-      - Gross Earnings
-      - Net Earnings (Payroll Journal)
-      - Direct Deposit Updated (DDU)
-
-      ---
-
-      # Admin Access
-
-      ![AdminManagement](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_admin_management.png)
-
-      This tab allows you to add or deactivate other admins to the Client Portal.
-
-      ## Adding a new DailyPay Admin
-
-      To create a new DailyPay admin, click **Create Admin** beside the Admin Management header and input their first name, last name, email address
-      associated with their account, and phone number.
-
-      - You can also create a user and assign them to one or more pay groups, to ensure they can only view the user information for the employees in their designated pay group.
-      - To disable an existing admin, click the **Deactivate User** button.
-
-      ---
-
-      # Settings
-
-      ![Settings](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_settings.png)
-      By navigating to the _Settings_ section of your account, you have the option to subscribe to receive email alerts if any file is needed.
-
-      ![Notifications](https://s3.amazonaws.com/dp-devportal-images/pngs/provider_portal_guide/provider_portal_notifications.png)
-
-      # Support
-
-      **Should you have any questions, please contact your Client Manager or Client Support:**
-
-      - **Email:** client.support@dailypay.com
-  - name: Tokenization
-    description: "The Tokenization Component provides a secure, embeddable form for collecting debit\ncard information. It is an alternative to the [Cards API](/#tag/Cards/operation/createGenericCardToken).\nLike the Cards API, the Tokenization Component may be used to process card data for\nuse when creating a [card account](/#tag/Accounts/operation/createAccount) for a user.\nThe Component is designed for use in mobile apps (WebView) and web apps (iframe),\nand supports robust validation and cross-platform messaging. This guide explains how to\nintegrate the Tokenization Component in a native application using a WebView.\n\n<img src=\"https://s3.amazonaws.com/dp-devportal-images/jpgs/Toolkit/ToolkitTokenization.jpg\" alt=\"Tokenization UI\" height=\"1000\"/>\n\n## Architecture Overview\n\nThe DailyPay Debit Card Tokenization Component is a secure, embeddable web form designed for seamless integration into mobile and web applications. It is intended to be loaded in a WebView (React Native, iOS, Android) or iframe, and communicates with the host application using the postMessage API. The component handles all user input, validation, and securely transmits card data to a DailyPay backend service, which performs the actual tokenization with the payment gateway. Only the resulting token and non-sensitive metadata are returned to the host. No sensitive card data is ever exposed to or stored by the host application.\n\n### Component Flow\n\n1. Embedding: The host app loads the component in a WebView or iframe, passing the DailyPay backend tokenization API URL as a parameter.\n1. User Input: The user enters their debit card and address details into the form. All validation and formatting is handled client-side.\n1. Tokenization: On submit, the component sends the card data via a secure API call to a DailyPay backend service. The backend service performs the actual tokenization with the payment gateway and returns a token to the component.\n1. Result Messaging: On success or failure, the component sends a DAILYPAY_CARD_TOKENIZE_RESPONSE message to the host via postMessage, containing either the token and metadata or error details.\n1. Host Handling: The host listens for this message and processes the token as needed (e.g., for account linking or payment setup).\n\n### Component Boundaries\n\n- Frontend (this component): Handles all UI, validation, formatting, and secure transmission of card data to the DailyPay backend. Communicates only via postMessage with the host, and via HTTPS with the backend.\n- DailyPay Backend Service: Receives card data from the component, performs tokenization with the payment gateway, and returns only the token and non-sensitive metadata to the component.\n- Host App: Responsible for embedding the component, listening for messages, and handling the tokenized result. Never processes or stores raw card data.\n\n## Notes\n\n- The component is robust to being embedded in a variety of host environments and will use the correct postMessage bridge automatically.\n- The form disables the submit button and shows a spinner during submission to prevent duplicate requests.\n- The key data (name, address, issuer or BIN (first 6 digits), etc.) is extracted from the submission and included in the response for downstream API use.\n\n## Tokenization Component URLs\n\nThe Tokenization Component is hosted at two URLs:\n\nProduction: https://companion.workloads.production.dailypay.com/v1/widgets/debitcard/tokenizer\n\nUAT: https://companion.workloads.uat.dailypay.com/v1/widgets/debitcard/tokenizer\n\n## Required Query Parameters\n\nThe following parameters are required whenever the Component is used:\n\n| Parameter           | Notes                                                       |\n| ------------------- | ----------------------------------------------------------- |\n| `client_id`         | The client ID used in authorization, supplied by DailyPay   |\n| `implementation_id` | The ID of this particular application, supplied by DailyPay |\n\nFor example: `https://companion.../tokenizer?client_id=123&implementation_id=3213`\n\n## Basic Integration Steps\n\n1. Import required dependencies\n2. Set up the WebView with the tokenizer URL\n3. Implement the message handler\n4. Process the tokenized card data\n\n## Response Messages\n\nThe widget communicates with your app using the postMessage API:\n\nSuccessful Tokenization\n\n```json\n{\n  \"type\": \"DAILYPAY_CARD_TOKENIZE_RESPONSE\",\n  \"response\": {\n    \"first_name\": \"...\", // User's first name\n    \"last_name\": \"...\", // User's last name\n    \"address_line_one\": \"...\", // First line of address\n    \"address_line_two\": \"...\", // Second line of address (optional)\n    \"address_city\": \"...\", // City\n    \"address_state\": \"...\", // State (2-letter abbreviation)\n    \"address_zip_code\": \"...\", // ZIP code\n    \"address_country\": \"USA\", // Country (always set to \"USA\")\n    \"expiration_month\": \"...\", // Card expiration month (MM format)\n    \"expiration_year\": \"...\", // Card expiration year (YY or YYYY format)\n    \"issuer\": \"...\", // First 6 digits of the card number (BIN)\n    \"token\": \"...\" // Tokenized card data from payment gateway\n  },\n  \"success\": true\n}\n```\n\nFailed Tokenization\n\n```json\n{\n  \"type\": \"DAILYPAY_CARD_TOKENIZE_RESPONSE\",\n  \"success\": false\n  // Error details\n}\n```\n\n## Handling Responses\n\n1. Always check the type property to identify the message\n2. Verify the success flag to determine if tokenization succeeded\n3. Access tokenized data via the `response` property\n4. For errors, check the error details in the response\n\n## Utilizing a Successful Response with the Accounts API\n\nThe `response` object returned with `DAILYPAY_CARD_TOKENIZE_RESPONSE` may be used\ndirectly in the POST request to the\n[accounts endpoint](/#tag/Accounts/operation/createAccount) as the\nvalue for the `details` field when the fields `\"account_type\": \"CARD\", \"subtype\": \"DEBIT\"`\nare used. This action will create a transfer account for the user based on\nthe card details submitted to the webview.\n\n## Security Best Practices\n\n- Always use HTTPS URLs in production\n- Don't store sensitive card information locally\n- Implement proper error handling\n\n## Troubleshooting\n\n- Enable WebView debugging to see console messages\n- Check network connectivity if widget fails to load\n- Verify that JavaScript is enabled in the WebView\n\n## Code Samples\n\n### Apple iOS\n\n```swift\nimport SwiftUI\nimport WebKit\n\nstruct WebView: UIViewRepresentable {\n    let url: URL\n    let handlerName = \"iosListener\"\n    var onTokenReceived: ((String) -> Void)?\n    var onFullResponseReceived: ((DailypayCardTokenizeResponse) -> Void)?\n\n    class Coordinator: NSObject, WKScriptMessageHandler {\n        var onIssuerReceived: ((String) -> Void)?\n        var onTokenReceived: ((String) -> Void)?\n        var onFullResponseReceived: ((DailypayCardTokenizeResponse) -> Void)?\n        init(onTokenReceived: ((String) -> Void)?, onFullResponseReceived: ((DailypayCardTokenizeResponse) -> Void)?) {\n            self.onTokenReceived = onTokenReceived\n            self.onFullResponseReceived = onFullResponseReceived\n        }\n        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {\n            print(\"Received postMessage: \\(message.body)\")\n            var data: Data? = nil\n            if let dict = message.body as? [String: Any] {\n                data = try? JSONSerialization.data(withJSONObject: dict)\n            } else if let str = message.body as? String {\n                data = str.data(using: .utf8)\n            }\n            if let data, let msg = try? JSONDecoder().decode(DailypayCardTokenizeMessage.self, from: data),\n               msg.type == \"DAILYPAY_CARD_TOKENIZE_RESPONSE\" {\n                onIssuerReceived?(msg.response.issuer)\n                onTokenReceived?(msg.response.token)\n                onFullResponseReceived?(msg.response)\n            }\n        }\n    }\n\n    func makeCoordinator() -> Coordinator {\n        Coordinator(onTokenReceived: onTokenReceived, onFullResponseReceived: onFullResponseReceived)\n    }\n\n    func makeUIView(context: Context) -> WKWebView {\n        let contentController = WKUserContentController()\n        contentController.add(context.coordinator, name: handlerName)\n        let config = WKWebViewConfiguration()\n        config.userContentController = contentController\n\n        // Forward window.postMessage to iOS\n        let js = \"\"\"\n        window.postMessage = function(data) {\n            window.webkit.messageHandlers.\\(handlerName).postMessage(data);\n        };\n        \"\"\"\n        let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: false)\n        contentController.addUserScript(userScript)\n\n        let webView = WKWebView(frame: .zero, configuration: config)\n        let request = URLRequest(url: url)\n        webView.load(request)\n        return webView\n    }\n\n    func updateUIView(_ uiView: WKWebView, context: Context) {\n        // No-op\n    }\n}\n\nstruct DailypayCardTokenizeResponse: Decodable {\n    let firstName: String\n    let lastName: String\n    let addressLineOne: String\n    let addressLineTwo: String\n    let addressCity: String\n    let addressState: String\n    let addressZipCode: String\n    let expirationMonth: String\n    let expirationYear: String\n    let addressCountry: String\n    let issuer: String\n    let token: String\n\n    enum CodingKeys: String, CodingKey {\n        case firstName = \"first_name\"\n        case lastName = \"last_name\"\n        case addressLineOne = \"address_line_one\"\n        case addressLineTwo = \"address_line_two\"\n        case addressCity = \"address_city\"\n        case addressState = \"address_state\"\n        case addressZipCode = \"address_zip_code\"\n        case expirationMonth = \"expiration_month\"\n        case expirationYear = \"expiration_year\"\n        case addressCountry = \"address_country\"\n        case issuer\n        case token\n    }\n}\n\nstruct DailypayCardTokenizeMessage: Decodable {\n    let type: String\n    let response: DailypayCardTokenizeResponse\n    let success: Bool\n}\n\nstruct ContentView: View {\n    // Replace client_id and implementation_id with values supplied by DailyPay\n    // that are unique to you and your application\n    @State private var urlString: String = \"https://companion.workloads.production.dailypay.com/v1/widgets/debitcard/tokenizer?client_id=123&implementation_id=3213\"\n    @State private var showAlert = false\n    @State private var issuer: String? = nil\n    @State private var showTokenAlert = false\n    @State private var token: String? = nil\n\n    func handleCardTokenizeResponse(_ response: DailypayCardTokenizeResponse) {\n        // Add card to DailyPay using POST /accounts\n        // See https://developer.dailypay.com/tag/Accounts#operation/createAccount\n        print(\"Ready to send to the DailyPay REST API: \\(response)\")\n    }\n\n    var body: some View {\n        VStack {\n            TextField(\"Enter URL\", text: $urlString)\n                .textFieldStyle(RoundedBorderTextFieldStyle())\n                .padding()\n            if let url = URL(string: urlString) {\n                WebView(\n                    url: url,\n                    onTokenReceived: { token in\n                        self.token = token\n                        self.showTokenAlert = true\n                    },\n                    onFullResponseReceived: { response in\n                        handleCardTokenizeResponse(response)\n                    }\n                )\n                .edgesIgnoringSafeArea(.all)\n            } else {\n                Text(\"Invalid URL\")\n            }\n        }\n        .alert(isPresented: $showTokenAlert) {\n            Alert(\n                title: Text(\"Token Received\"),\n                message: Text(token ?? \"No token\"),\n                dismissButton: .default(Text(\"OK\"))\n            )\n        }\n    }\n}\n\n#Preview {\n    ContentView()\n}\n```\n\n### Google Android\n\n```kotlin\npackage com.example.webviewrunner\n\nimport android.os.Bundle\nimport android.webkit.JavascriptInterface\nimport android.webkit.WebSettings\nimport android.webkit.WebView\nimport android.webkit.WebViewClient\nimport android.app.AlertDialog\nimport androidx.appcompat.app.AppCompatActivity\n\nclass MainActivity : AppCompatActivity() {\n\n    private lateinit var webView: WebView\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n\n        webView = findViewById(R.id.webView)\n\n        // Configure WebView settings\n        val webSettings: WebSettings = webView.settings\n        webSettings.javaScriptEnabled = true // Enable JavaScript if your page uses it\n        webSettings.setSupportZoom(true) // Enable zoom controls\n        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW // Allow mixed content (HTTP/HTTPS)\n        webSettings.domStorageEnabled = true // Enable DOM storage\n\n        // Set a WebViewClient to handle page navigation within the WebView itself\n        webView.webViewClient = object : WebViewClient() {\n            // This method is deprecated in API 24 and later, but still useful for older devices\n            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {\n                url?.let {\n                    view?.loadUrl(it)\n                }\n                return true // Return true to indicate that the app handled the URL\n            }\n\n            // For API 24 and later\n            override fun shouldOverrideUrlLoading(view: WebView?, request: android.webkit.WebResourceRequest?): Boolean {\n                request?.url?.let { uri ->\n                    view?.loadUrl(uri.toString())\n                }\n                return true // Return true to indicate that the app handled the URL\n            }\n\n            override fun onReceivedError(view: WebView?, request: android.webkit.WebResourceRequest?, error: android.webkit.WebResourceError?) {\n                super.onReceivedError(view, request, error)\n                android.util.Log.e(\"WebView\", \"Error: ${error?.description}\")\n            }\n            override fun onReceivedHttpError(view: WebView?, request: android.webkit.WebResourceRequest?, errorResponse: android.webkit.WebResourceResponse?) {\n                super.onReceivedHttpError(view, request, errorResponse)\n                android.util.Log.e(\"WebView\", \"HTTP error: ${errorResponse?.statusCode}\")\n            }\n        }\n\n        // Add JavaScript interface for postMessage\n        webView.addJavascriptInterface(object {\n            @JavascriptInterface\n            fun postMessage(message: String) {\n\t\t// Interpret response and send to DailyPay using POST /accounts\n        // See https://developer.dailypay.com/tag/Accounts#operation/createAccount\n\n\t\t// For demo - alert the response payload here.\n                runOnUiThread {\n                    AlertDialog.Builder(this@MainActivity)\n                        .setTitle(\"Message from WebView\")\n                        .setMessage(message)\n                        .setPositiveButton(\"OK\", null)\n                        .show()\n                }\n            }\n        }, \"AndroidInterface\")\n\n        // Replace client_id and implementation_id with values supplied by DailyPay\n        // that are unique to you and your application\n        webView.loadUrl(\"https://companion.workloads.production.dailypay.com/v1/widgets/debitcard/tokenizer?client_id=123&implementation_id=3213\")\n    }\n\n    // Handle back button presses to navigate within the WebView's history\n    override fun onBackPressed() {\n        if (webView.canGoBack()) {\n            webView.goBack()\n        } else {\n            super.onBackPressed()\n        }\n    }\n}\n```\n\n### React Native\n\nInstall dependencies:\n`npm install react-native-webview` or `yarn add react-native-webview`\n\n```javascript\nimport React, { useRef, useState } from \"react\";\nimport { View } from \"react-native\";\nimport { WebView } from \"react-native-webview\";\nconst TokenizerComponent = () => {\n  const webViewRef = useRef(null);\n  const [tokenData, setTokenData] = useState(null);\n  const handleWebViewMessage = (event) => {\n    try {\n      const messageData = JSON.parse(event.nativeEvent.data);\n      if (messageData.type === \"DAILYPAY_CARD_TOKENIZE_RESPONSE\") {\n        if (messageData.success && messageData.response) {\n          setTokenData(messageData.response);\n        }\n      }\n    } catch (error) {\n      console.error(\"Failed to parse message:\", error);\n    }\n  };\n  return (\n    <WebView\n      ref={webViewRef}\n      source={{\n        // Replace client_id and implementation_id with values supplied by DailyPay\n        // that are unique to you and your application\n        uri: \"https://companion.workloads.production.dailypay.com/v1/widgets/debitcard/tokenizer?client_id=123&implementation_id=3213\",\n      }}\n      onMessage={handleWebViewMessage}\n      javaScriptEnabled={true}\n      domStorageEnabled={true}\n    />\n  );\n};\n```\n"
+      {% partial file="/_partials/status.md" /%}
   - name: Jobs
     description: |
       The _jobs_ endpoint provides access to comprehensive information 
@@ -1126,61 +92,8 @@ tags:
 
       **Functionality:** Retrieve limited details about a person, including
       their name, global status, and state of residence.
-  - name: Cards
-    description: |
-      ## What is the Payments API?
-
-      **_Note: You may also process debit card data and obtain a token using the [Toolkit Tokenization Component](/#tag/Tokenization)_**
-
-      The Payments API is a PCI compliant endpoint and allows for secure debit card token creation. These tokens are used within DailyPay's APIs. When a tokenized debit card is added to a user’s account they can begin to take instant transfers.
-
-      **How does this work?** A user's debit card data is sent via POST request to the Payments API. The debit card data is encrypted and tokenized before being returned. This tokenized card data is used for instant transfers via the Extend API.
-
-      ### What is PCI compliance?
-
-      It’s how we keep card data secure. DailyPay has a responsibility and legal requirement to protect debit card data therefore the Payments API endpoint complies with the Payment Card Industry Data Security Standards [PCI DSS](https://www.pcisecuritystandards.org/).
-
-      > 📘 **Info**
-      > DailyPay only handles card data during encryption and tokenization
-      > **The Payments server is DailyPay’s only PCI compliant API.**
-
-      ## Create a Debit Card Token
-
-      Steps to create a tokenized debit card for use within DailyPay's APIs.
-
-      ### 1. POST debit card data to the Payments API
-
-      After you have securely collected the debit card data for a user, create a POST to the PCI compliant [Cards API](/#tag/Cards/Create-a-Debit-Card-Token) with the following required parameters in this example.
-
-      ```json
-      {
-        "first_name": "Edith",
-        "last_name": "Clarke",
-        "card_number": "4007589999999912",
-        "expiration_year": "2027",
-        "expiration_month": "02",
-        "cvv": "123",
-        "address_line_one": "1234 Street",
-        "address_city": "Fort Lee",
-        "address_state": "NJ",
-        "address_zip_code": "07237",
-        "address_country": "US"
-      }
-      ```
-
-      ### 2. Receive and handle the tokenized card data
-
-      The [Cards API](/#tag/Cards/Create-a-Debit-Card-Token) returns an opaque string representing the card details. This token is encrypted and complies with PCI DSS. You will need the token for step 3, after which it can be discarded. The token is a long string and will look similar to below:
-
-      ```json
-      {"token":"eyJhbGciOiJSU0Et.....T0FFU”}
-      ```
-
-      ### 3. POST the token to the Extend API
-
-      > 📘 **Important** > [Proper authorization](/#tag/Authentication) is required to create a transfer account.
-
-      Send the encrypted token in a POST request to the [accounts endpoint](/#tag/Accounts/operation/createAccount) as the value for the `token` field in the `details` object. This will create a transfer account and allow a user to start taking transfers.
+  - name: Card Tokenization
+    description: Securely tokenize personal cards for use in the accounts API.
   - name: Health
     description: |
       The _health_ endpoint provides a simple health check for the API. 
@@ -1188,12 +101,6 @@ tags:
       **Functionality:** Check the status of the API to ensure it is functioning
       correctly.
 paths:
-  /oauth2/token:
-    servers:
-      - url: https://auth.dailypay.com
-        description: Production environment
-      - url: https://auth.uat.dailypay.com
-        description: Development environment
   /rest/jobs/{job_id}:
     parameters:
       - $ref: '#/components/parameters/apiversion'
@@ -1277,7 +184,6 @@ paths:
       summary: Get a list of job objects
       description: |
         Returns a collection of job objects. This object represents a person's employment details.
-        See [Filtering Jobs](https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters) for a description of filterable fields.
       operationId: listJobs
       security:
         - oauth_client_credentials_token:
@@ -1336,7 +242,6 @@ paths:
       summary: Get a list of Account objects
       description: |
         Returns a list of account objects. An account object represents a person's bank accounts, debit and pay cards, and earnings balance accounts.
-        See [Filtering Accounts](https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters) for a description of filterable fields.
       security:
         - oauth_client_credentials_token:
             - client:lookup
@@ -1439,7 +344,6 @@ paths:
       summary: Get a list of transfers
       description: |
         Returns a list of transfer objects.
-        See [Filtering Transfers](https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters) for a description of filterable fields.
       operationId: listTransfers
       security:
         - oauth_client_credentials_token:
@@ -1498,6 +402,8 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/Unexpected'
   /rest/paychecks/{paycheck_id}:
@@ -1537,7 +443,6 @@ paths:
       summary: Get a list of paycheck objects
       description: |
         Returns a collection of paycheck objects. This object details a person's pay and pay period.
-        See [Filtering Paychecks](https://developer.dailypay.com/tag/Filtering#section/Supported-Endpoint-Filters) for a description of filterable fields.
       operationId: listPaychecks
       security:
         - oauth_user_token:
@@ -1691,7 +596,7 @@ paths:
       operationId: createGenericCardToken
       security: []
       tags:
-        - Cards
+        - Card Tokenization
       requestBody:
         required: true
         content:
@@ -1801,26 +706,23 @@ paths:
           $ref: '#/components/responses/Unexpected'
 components:
   securitySchemes:
-    clientBasicAuth:
-      type: http
-      scheme: basic
     oauth_client_credentials_token:
       type: oauth2
       flows:
         clientCredentials:
-          tokenUrl: https://api.dailypay.com/oauth/token
+          tokenUrl: https://auth.dailypay.com/oauth2/token
           scopes:
-            client:admin: Read access to all relevant objects for a server application client,  including accounts, jobs, people, transfers, and organizations.
-            client:lookup: Read access to resources necessary to identify a person by their
+            client:lookup: Read access to resources necessary to find a person by known identifiers.
     oauth_user_token:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://api.dailypay.com/oauth/authorize
-          tokenUrl: https://api.dailypay.com/oauth/token
+          x-usePkce: true
+          authorizationUrl: https://auth.dailypay.com/oauth2/auth
+          tokenUrl: https://auth.dailypay.com/oauth2/token
           scopes:
             user:read: Read access to all relevant objects for a non-application user,  including accounts, jobs, people, transfers, and paychecks.
-            user:read_write: Read and write access to all relevant objects for a non-application user, including accounts, jobs, people, transfers, and paychecks. job.
+            user:read_write: Read and write access to all relevant objects for a non-application user, including accounts, jobs, people, transfers, and paychecks.
   parameters:
     apiversion:
       name: DailyPay-API-Version
@@ -2299,7 +1201,7 @@ components:
           x-enumDescriptions:
             INVALID_USER_INPUT: The server was unable to understand the request. Check for syntax or structural errors.
             INVALID_PARAMETERS: Missing or invalid request parameters provided. See the `details` field for specifics.
-            INVALID_IDEMPOTENCY_KEY: Idempotency key is missing or was used for a dissimilar request.
+            INVALID_IDEMPOTENCY_KEY: Idempotency key was used for a dissimilar request.  Request payloads must be identical when reusing an idempotency key.
             INVALID_RESOURCE_LINK: The target resource URI is missing or invalid.
             INVALID_VERSION_HEADER: Request contained an API version header that is not supported
             INVALID_FILTER_QUERY: The filter query is malformed.
@@ -3334,6 +2236,7 @@ components:
                 INELIGIBLE_ORIGIN: The origin specified is not eligible for transfers at this time.
                 INVALID_DESTINATION: The provided destination relationship must reference an existing transfer account.
                 INVALID_DIRECT_DEPOSIT_STATUS: Transfers from this origin account are unavailable unless `direct_deposit_status` is `SETUP_COMPLETE` on one or more associated jobs.
+                INVALID_IDEMPOTENCY_KEY: Idempotency key was used for a dissimilar request. Request payloads must be identical when reusing an idempotency key.
                 INVALID_PARAMETERS: Missing or invalid request parameters provided. See the `details` field for specifics.
                 INVALID_RESOURCE_STATE: Unable to process the transfer due to another resource in an invalid state. See the embedding guide for more information.
                 INVALID_TRANSFER_SCHEDULE: The provided schedule is invalid for the selected destination account.
@@ -3359,6 +2262,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorTransferCreateError'
+    ErrorConflictError:
+      allOf:
+        - type: object
+          required:
+            - code
+          properties:
+            code:
+              description: A code that indicates what went wrong.
+              example: IDEMPOTENCY_KEY_LOCKED
+              type: string
+              x-go-type: string
+              x-enumDescriptions:
+                IDEMPOTENCY_KEY_LOCKED: The provided idempotency key is currently being used by another request.  This can happen if there are multiple simultaneous requests with the same idempotency key. It is safe to retry the request.
+        - $ref: '#/components/schemas/Error'
+    ErrorConflict:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          description: A list of errors that occurred.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorConflictError'
     PaycheckAttributes:
       type: object
       required:
@@ -3611,7 +2538,7 @@ components:
           x-speakeasy-name-override: Products
           readOnly: true
           description: |
-            Products that the person is enrolled in or eligible for.
+            Products that the person is enrolled in or eligible for. This data is refreshed nightly.
           required:
             - dailypay_card
           properties:
@@ -3620,7 +2547,7 @@ components:
               x-go-type-name: DPCardProductEntitlement
               x-speakeasy-name-override: DailyPayCardProductEntitlement
               description: |
-                The DailyPay Visa®️ Prepaid Card program.
+                The DailyPay Visa®️ Prepaid Card program. A person can be either eligible or enrolled, but not both.
               required:
                 - eligible
                 - enrolled
@@ -3760,6 +2687,12 @@ components:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/TransferCreateError'
+    Conflict:
+      description: A conflict occurred with the current state of the resource
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorConflict'
     Paycheck200:
       description: Returns the paycheck object.
       content:
@@ -3894,17 +2827,20 @@ x-speakeasy-globals:
 x-tagGroups:
   - name: Documentation
     tags:
-      - REST API Introduction
-      - Getting Started
-      - Concepts
+      - API Status
+      - Environments
       - Filtering
-      - Errors
-      - Client Portal
-  - name: Toolkit
+      - Idempotency
+      - Versioning
+  - name: Core Resources
     tags:
-      - Tokenization
-  - name: Resources
+      - Accounts
+      - Health
+      - Jobs
+      - Organizations
+      - Paychecks
+      - People
+      - Transfers
+  - name: Payments API
     tags:
-      - Troubleshooting
-      - FAQs
-      - Glossary
+      - Card Tokenization
