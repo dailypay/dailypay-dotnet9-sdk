@@ -184,9 +184,9 @@ namespace DailyPay.SDK.DotNet9
         public SDKConfig SDKConfiguration { get; private set; }
 
         private const string _language = "csharp";
-        private const string _sdkVersion = "0.5.2";
+        private const string _sdkVersion = "0.5.3";
         private const string _sdkGenVersion = "2.755.0";
-        private const string _openapiDocVersion = "3.0.0-beta87";
+        private const string _openapiDocVersion = "3.0.0-beta01";
         public IJobs Jobs { get; private set; }
         public IAccounts Accounts { get; private set; }
         public ITransfers Transfers { get; private set; }
