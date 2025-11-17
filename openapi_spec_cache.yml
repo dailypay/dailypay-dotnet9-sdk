@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta01
+  version: 3.0.0-beta88
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -763,6 +763,7 @@ components:
       required: false
       schema:
         type: string
+        example: PRIMARY_ID_98765
     filter.external_identifiers.employee_id:
       name: filter[external_identifiers.employee_id]
       in: query
@@ -770,6 +771,7 @@ components:
       required: false
       schema:
         type: string
+        example: EMP123456
     filter.external_identifiers.group:
       name: filter[external_identifiers.group]
       in: query
@@ -777,6 +779,7 @@ components:
       required: false
       schema:
         type: string
+        example: '12345'
     filter.person.id:
       name: filter[person.id]
       in: query
@@ -784,6 +787,8 @@ components:
       required: false
       schema:
         type: string
+        format: uuid
+        example: aa860051-c411-4709-9685-c1b716df611b
     filter.organization.id:
       name: filter[organization.id]
       in: query
@@ -791,6 +796,8 @@ components:
       required: false
       schema:
         type: string
+        format: uuid
+        example: f0b30634-108c-439c-a8c1-c6a91197f022
     filter:
       name: filter
       x-speakeasy-name-override: filter-by
@@ -799,6 +806,7 @@ components:
       deprecated: true
       schema:
         type: string
+        example: ''
     account_id:
       name: account_id
       in: path
@@ -827,6 +835,13 @@ components:
       required: false
       schema:
         type: string
+        example: ODP
+        x-enumDescriptions:
+          ODP: On Demand Pay (Earnings Balance)
+          CHECKING: Checking Account (Depository)
+          SAVINGS: Savings Account (Depository)
+          DAILYPAY: DailyPay Card (Card)
+          DEBIT: Debit Card (Card)
     include:
       name: include
       in: query
@@ -852,6 +867,7 @@ components:
       schema:
         type: string
         format: uuid
+        example: e2736aa1-78c4-4cc6-b0a6-848e733f232a
       required: true
       description: |
         An idempotency key is a unique string that you provide to ensure a request is only processed once.
@@ -872,6 +888,8 @@ components:
       required: false
       schema:
         type: string
+        format: uuid
+        example: e9d84b0d-92ba-43c9-93bf-7c993313fa6f
     filter.paycheck_status:
       name: filter[status]
       in: query
@@ -884,6 +902,7 @@ components:
           - PROCESSING
           - IN_TRANSIT
           - DEPOSITED
+        example: DEPOSITED
     filter.deposit_expected_at__gte:
       name: filter[deposit_expected_at__gte]
       in: query
@@ -1632,6 +1651,7 @@ components:
                   description: The issuer of the card.
                   example: '411600'
                   type: string
+                  readOnly: true
                 first_name:
                   description: The first name of the account holder.
                   example: Edith
@@ -2019,7 +2039,6 @@ components:
         The relationships between the transfer and other resources, including the destination account, the origination account, and the person who initiated the transfer.
       required:
         - destination
-        - origin
         - person
         - estimated_funding_sources
         - final_funding_sources
@@ -2785,7 +2804,6 @@ components:
                     subtype: DEBIT
                     details:
                       token: abc.efg.123
-                      issuer: '411600'
                       first_name: Edith
                       last_name: Clarke
                       expiration_month: '02'
