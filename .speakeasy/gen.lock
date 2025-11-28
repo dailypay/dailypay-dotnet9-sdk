@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: a9c33e466fad7a1e8249ff3254d6c1fc
-  docVersion: 3.0.0-beta95
-  speakeasyVersion: 1.660.0
-  generationVersion: 2.760.2
-  releaseVersion: 0.5.4
-  configChecksum: 1cadfd4ed78592a04c577beed52404b4
+  docChecksum: 76ec3e0eec63f06d3f5e0050d59893f1
+  docVersion: 3.0.0-beta96
+  speakeasyVersion: 1.664.0
+  generationVersion: 2.766.1
+  releaseVersion: 0.5.5
+  configChecksum: 8899bfc94b1e62ea82d2868f1a306120
 features:
   csharp:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.0.1
-    core: 3.15.4
+    core: 3.15.7
     deprecations: 2.81.2
     examples: 2.81.6
     globalSecurity: 2.83.8
@@ -436,6 +436,7 @@ generatedFiles:
   - src/DailyPay/SDK/DotNet9/Transfers.cs
   - src/DailyPay/SDK/DotNet9/Utils/AnyDeserializer.cs
   - src/DailyPay/SDK/DotNet9/Utils/BigIntStrConverter.cs
+  - src/DailyPay/SDK/DotNet9/Utils/Constants.cs
   - src/DailyPay/SDK/DotNet9/Utils/DecimalStrConverter.cs
   - src/DailyPay/SDK/DotNet9/Utils/EnumConverter.cs
   - src/DailyPay/SDK/DotNet9/Utils/FlexibleObjectDeserializer.cs
