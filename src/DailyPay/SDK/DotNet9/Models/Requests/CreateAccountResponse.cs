@@ -22,6 +22,6 @@ namespace DailyPay.SDK.DotNet9.Models.Requests
         /// <summary>
         /// Returns the account object.
         /// </summary>
-        public AccountDataOutput? AccountData { get; set; }
+        public AccountData? AccountData { get; set; }
     }
 }

@@ -26,6 +26,6 @@ namespace DailyPay.SDK.DotNet9.Models.Requests
         public long? Version { get; set; } = 3;
 
         [SpeakeasyMetadata("request:mediaType=application/vnd.api+json")]
-        public AccountDataInput AccountData { get; set; } = default!;
+        public AccountCreateData AccountCreateData { get; set; } = default!;
     }
 }

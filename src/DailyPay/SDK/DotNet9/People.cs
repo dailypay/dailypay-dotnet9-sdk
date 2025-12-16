@@ -357,7 +357,7 @@ namespace DailyPay.SDK.DotNet9
             httpRequest.Headers.Add("user-agent", SDKConfiguration.UserAgent);
             HeaderSerializer.PopulateHeaders(ref httpRequest, request);
 
-            var serializedBody = RequestBodySerializer.Serialize(request, "PersonData", "json", false, false);
+            var serializedBody = RequestBodySerializer.Serialize(request, "PersonUpdateData", "json", false, false);
             if (serializedBody != null)
             {
                 httpRequest.Content = serializedBody;
