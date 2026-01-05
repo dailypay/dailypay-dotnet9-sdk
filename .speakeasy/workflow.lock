@@ -1,4 +1,4 @@
-speakeasyVersion: 1.678.0
+speakeasyVersion: 1.680.12
 sources:
     cloud:
         sourceNamespace: xapi
@@ -23,7 +23,7 @@ targets:
         sourceRevisionDigest: sha256:85d5608edff9a5c1926352181d7dc9ac926f551ed364e9fff7338a19c79abd20
         sourceBlobDigest: sha256:6880da8b75a7a816261f0222685504031a412f93a59616f3eb4d0837bf94448f
         codeSamplesNamespace: xapi-dotnet9-code-samples
-        codeSamplesRevisionDigest: sha256:3c1a4fd5a1fc8f55a900a7e87e843722068e443b09777aabd5cc1c451083b25d
+        codeSamplesRevisionDigest: sha256:e6203d495a59bf38f134b160cfb257b7832d6dc83153232e279b85d34e80175b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
