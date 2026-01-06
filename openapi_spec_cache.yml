@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta100
+  version: 3.0.0-beta101
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -301,8 +301,6 @@ paths:
         Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.
       operationId: readTransfer
       security:
-        - oauth_client_credentials_token:
-            - client:admin
         - oauth_user_token:
             - user:read
       parameters:
@@ -332,12 +330,9 @@ paths:
         Returns a list of transfer objects.
       operationId: listTransfers
       security:
-        - oauth_client_credentials_token:
-            - client:admin
         - oauth_user_token:
             - user:read
       parameters:
-        - $ref: '#/components/parameters/filter.person.id'
         - $ref: '#/components/parameters/filter'
       responses:
         '200':
