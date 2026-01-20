@@ -104,10 +104,8 @@ namespace DailyPay.SDK.DotNet9
 
         public async Task<ReadAccountResponse> ReadAsync(ReadAccountRequest request, RetryConfig? retryConfig = null)
         {
-            if (request == null)
-            {
-                request = new ReadAccountRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -366,6 +364,10 @@ namespace DailyPay.SDK.DotNet9
 
         public async Task<ListAccountsResponse> ListAsync(ListAccountsRequest? request = null, RetryConfig? retryConfig = null)
         {
+            if (request == null)
+            {
+                request = new ListAccountsRequest();
+            }
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
@@ -598,10 +600,8 @@ namespace DailyPay.SDK.DotNet9
 
         public async Task<CreateAccountResponse> CreateAsync(CreateAccountRequest request, RetryConfig? retryConfig = null)
         {
-            if (request == null)
-            {
-                request = new CreateAccountRequest();
-            }
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             request.Version ??= SDKConfiguration.Version;
             
             string baseUrl = this.SDKConfiguration.GetTemplatedServerUrl();
