@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: 086989f5dd81ea832ad5105c140e1e2c
-  docVersion: 3.0.0-beta102
-  speakeasyVersion: 1.690.1
+  docChecksum: b4b4afed41fc2541348fd83dac29734d
+  docVersion: 3.0.0-beta101
+  speakeasyVersion: 1.691.0
   generationVersion: 2.797.1
-  releaseVersion: 0.8.3
-  configChecksum: 7a4ab2ee0dc9f8d87ec1d6da9e6370d7
+  releaseVersion: 0.8.4
+  configChecksum: 69c8296ce1211cc59bdea10c75e86deb
 persistentEdits:
-  generation_id: ff27b220-6aa7-4da0-b121-b135a0acdd26
-  pristine_commit_hash: 1a2e6a067ddc83abfaed51069d330f9c30354553
-  pristine_tree_hash: 4ef7881a786fba813b542de8237c853555b81fa9
+  generation_id: 1e018605-fbbe-4608-befc-daa7c1b78469
+  pristine_commit_hash: f3f2a9811751a6efb1a30fa7aa3d3913f84716c3
+  pristine_tree_hash: 182a2f94102a9d3d05c64b3c25a9993b15da6469
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -167,8 +167,8 @@ trackedFiles:
     pristine_git_object: 1104c1f7feaf9c14ed29c1a72c8e475effcd06bd
   docs/Models/Components/CreateCardAccountDetails.md:
     id: 3f4e0fa1e6c2
-    last_write_checksum: sha1:7dc0f8cfa172ecdb7222267645422fde5ad1abc0
-    pristine_git_object: d2d30c98bc8b148d43975e251844725c606bba41
+    last_write_checksum: sha1:228e17712d12839d89ef7236b2568c6a74cdc1a3
+    pristine_git_object: 807bc798249ebd9bef9e275cf866f250f500d5c4
   docs/Models/Components/DailyPayCardProductEntitlement.md:
     id: 056fb8df7d8d
     last_write_checksum: sha1:5070db83e49f3f8aefa59e7c9a29c409a8be7ce4
@@ -739,8 +739,8 @@ trackedFiles:
     pristine_git_object: 9cbb61ea581456de2414b59ff42cbf22b9565fcc
   docs/Models/Requests/ListTransfersRequest.md:
     id: 39b5511c9895
-    last_write_checksum: sha1:51212bc58a6e88861ddee12c13e67683e0a4f84f
-    pristine_git_object: 91633d538a57d5e1686bd8a44e3e556b2888742a
+    last_write_checksum: sha1:37c52bcb114db8bdc1c9f03b869049e76e45d486
+    pristine_git_object: b7ba0a2b462dfdd9eca06892568f7490f43a6bff
   docs/Models/Requests/ListTransfersResponse.md:
     id: f2d711efbe42
     last_write_checksum: sha1:79e7f62edea5d869ca6edf715997d747711cdef7
@@ -839,8 +839,8 @@ trackedFiles:
     pristine_git_object: 28bac1ea4967676530623bdcbd3c9dd13c96b58b
   docs/sdks/transfers/README.md:
     id: f56918861798
-    last_write_checksum: sha1:4e74793e366d1dba99fb1de79a7481a5e19a695e
-    pristine_git_object: 3314ac02b2ed9816c11d0b0085d3933d0af2de9b
+    last_write_checksum: sha1:ae7904769e219a921f40c0c5a2ed31c585dd5615
+    pristine_git_object: 171f071bf0fdf6e95de39c3b12a72b878c27d77a
   global.json:
     id: 908e72401bf4
     last_write_checksum: sha1:3161b880f51cd74e7d1dea069b541d8bf4736dc9
@@ -855,8 +855,8 @@ trackedFiles:
     pristine_git_object: 3a48454b59fe61525dde971c66d1f3d49ecdbaf3
   src/DailyPay/SDK/DotNet9/DailyPay.SDK.DotNet9.csproj:
     id: 4e1cc95b07f3
-    last_write_checksum: sha1:b2e471e3585c8a5a598113e39ea2e57c3dd131af
-    pristine_git_object: 560716f01911d730c3a00668b5654ca8478e0039
+    last_write_checksum: sha1:b051f5aca13ea9846b937acf4f76426663eebe3c
+    pristine_git_object: bfdc7208e2392afcad6e6c35c2fa7e18e86fb137
   src/DailyPay/SDK/DotNet9/Health.cs:
     id: e81381e0f3d5
     last_write_checksum: sha1:7dcc5f5b937792058c85ee7f76941eeb247329db
@@ -1003,8 +1003,8 @@ trackedFiles:
     pristine_git_object: b9b8434dc0997348f9e5e914cf7a5ee52345e03a
   src/DailyPay/SDK/DotNet9/Models/Components/CreateCardAccountDetails.cs:
     id: c2f01133db92
-    last_write_checksum: sha1:f3bedbfdcdfb8809825dc394fb57cd7493b351c5
-    pristine_git_object: cec47225c5becd5d09e83bd909c5b094e06c0050
+    last_write_checksum: sha1:26d23812c6e493512158f89eeb4eb337ed070b24
+    pristine_git_object: 9494a233d1ec1254f2b57a9ff221c1966b2e24fb
   src/DailyPay/SDK/DotNet9/Models/Components/DailyPayCardProductEntitlement.cs:
     id: 0f2ca8058d85
     last_write_checksum: sha1:90d242da9417369e54416775aa91c4b1936964fe
@@ -1587,8 +1587,8 @@ trackedFiles:
     pristine_git_object: bdd4bafb25a35d69773126712fde7dcf403adb00
   src/DailyPay/SDK/DotNet9/Models/Requests/ListTransfersRequest.cs:
     id: 065adc899ee2
-    last_write_checksum: sha1:49b48b2175fd76aa5e30b1af86a0dc490f229531
-    pristine_git_object: 1182de913eb999daca588fb13c9eb43a22c7a7f7
+    last_write_checksum: sha1:e8858ba327835907a3ce9b266344c4a468c4bc37
+    pristine_git_object: 6051f27f3d7ce255871bda6941979d2cce2329ac
   src/DailyPay/SDK/DotNet9/Models/Requests/ListTransfersResponse.cs:
     id: e3c34c194ecb
     last_write_checksum: sha1:d59e881877fac6b0eeb31d7efcacc4cbaca91219
@@ -1675,8 +1675,8 @@ trackedFiles:
     pristine_git_object: 3cf71c1167e9cc18a1568fdadd486d708e05cfc8
   src/DailyPay/SDK/DotNet9/SDKConfig.cs:
     id: 61689d242469
-    last_write_checksum: sha1:4d4f8255b9f8b3fc212328bed01c22d5a306e365
-    pristine_git_object: 9df5db1411b642a32276e28603e80fdddf473def
+    last_write_checksum: sha1:abe309008aced86cde1005087cb993eee16d936a
+    pristine_git_object: bb48fae0e41c633f54dcfca1a6d54e05632aabd5
   src/DailyPay/SDK/DotNet9/Transfers.cs:
     id: 5ea2e76dde98
     last_write_checksum: sha1:cc3bb5485b9273baf57a871c237e3f3e5f7c1fda
@@ -1691,8 +1691,8 @@ trackedFiles:
     pristine_git_object: b8fbb3d0d61daa2feb340e03552e8856899a3c13
   src/DailyPay/SDK/DotNet9/Utils/Constants.cs:
     id: 2411df5fa6b9
-    last_write_checksum: sha1:c5574eef165bd8270ef25b1952c1d47015a794e3
-    pristine_git_object: 21298f3e872e95995cdf41e9a5877f7708bee38b
+    last_write_checksum: sha1:4cc6b2c4129e11590d6857d913a4ee0409c2ef34
+    pristine_git_object: b48594c2b12d5117c213f8f496decdb66ab3712c
   src/DailyPay/SDK/DotNet9/Utils/DecimalStrConverter.cs:
     id: 6bb6ec219c31
     last_write_checksum: sha1:557001cd2c9ed880baa4ffbd536c936dfcebc177
@@ -1960,7 +1960,7 @@ examples:
         header:
           DailyPay-API-Version: 3
       requestBody:
-        application/vnd.api+json: {"data": {"type": "accounts", "attributes": {"name": "Acme Bank Debit Card", "account_type": "CARD", "subtype": "DEBIT", "details": {"token": "abc.efg.123", "first_name": "Edith", "last_name": "Clarke", "expiration_month": "02", "expiration_year": "2027", "address_line_one": "123 Kebly Street", "address_city": "Fort Lee", "address_state": "NJ", "address_zip_code": "72374", "address_country": "US", "issuer": "411600"}}, "relationships": {"person": {"data": {"type": "people", "id": "3fa8f641-5717-4562-b3fc-2c963f66afa6"}}}}}
+        application/vnd.api+json: {"data": {"type": "accounts", "attributes": {"name": "Acme Bank Debit Card", "account_type": "CARD", "subtype": "DEBIT", "details": {"token": "abc.efg.123", "first_name": "Edith", "last_name": "Clarke", "expiration_month": "02", "expiration_year": "2027", "address_line_one": "123 Kebly Street", "address_city": "Fort Lee", "address_state": "NJ", "address_zip_code": "72374", "address_country": "US"}}, "relationships": {"person": {"data": {"type": "people", "id": "3fa8f641-5717-4562-b3fc-2c963f66afa6"}}}}}
       responses:
         "200":
           application/vnd.api+json: {"data": {"id": "2bc7d781-3247-46f6-b60f-4090d214936a", "type": "accounts", "attributes": {"verification_status": "VERIFIED", "balances": {"available": 12000, "current": 50000, "currency": "USD"}, "capabilities": {"transfer_destination": [{"schedule": "WITHIN_THIRTY_MINUTES", "fee": 300, "currency": "USD"}, {"schedule": "NEXT_BUSINESS_DAY", "fee": 0, "currency": "USD"}]}, "name": "Checking Account", "account_type": "DEPOSITORY", "subtype": "CHECKING", "details": {"first_name": "Edith", "last_name": "Clarke", "routing_number": "XXXXX2021", "account_number": "XXXXXX4321"}}, "links": {"self": "https://api.dailypay.com/rest/accounts/2bc7d781-3247-46f6-b60f-4090d214936a"}, "relationships": {"person": {"data": {"type": "people", "id": "3fa8f641-5717-4562-b3fc-2c963f66afa6"}}}}}
