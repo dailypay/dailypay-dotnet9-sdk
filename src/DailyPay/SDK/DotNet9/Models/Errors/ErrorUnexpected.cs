@@ -29,7 +29,7 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     }
 
     /// <summary>
-    /// Unexpected error occured
+    /// Unexpected error occured.
     /// </summary>
     public class ErrorUnexpected : DailyPayError
     {
@@ -59,5 +59,4 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

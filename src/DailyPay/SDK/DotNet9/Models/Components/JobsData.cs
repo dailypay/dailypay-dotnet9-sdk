@@ -13,13 +13,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// Returns a list of job objects.
     /// </summary>
     public class JobsData
     {
-
         [JsonProperty("data")]
         public List<JobResource> Data { get; set; } = default!;
     }

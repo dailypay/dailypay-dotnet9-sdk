@@ -12,13 +12,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Returns details about an organization.
     /// </summary>
     public class OrganizationData
     {
-
         [JsonProperty("data")]
         public OrganizationResource Data { get; set; } = default!;
     }

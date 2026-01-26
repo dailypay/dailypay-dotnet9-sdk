@@ -11,13 +11,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
 {
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// A list of links to resources that may be helpful in resolving the error.
     /// </summary>
     public class ErrorUnauthorizedErrorLinks
     {
-
         [JsonProperty("about")]
         public string? About { get; set; }
     }

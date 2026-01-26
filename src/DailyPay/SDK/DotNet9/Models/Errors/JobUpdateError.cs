@@ -29,7 +29,7 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     }
 
     /// <summary>
-    /// Bad Request
+    /// Bad Request.
     /// </summary>
     public class JobUpdateError : DailyPayError
     {
@@ -59,5 +59,4 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

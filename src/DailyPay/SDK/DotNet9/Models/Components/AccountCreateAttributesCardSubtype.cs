@@ -12,9 +12,9 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
-    /// The subtype of the account. Additional subtypes may be added over time
+    /// The subtype of the account. Additional subtypes may be added over time.
     /// </summary>
     public enum AccountCreateAttributesCardSubtype
     {
@@ -56,5 +56,4 @@ namespace DailyPay.SDK.DotNet9.Models.Components
             throw new Exception($"Unknown value {value} for enum AccountCreateAttributesCardSubtype");
         }
     }
-
 }

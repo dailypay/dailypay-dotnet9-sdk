@@ -11,13 +11,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
 {
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Additional information about the error.
     /// </summary>
     public class ErrorAccountCreateErrorMeta
     {
-
         /// <summary>
         /// A UUID for the originating request.
         /// </summary>

@@ -12,10 +12,9 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     public class OrganizationRelationship
     {
-
         [JsonProperty("data")]
         public OrganizationIdentifier Data { get; set; } = default!;
     }
