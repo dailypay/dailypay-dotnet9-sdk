@@ -12,13 +12,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// An account with type `DEPOSITORY` and subtype `SAVINGS` or `CHECKING`.
     /// </summary>
     public class Depository
     {
-
         /// <summary>
         /// A code that indicates the status of an account that is a destination for funds.
         /// </summary>

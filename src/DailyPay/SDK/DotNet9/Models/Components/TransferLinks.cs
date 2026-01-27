@@ -11,10 +11,9 @@ namespace DailyPay.SDK.DotNet9.Models.Components
 {
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     public class TransferLinks
     {
-
         [JsonProperty("self")]
         public string Self { get; set; } = default!;
     }

@@ -29,7 +29,7 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     }
 
     /// <summary>
-    /// A conflict occurred with the current state of the resource
+    /// A conflict occurred with the current state of the resource.
     /// </summary>
     public class ErrorConflict : DailyPayError
     {
@@ -59,5 +59,4 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

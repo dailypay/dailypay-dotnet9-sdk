@@ -12,15 +12,14 @@ namespace DailyPay.SDK.DotNet9.Models.Requests
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     public class UpdateJobResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Returns the updated Job object
+        /// Returns the updated Job object.
         /// </summary>
         public JobData? JobData { get; set; }
     }

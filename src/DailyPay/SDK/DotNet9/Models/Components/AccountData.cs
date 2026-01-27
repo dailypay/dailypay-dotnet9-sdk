@@ -12,13 +12,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     /// <summary>
     /// Returns the account object.
     /// </summary>
     public class AccountData
     {
-
         [JsonProperty("data")]
         public AccountResource Data { get; set; } = default!;
     }

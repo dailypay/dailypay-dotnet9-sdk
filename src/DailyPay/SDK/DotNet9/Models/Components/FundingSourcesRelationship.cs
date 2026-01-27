@@ -13,10 +13,9 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     public class FundingSourcesRelationship
     {
-
         [JsonProperty("data")]
         public List<FundingSourceIdentifier> Data { get; set; } = default!;
     }

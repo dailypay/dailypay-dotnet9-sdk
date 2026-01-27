@@ -9,6 +9,9 @@
 #nullable enable
 namespace DailyPay.SDK.DotNet9.Utils.Retries
 {
+    /// <summary>
+    /// Exponential backoff strategy configuration.
+    /// </summary>
     public class BackoffStrategy
     {
         public readonly long InitialIntervalMs;

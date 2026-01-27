@@ -12,7 +12,7 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     /// <summary>
     /// A code that indicates what went wrong.
     /// </summary>
@@ -56,5 +56,4 @@ namespace DailyPay.SDK.DotNet9.Models.Components
             throw new Exception($"Unknown value {value} for enum ErrorUnauthorizedErrorCode");
         }
     }
-
 }

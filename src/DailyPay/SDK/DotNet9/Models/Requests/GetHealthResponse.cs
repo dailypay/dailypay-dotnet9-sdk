@@ -12,15 +12,14 @@ namespace DailyPay.SDK.DotNet9.Models.Requests
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     public class GetHealthResponse
     {
-
         [JsonProperty("-")]
         public HTTPMetadata HttpMeta { get; set; } = default!;
 
         /// <summary>
-        /// Returns a healthcheck document
+        /// Returns a healthcheck document.
         /// </summary>
         public Health200? Health200 { get; set; }
     }

@@ -12,7 +12,7 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum FilterPaycheckStatus
     {
         [JsonProperty("ESTIMATED")]
@@ -57,5 +57,4 @@ namespace DailyPay.SDK.DotNet9.Models.Components
             throw new Exception($"Unknown value {value} for enum FilterPaycheckStatus");
         }
     }
-
 }

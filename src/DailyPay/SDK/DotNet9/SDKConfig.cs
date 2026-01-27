@@ -17,6 +17,9 @@ namespace DailyPay.SDK.DotNet9
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// Main configuration for the SDK.
+    /// </summary>
     public struct SDKConfig
     {
         /// <summary>
@@ -52,7 +55,7 @@ namespace DailyPay.SDK.DotNet9
                 },
             };
             Version = null;
-            UserAgent = "speakeasy-sdk/csharp 0.8.4 2.797.1 3.0.0-beta101 DailyPay.SDK.DotNet9";
+            UserAgent = "speakeasy-sdk/csharp 0.8.5 2.801.0 3.0.0-beta103 DailyPay.SDK.DotNet9";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;

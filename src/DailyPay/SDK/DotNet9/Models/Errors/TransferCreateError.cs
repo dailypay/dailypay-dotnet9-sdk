@@ -29,7 +29,7 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     }
 
     /// <summary>
-    /// The request contained an error
+    /// The request contained an error.
     /// </summary>
     public class TransferCreateError : DailyPayError
     {
@@ -59,5 +59,4 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
            #pragma warning restore CS0618
         }
     }
-
 }

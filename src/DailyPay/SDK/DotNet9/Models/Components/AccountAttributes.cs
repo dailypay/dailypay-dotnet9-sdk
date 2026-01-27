@@ -55,7 +55,6 @@ namespace DailyPay.SDK.DotNet9.Models.Components
         }
     }
 
-
     /// <summary>
     /// The details of the account.
     /// </summary>

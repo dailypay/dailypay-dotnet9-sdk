@@ -12,7 +12,7 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System;
-    
+
     public enum FilterAccountType
     {
         [JsonProperty("EARNINGS_BALANCE")]
@@ -55,5 +55,4 @@ namespace DailyPay.SDK.DotNet9.Models.Components
             throw new Exception($"Unknown value {value} for enum FilterAccountType");
         }
     }
-
 }

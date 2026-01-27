@@ -12,10 +12,9 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Models.Components;
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
-    
+
     public class JobUpdateData
     {
-
         /// <summary>
         /// A job describes the financial relationship between a person and an organization.
         /// </summary>

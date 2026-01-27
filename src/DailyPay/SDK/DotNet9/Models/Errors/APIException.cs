@@ -13,6 +13,9 @@ namespace DailyPay.SDK.DotNet9.Models.Errors
     using System;
     using System.Net.Http;
 
+    /// <summary>
+    /// Default API Exception.
+    /// </summary>
     public class APIException : DailyPayError
     {
         /// <summary>

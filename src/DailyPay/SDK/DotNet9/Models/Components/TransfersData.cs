@@ -13,13 +13,12 @@ namespace DailyPay.SDK.DotNet9.Models.Components
     using DailyPay.SDK.DotNet9.Utils;
     using Newtonsoft.Json;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// A list of transfer objects.
     /// </summary>
     public class TransfersData
     {
-
         [JsonProperty("data")]
         public List<TransferResource> Data { get; set; } = default!;
 
