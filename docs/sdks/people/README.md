@@ -73,7 +73,7 @@ Update a person object.
 
 ### Example Usage
 
-<!-- UsageSnippet language="csharp" operationID="updatePerson" method="patch" path="/rest/people/{person_id}" -->
+<!-- UsageSnippet language="csharp" operationID="updatePerson" method="patch" path="/rest/people/{person_id}" example="StateOfResidence" -->
 ```csharp
 using DailyPay.SDK.DotNet9;
 using DailyPay.SDK.DotNet9.Models.Components;
