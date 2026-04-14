@@ -37,7 +37,9 @@ namespace DailyPay.SDK.DotNet9
         /// <remarks>
         /// Returns details about a transfer of money from one account to another. <br/>
         /// <br/>
-        /// Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.
+        /// Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ReadTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -57,7 +59,9 @@ namespace DailyPay.SDK.DotNet9
         /// Get a list of transfers.
         /// </summary>
         /// <remarks>
-        /// Returns a list of transfer objects.
+        /// Returns a list of transfer objects.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListTransfersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -79,7 +83,9 @@ namespace DailyPay.SDK.DotNet9
         /// </summary>
         /// <remarks>
         /// Request transfer of funds from an `EARNINGS_BALANCE` account to a<br/>
-        /// personal `DEPOSITORY` or `CARD` account.
+        /// personal `DEPOSITORY` or `CARD` account.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -122,7 +128,9 @@ namespace DailyPay.SDK.DotNet9
         /// <remarks>
         /// Returns details about a transfer of money from one account to another. <br/>
         /// <br/>
-        /// Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.
+        /// Created when a person takes an advance against a future paycheck, or on a daily basis when available balance is updated based on current employment.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ReadTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -155,7 +163,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readTransfer", null, SDKConfiguration.SecuritySource);
@@ -405,7 +413,9 @@ namespace DailyPay.SDK.DotNet9
         /// Get a list of transfers.
         /// </summary>
         /// <remarks>
-        /// Returns a list of transfer objects.
+        /// Returns a list of transfer objects.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListTransfersRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -442,7 +452,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listTransfers", null, SDKConfiguration.SecuritySource);
@@ -667,7 +677,9 @@ namespace DailyPay.SDK.DotNet9
         /// </summary>
         /// <remarks>
         /// Request transfer of funds from an `EARNINGS_BALANCE` account to a<br/>
-        /// personal `DEPOSITORY` or `CARD` account.
+        /// personal `DEPOSITORY` or `CARD` account.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="CreateTransferRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -709,7 +721,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "createTransfer", null, SDKConfiguration.SecuritySource);

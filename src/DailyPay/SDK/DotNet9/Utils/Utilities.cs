@@ -130,11 +130,25 @@ namespace DailyPay.SDK.DotNet9.Utils
                 && o.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
         }
 
+        public static bool IsModelNamespace(string ns)
+        {
+            var modelNamespaces = new[]
+            {
+                "DailyPay.SDK.DotNet9.Models.Requests",
+                "DailyPay.SDK.DotNet9.Models.Components",
+                "DailyPay.SDK.DotNet9.Models.Errors",
+            };
+
+            return modelNamespaces.Contains(ns);
+        }
+
         public static bool IsClass(object? o)
         {
             if (o == null)
                 return false;
-            return o.GetType().IsClass && (o.GetType().FullName ?? "").StartsWith("DailyPay.SDK.DotNet9.Models");
+            if (!o.GetType().IsClass)
+                return false;
+            return IsModelNamespace(o.GetType().Namespace ?? "");
         }
 
         // TODO: code review polyfilled for IsAssignableTo

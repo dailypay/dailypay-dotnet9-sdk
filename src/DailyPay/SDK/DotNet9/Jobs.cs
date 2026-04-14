@@ -35,7 +35,8 @@ namespace DailyPay.SDK.DotNet9
         /// Get a job object.
         /// </summary>
         /// <remarks>
-        /// Returns details about a person's employment.
+        /// Returns details about a person's employment.<br/>
+        /// <para>If set, this operation will use either <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthClientCredentialsToken"/> or <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ReadJobRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -56,7 +57,9 @@ namespace DailyPay.SDK.DotNet9
         /// </summary>
         /// <remarks>
         /// Update this job to set where pay should be deposited for paychecks related to this job,  or deactivate on-demand pay for this job. <br/>
-        /// Returns the job object if the update succeeded. Returns an error if update parameters are invalid.
+        /// Returns the job object if the update succeeded. Returns an error if update parameters are invalid.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="UpdateJobRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -76,7 +79,9 @@ namespace DailyPay.SDK.DotNet9
         /// Get a list of job objects.
         /// </summary>
         /// <remarks>
-        /// Returns a collection of job objects. This object represents a person's employment details.
+        /// Returns a collection of job objects. This object represents a person's employment details.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use either <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthClientCredentialsToken"/> or <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListJobsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -115,7 +120,8 @@ namespace DailyPay.SDK.DotNet9
         /// Get a job object.
         /// </summary>
         /// <remarks>
-        /// Returns details about a person's employment.
+        /// Returns details about a person's employment.<br/>
+        /// <para>If set, this operation will use either <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthClientCredentialsToken"/> or <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ReadJobRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -148,7 +154,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthClientCredentialsToken", "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "readJob", new List<string> { "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
@@ -399,7 +405,9 @@ namespace DailyPay.SDK.DotNet9
         /// </summary>
         /// <remarks>
         /// Update this job to set where pay should be deposited for paychecks related to this job,  or deactivate on-demand pay for this job. <br/>
-        /// Returns the job object if the update succeeded. Returns an error if update parameters are invalid.
+        /// Returns the job object if the update succeeded. Returns an error if update parameters are invalid.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="UpdateJobRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -438,7 +446,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "updateJob", null, SDKConfiguration.SecuritySource);
@@ -688,7 +696,9 @@ namespace DailyPay.SDK.DotNet9
         /// Get a list of job objects.
         /// </summary>
         /// <remarks>
-        /// Returns a collection of job objects. This object represents a person's employment details.
+        /// Returns a collection of job objects. This object represents a person's employment details.<br/>
+        /// <br/>
+        /// <para>If set, this operation will use either <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthClientCredentialsToken"/> or <see cref="DailyPay.SDK.DotNet9.Models.Components.Security.OauthUserToken"/> from the global security.</para>
         /// </remarks>
         /// <param name="request">A <see cref="ListJobsRequest"/> parameter.</param>
         /// <param name="retryConfig">The retry configuration to use for this operation.</param>
@@ -722,7 +732,7 @@ namespace DailyPay.SDK.DotNet9
 
             if (SDKConfiguration.SecuritySource != null)
             {
-                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource).Apply(httpRequest);
+                httpRequest = new SecurityMetadata(SDKConfiguration.SecuritySource, new string[] { "OauthClientCredentialsToken", "OauthUserToken" }).Apply(httpRequest);
             }
 
             var hookCtx = new HookContext(SDKConfiguration, baseUrl, "listJobs", new List<string> { "client:lookup", "client:admin" }, SDKConfiguration.SecuritySource);
