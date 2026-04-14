@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta107
+  version: 3.0.0-beta.109
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -2650,6 +2650,41 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/PersonResource'
+    PersonUpdateData:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          x-go-type-name: PersonUpdateResource
+          x-speakeasy-name-override: PersonUpdateResource
+          required:
+            - type
+            - id
+            - attributes
+          properties:
+            type:
+              type: string
+              const: people
+            id:
+              type: string
+              format: uuid
+              example: aa860051-c411-4709-9685-c1b716df611b
+            attributes:
+              type: object
+              x-go-type-name: PersonUpdateAttributes
+              x-speakeasy-name-override: PersonUpdateAttributes
+              required:
+                - state_of_residence
+              description: A person is a record of someone known to DailyPay. There will only ever be one person record per human being.
+              properties:
+                state_of_residence:
+                  type: string
+                  description: |
+                    The two-letter abbreviation for the state in which the person resides, if located in the United States.  This is used for regulatory compliance purposes.
+                  maxLength: 2
+                  example: NY
   responses:
     Job200:
       description: Returns the job object.
@@ -3012,42 +3047,7 @@ components:
       content:
         application/vnd.api+json:
           schema:
-            type: object
-            x-go-type-name: PersonUpdateData
-            x-speakeasy-name-override: PersonUpdateData
-            required:
-              - data
-            properties:
-              data:
-                type: object
-                x-go-type-name: PersonUpdateResource
-                x-speakeasy-name-override: PersonUpdateResource
-                required:
-                  - type
-                  - id
-                  - attributes
-                properties:
-                  type:
-                    type: string
-                    const: people
-                  id:
-                    type: string
-                    format: uuid
-                    example: aa860051-c411-4709-9685-c1b716df611b
-                  attributes:
-                    type: object
-                    x-go-type-name: PersonUpdateAttributes
-                    x-speakeasy-name-override: PersonUpdateAttributes
-                    required:
-                      - state_of_residence
-                    description: A person is a record of someone known to DailyPay. There will only ever be one person record per human being.
-                    properties:
-                      state_of_residence:
-                        type: string
-                        description: |
-                          The two-letter abbreviation for the state in which the person resides, if located in the United States.  This is used for regulatory compliance purposes.
-                        maxLength: 2
-                        example: NY
+            $ref: '#/components/schemas/PersonUpdateData'
           examples:
             StateOfResidence:
               summary: Update the state of residence for the person
