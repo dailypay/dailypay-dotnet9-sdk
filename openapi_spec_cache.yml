@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta.110
+  version: 3.0.0-beta.111
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -1113,10 +1113,12 @@ components:
           $ref: '#/components/schemas/OrganizationRelationship'
         direct_deposit_default_depository:
           description: The `DEPOSITORY` account to which paychecks from this job will attempt to be deposited.
-          $ref: '#/components/schemas/AccountRelationship'
+          allOf:
+            - $ref: '#/components/schemas/AccountRelationship'
         direct_deposit_default_card:
           description: The `CARD` account to which paychecks from this job will attempt to be deposited, if the `DEPOSITORY` account fails.
-          $ref: '#/components/schemas/AccountRelationship'
+          allOf:
+            - $ref: '#/components/schemas/AccountRelationship'
     JobResource:
       type: object
       description: A job describes the financial relationship between a person and an organization.
@@ -1370,10 +1372,12 @@ components:
               properties:
                 direct_deposit_default_depository:
                   description: The `DEPOSITORY` account to which paychecks from this job will attempt to be deposited.
-                  $ref: '#/components/schemas/AccountRelationship'
+                  allOf:
+                    - $ref: '#/components/schemas/AccountRelationship'
                 direct_deposit_default_card:
                   description: The `CARD` account to which paychecks from this job will attempt to be deposited, if the `DEPOSITORY` account fails.
-                  $ref: '#/components/schemas/AccountRelationship'
+                  allOf:
+                    - $ref: '#/components/schemas/AccountRelationship'
             attributes:
               type: object
               x-go-type-name: JobUpdateAttributes
@@ -1948,7 +1952,8 @@ components:
             The amount of funds requested to move from the origin account to the destination account. Any fees will be subtracted from this amount prior to landing in the destination account.
 
             A monetary quantity expressed in units of the lowest denomination in the associated currency. For example, `{ amount: 7250, currency: 'USD' }` resolves to $72.50.
-          $ref: '#/components/schemas/Amount'
+          allOf:
+            - $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
         schedule:
@@ -2093,7 +2098,8 @@ components:
             The account to which funds are transferred. 
 
             User-created transfers should have a destination Account with `account_type` `DEPOSITORY` or `CARD`.
-          $ref: '#/components/schemas/AccountRelationship'
+          allOf:
+            - $ref: '#/components/schemas/AccountRelationship'
         person:
           $ref: '#/components/schemas/PersonRelationship'
         estimated_funding_sources:
@@ -2102,13 +2108,15 @@ components:
 
             The paychecks impacted, and final amount allocated from each paycheck is subject to change. 
             See `final_funding_sources` for the final allocations.
-          $ref: '#/components/schemas/FundingSourcesRelationship'
+          allOf:
+            - $ref: '#/components/schemas/FundingSourcesRelationship'
         final_funding_sources:
           description: |
             On user-created transfers, details the paychecks that were used to reimburse this transfer and the amount allocated from each paycheck.
 
             If this relationship has members, its members and their values are immutable.
-          $ref: '#/components/schemas/FundingSourcesRelationship'
+          allOf:
+            - $ref: '#/components/schemas/FundingSourcesRelationship'
     TransferResource:
       type: object
       required:
@@ -2144,7 +2152,8 @@ components:
 
             A monetary quantity expressed in units of the lowest denomination in the
             associated currency. For example, `{ amount: 7250, currency: 'USD' }` resolves to $72.50.
-          $ref: '#/components/schemas/Amount'
+          allOf:
+            - $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
     TransferIdentifier:
@@ -2178,7 +2187,6 @@ components:
         - transfer
       properties:
         source:
-          description: Identifies a resource, usually a paycheck, used as a source of funds for a transfer.
           $ref: '#/components/schemas/PaycheckRelationship'
         transfer:
           $ref: '#/components/schemas/TransferRelationship'
@@ -2235,13 +2243,15 @@ components:
         origin:
           description: |
             User-created transfers must originate from an Account with `account_type` `EARNINGS_BALANCE`.
-          $ref: '#/components/schemas/AccountRelationship'
+          allOf:
+            - $ref: '#/components/schemas/AccountRelationship'
         destination:
           description: |
             The account to which funds are transferred. 
 
             User-created transfers should have a destination Account with `account_type` `DEPOSITORY` or `CARD`.
-          $ref: '#/components/schemas/AccountRelationship'
+          allOf:
+            - $ref: '#/components/schemas/AccountRelationship'
         person:
           $ref: '#/components/schemas/PersonRelationship'
     TransferCreateResource:
