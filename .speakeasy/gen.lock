@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 957ae967-7255-4970-9b37-fccfb74289a2
 management:
-  docChecksum: 6f94c18ab521a74927e42505763a124f
-  docVersion: 3.0.0-beta.112
-  speakeasyVersion: 1.762.0
-  generationVersion: 2.882.0
-  releaseVersion: 0.8.14
-  configChecksum: 0053d4624cc43f66a1048a8f902036ac
+  docChecksum: 1e7084a73367eb4196151f14cf4a5d0e
+  docVersion: 3.0.0-beta.114
+  speakeasyVersion: 1.763.2
+  generationVersion: 2.884.4
+  releaseVersion: 0.8.15
+  configChecksum: e2819d782f8c51556a8fa1dbef01ac41
 persistentEdits:
-  generation_id: 5dbed314-476e-4581-9db0-7a634f27512f
-  pristine_commit_hash: c4812a97b0a1d9519e8966379e21c956aae9d20c
-  pristine_tree_hash: 210477532b4add886fca377073782552179f341e
+  generation_id: c1f14069-f510-411e-a16d-ac943f304002
+  pristine_commit_hash: c1cb7f6f9330310dc1b0e8b75b449c45a4619613
+  pristine_tree_hash: e70ca93c50d38718f976fd85e1893acf7c05e749
 features:
   csharp:
     additionalDependencies: 0.1.0
@@ -701,6 +701,14 @@ trackedFiles:
     id: 3f0297c2648e
     last_write_checksum: sha1:ff4b7f03e0ddfe38636bc7ab15336f3c2fe355ee
     pristine_git_object: d78ae5b15d6b1734def888a0656cecca9c236837
+  docs/Models/Requests/DeleteAccountRequest.md:
+    id: c8cc32a817e1
+    last_write_checksum: sha1:b105a8115d7a0f2ef5a6fb82453991c4f7b099d1
+    pristine_git_object: 44c26e00842229fec7533aeb4e2ad9486196db7f
+  docs/Models/Requests/DeleteAccountResponse.md:
+    id: ae8d53336529
+    last_write_checksum: sha1:37199f41d7f9453ef851d574c17c4604f9538218
+    pristine_git_object: a583f858cf06becabb4b40ae9da72e0a46729a14
   docs/Models/Requests/GetHealthResponse.md:
     id: 0a76a97666d5
     last_write_checksum: sha1:4c726b9513f1804b96fe40c7dfcb24a95d248ce5
@@ -811,8 +819,8 @@ trackedFiles:
     pristine_git_object: 606b396f348e96c657d1c0eca1c28264dbb1ed65
   docs/sdks/accounts/README.md:
     id: d6c754b1ca96
-    last_write_checksum: sha1:ccb306a46317fc2c06f65f69c74fe3e5fea28d5a
-    pristine_git_object: e8f2b229cb8502cb318a461e3fb770e92f442336
+    last_write_checksum: sha1:5ca68e6a0204d5f2db7952bf9aad27eb627c53a9
+    pristine_git_object: c1ca3e76b1e046e83ab0d8f7e040f5436b51b8d0
   docs/sdks/cardtokenization/README.md:
     id: 43823e4558a8
     last_write_checksum: sha1:3d2bef5fc310cd0096a95cf258f89ff89fab08ef
@@ -847,16 +855,16 @@ trackedFiles:
     pristine_git_object: ef3195af86a7d6ef1e34296c380fd52d85b696fd
   src/DailyPay/SDK/DotNet9/Accounts.cs:
     id: 83ff204e6baf
-    last_write_checksum: sha1:88f0f1f18a060fbf8794d6c261bc804963ee630e
-    pristine_git_object: a86a0e8f3ec086943f9a117d27c8362dc5d19c6e
+    last_write_checksum: sha1:5bc94a39bcb3230d6177b45ca354b222dda57302
+    pristine_git_object: 4900899fa5d5ba4c724e9778e8732a77a781e77a
   src/DailyPay/SDK/DotNet9/CardTokenization.cs:
     id: d2a6f2d440a7
     last_write_checksum: sha1:11c9f54bfa6e817269f92cc0523cb5d7f1b31468
     pristine_git_object: 825035753a7d811daace2447b56a1c5b466e1c4c
   src/DailyPay/SDK/DotNet9/DailyPay.SDK.DotNet9.csproj:
     id: 4e1cc95b07f3
-    last_write_checksum: sha1:e8fd32dd2f667b09382f1c7d16dc4b2e819b7902
-    pristine_git_object: 29801fcb88d641cfae519b938c29353cc2db220b
+    last_write_checksum: sha1:c7e6e1208ce3c895535143fd77c30744c4ba5e13
+    pristine_git_object: e5a694612078fd78eb17701c921e0f42a4180748
   src/DailyPay/SDK/DotNet9/Health.cs:
     id: e81381e0f3d5
     last_write_checksum: sha1:d94a444d86d9ed665e1c6693e55d71245c521ef8
@@ -1549,6 +1557,14 @@ trackedFiles:
     id: 842ee61f3a42
     last_write_checksum: sha1:7afc147588781445533a4f45d05955e973219272
     pristine_git_object: 50c21ec5025db0dbb20e6746c9e1714f4fa4aec0
+  src/DailyPay/SDK/DotNet9/Models/Requests/DeleteAccountRequest.cs:
+    id: 668c8be478c2
+    last_write_checksum: sha1:6c90e44c84f2e4a494e441395648230e492fdc79
+    pristine_git_object: 1dd2642473195e254ea2135b95f63639982fe468
+  src/DailyPay/SDK/DotNet9/Models/Requests/DeleteAccountResponse.cs:
+    id: afab2c32400f
+    last_write_checksum: sha1:6e17e29511450548814bcb21acda28c292343307
+    pristine_git_object: 24cea202c6dc1b0198457102dd3be6a697a9789d
   src/DailyPay/SDK/DotNet9/Models/Requests/GetHealthResponse.cs:
     id: ac17e1883eb1
     last_write_checksum: sha1:57648f9cedf464b3d8b0d243e23a38b62a7b140e
@@ -1675,8 +1691,8 @@ trackedFiles:
     pristine_git_object: 7e2908c6ebd26f3adce1e6156d81c39921a300da
   src/DailyPay/SDK/DotNet9/SDKConfig.cs:
     id: 61689d242469
-    last_write_checksum: sha1:ba9911ee392660fa1372bb2d75472b0c48aab16b
-    pristine_git_object: 4e2b8ff3102897a5625f21d35fa32a5096f7af07
+    last_write_checksum: sha1:ef9a8fdf74edafa6c402b8bdbae187a8ccac7499
+    pristine_git_object: 3475d87c340b0e9ce915ddc73335108846a6aacf
   src/DailyPay/SDK/DotNet9/Transfers.cs:
     id: 5ea2e76dde98
     last_write_checksum: sha1:37e5bdc1f0ce12685c7aa49740b43f4ce0496515
@@ -1691,8 +1707,8 @@ trackedFiles:
     pristine_git_object: b8fbb3d0d61daa2feb340e03552e8856899a3c13
   src/DailyPay/SDK/DotNet9/Utils/Constants.cs:
     id: 2411df5fa6b9
-    last_write_checksum: sha1:ae00af27dca447034ddd2c37715d7f2e7a7ba6da
-    pristine_git_object: 1d75b6ac7297c95c0802d48635da126d951e3a39
+    last_write_checksum: sha1:fd84c7faa9fab4d497ab96826fe89640160b3e2a
+    pristine_git_object: cd8a9131c405a42cfd9361535a3385687641bbfb
   src/DailyPay/SDK/DotNet9/Utils/DecimalStrConverter.cs:
     id: 6bb6ec219c31
     last_write_checksum: sha1:557001cd2c9ed880baa4ffbd536c936dfcebc177
@@ -2256,6 +2272,24 @@ examples:
           application/json: {"status": "UP", "version": "3.0.0"}
         "401":
           application/vnd.api+json: {"errors": []}
+        "500":
+          application/vnd.api+json: {"errors": []}
+  deleteAccount:
+    speakeasy-default-delete-account:
+      parameters:
+        path:
+          account_id: "2bc7d781-3247-46f6-b60f-4090d214936a"
+        header:
+          DailyPay-API-Version: 3
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "INVALID_PARAMETERS", "status": "400", "detail": "The request failed because it was not in the correct format or did not contain valid data.", "links": {"about": "https://developer.dailypay.com/tag/Errors"}, "source": {"parameter": "filter[first_name]", "pointer": "/data/attributes/first_name", "header": "Accept"}, "meta": {"request_id": "3c526bf4-f3c0-4c4a-a4cb-95f7db8b3bbe", "trace_id": "4016616108459136584"}}]}
+        "401":
+          application/vnd.api+json: {"errors": [{"status": "400", "detail": "The request failed because it was not in the correct format or did not contain valid data.", "links": {"about": "https://developer.dailypay.com/tag/Errors"}, "source": {"parameter": "filter[first_name]", "pointer": "/data/attributes/first_name", "header": "Accept"}, "meta": {"request_id": "3c526bf4-f3c0-4c4a-a4cb-95f7db8b3bbe", "trace_id": "4016616108459136584"}, "code": "INVALID_TOKEN"}]}
+        "403":
+          application/vnd.api+json: {"errors": [{"status": "400", "detail": "The request failed because it was not in the correct format or did not contain valid data.", "links": {"about": "https://developer.dailypay.com/tag/Errors"}, "source": {"parameter": "filter[first_name]", "pointer": "/data/attributes/first_name", "header": "Accept"}, "meta": {"request_id": "3c526bf4-f3c0-4c4a-a4cb-95f7db8b3bbe", "trace_id": "4016616108459136584"}, "code": "FORBIDDEN"}]}
+        "404":
+          application/vnd.api+json: {"errors": [{"status": "400", "detail": "The request failed because it was not in the correct format or did not contain valid data.", "links": {"about": "https://developer.dailypay.com/tag/Errors"}, "source": {"parameter": "filter[first_name]", "pointer": "/data/attributes/first_name", "header": "Accept"}, "meta": {"request_id": "3c526bf4-f3c0-4c4a-a4cb-95f7db8b3bbe", "trace_id": "4016616108459136584"}, "code": "RECORD_NOT_FOUND"}]}
         "500":
           application/vnd.api+json: {"errors": []}
 examplesVersion: 1.0.2
