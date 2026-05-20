@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta.112
+  version: 3.0.0-beta.114
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -219,6 +219,28 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Account200'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/Unexpected'
+    delete:
+      tags:
+        - Accounts
+      summary: Delete an Account
+      description: Removes a previously added DEPOSITORY or CARD account. EARNINGS_BALANCE accounts cannot be deleted.
+      operationId: deleteAccount
+      security:
+        - oauth_user_token:
+            - user:read_write
+      responses:
+        '204':
+          description: Account successfully deleted
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
