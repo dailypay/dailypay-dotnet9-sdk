@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta.114
+  version: 3.0.0-beta.115
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -1872,6 +1872,9 @@ components:
             address_state:
               type: string
               description: The two-letter abbreviation of the state in the address for the card.
+              pattern: ^[A-Z]{2}$
+              minLength: 2
+              maxLength: 2
               example: NJ
             address_zip_code:
               type: string
@@ -1935,6 +1938,7 @@ components:
                 DUPLICATE_ACCOUNT: Provided input matches an already existing account
                 INVALID_DEBIT_CARD: Provided debit card is invalid
                 INVALID_CARD_TOKEN: Provided card token is invalid
+                INVALID_FIELDS: One or more fields have an invalid format
                 MISSING_REQUIRED_FIELD: Required field was not provided
                 INVALID_USER_INPUT: The server was unable to understand the request. Check for syntax or structural errors.
                 INVALID_PARAMETERS: Missing or invalid request parameters provided. See the `details` field for specifics.
