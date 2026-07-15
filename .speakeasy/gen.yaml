@@ -30,7 +30,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.8.18
+  version: 0.8.19
   additionalDependencies: []
   author: DailyPay, Inc.
   baseErrorName: DailyPayError
@@ -61,7 +61,10 @@ csharp:
   outputModelSuffix: output
   packageName: DailyPay.SDK.DotNet9
   packageTags: ""
+  presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sourceDirectory: src
+  targetFramework: dotnetVersion
+  unionStrategy: left-to-right
   useNodatime: true
