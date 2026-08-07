@@ -55,7 +55,7 @@ namespace DailyPay.SDK.DotNet9
                 },
             };
             Version = null;
-            UserAgent = "speakeasy-sdk/csharp 0.8.21 2.924.0 3.0.0-beta.119 DailyPay.SDK.DotNet9";
+            UserAgent = "speakeasy-sdk/csharp 0.8.22 2.926.8 3.0.0-beta.120 DailyPay.SDK.DotNet9";
             SecuritySource = null;
             Hooks = new SDKHooks();
             RetryConfig = null;
