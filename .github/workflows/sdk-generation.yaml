@@ -80,7 +80,7 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: sdk-auto-gen-dotnet9-${{ github.run_id }}
+          branch: sdk-auto-gen-dotnet9
           base: main
           commit-message: "chore: regenerate .NET 9 SDK"
           title: "chore: regenerate .NET 9 SDK - OpenAPI spec updated"
