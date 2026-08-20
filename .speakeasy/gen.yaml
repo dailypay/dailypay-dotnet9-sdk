@@ -30,7 +30,7 @@ generation:
     generateNewTests: true
     skipResponseBodyAssertions: false
 csharp:
-  version: 0.8.22
+  version: 0.9.0
   additionalDependencies: []
   author: DailyPay, Inc.
   baseErrorName: DailyPayError
@@ -43,6 +43,8 @@ csharp:
   enableSourceLink: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
+  forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: false
   httpClientPrefix: Speakeasy
   imports:
     option: openapi
@@ -64,6 +66,7 @@ csharp:
   presenceAwareJsonSerialization: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
+  schemaValidation: strict
   sourceDirectory: src
   targetFramework: dotnetVersion
   unionStrategy: left-to-right
