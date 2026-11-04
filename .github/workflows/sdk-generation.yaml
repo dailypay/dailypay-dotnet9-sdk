@@ -33,16 +33,20 @@ jobs:
             if cmp -s "openapi_spec_cache.yml" "/tmp/openapi/current_spec.yml"; then
               echo "Published OpenAPI spec matches the cached spec on main"
               echo "SPEC_CHANGED=false" >> "$GITHUB_ENV"
-            # gen.lock differs every run, so regenerating this spec would force-push the open PR and dismiss its approvals.
-            elif [ "$(gh pr list --head "$REGEN_BRANCH" --base main --state open --json isCrossRepository --jq 'any(.[]; .isCrossRepository | not)')" = true ] \
-              && git fetch --depth=1 origin "refs/heads/$REGEN_BRANCH" \
-              && git show FETCH_HEAD:openapi_spec_cache.yml > /tmp/openapi/pr_spec.yml \
-              && cmp -s /tmp/openapi/pr_spec.yml /tmp/openapi/current_spec.yml; then
-              echo "Open PR on $REGEN_BRANCH already has the published OpenAPI spec"
-              echo "SPEC_CHANGED=false" >> "$GITHUB_ENV"
             else
               echo "Published OpenAPI spec differs from the cached spec on main"
-              echo "SPEC_CHANGED=true" >> "$GITHUB_ENV"
+              SPEC_CHANGED=true
+              # gen.lock differs every run, so regenerating this spec would force-push the open PR and dismiss its approvals.
+              OPEN_PR=$(gh pr list --head "$REGEN_BRANCH" --base main --state open --json isCrossRepository --jq 'any(.[]; .isCrossRepository | not)')
+              if [ "$OPEN_PR" = true ]; then
+                git fetch --depth=1 origin "refs/heads/$REGEN_BRANCH"
+                git show FETCH_HEAD:openapi_spec_cache.yml > /tmp/openapi/pr_spec.yml
+                if cmp -s /tmp/openapi/pr_spec.yml /tmp/openapi/current_spec.yml; then
+                  echo "Open PR on $REGEN_BRANCH already has the published OpenAPI spec"
+                  SPEC_CHANGED=false
+                fi
+              fi
+              echo "SPEC_CHANGED=$SPEC_CHANGED" >> "$GITHUB_ENV"
             fi
           else
             echo "No cached spec found, treating as changed"
