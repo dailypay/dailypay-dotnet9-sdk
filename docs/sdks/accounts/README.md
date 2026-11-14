@@ -327,5 +327,6 @@ var res = await sdk.Accounts.CreateAsync(req);
 | DailyPay.SDK.DotNet9.Models.Errors.AccountCreateError | 400                                                   | application/vnd.api+json                              |
 | DailyPay.SDK.DotNet9.Models.Errors.ErrorUnauthorized  | 401                                                   | application/vnd.api+json                              |
 | DailyPay.SDK.DotNet9.Models.Errors.ErrorForbidden     | 403                                                   | application/vnd.api+json                              |
-| DailyPay.SDK.DotNet9.Models.Errors.ErrorUnexpected    | 500                                                   | application/vnd.api+json                              |
+| DailyPay.SDK.DotNet9.Models.Errors.ErrorConflict      | 409                                                   | application/vnd.api+json                              |
+| DailyPay.SDK.DotNet9.Models.Errors.ErrorUnexpected    | 500, 503                                              | application/vnd.api+json                              |
 | DailyPay.SDK.DotNet9.Models.Errors.APIException       | 4XX, 5XX                                              | \*/\*                                                 |

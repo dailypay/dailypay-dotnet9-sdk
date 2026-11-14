@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  version: 3.0.0-beta.126
+  version: 3.0.0-beta.132
   termsOfService: https://www.dailypay.com/en-us/legal/direct/dailypay-client-api-terms-of-use/
   title: DailyPay Rest API
   x-logo:
@@ -307,8 +307,12 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/Unexpected'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
   /rest/transfers/{transfer_id}:
     parameters:
       - $ref: '#/components/parameters/apiversion'
@@ -1954,6 +1958,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorAccountCreateError'
+    ErrorConflictError:
+      allOf:
+        - type: object
+          required:
+            - code
+          properties:
+            code:
+              description: A code that indicates what went wrong.
+              example: IDEMPOTENCY_KEY_LOCKED
+              type: string
+              x-go-type: string
+              x-enumDescriptions:
+                IDEMPOTENCY_KEY_LOCKED: The provided idempotency key is currently being used by another request.  This can happen if there are multiple simultaneous requests with the same idempotency key. It is safe to retry the request.
+                DEBIT_CARD_CREATION_IN_PROGRESS: Another debit card is being added for this person. It is safe to retry the request shortly.
+        - $ref: '#/components/schemas/Error'
+    ErrorConflict:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          description: A list of errors that occurred.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorConflictError'
     TransferCreateAttributes:
       type: object
       required:
@@ -2349,30 +2378,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ErrorTransferCreateError'
-    ErrorConflictError:
-      allOf:
-        - type: object
-          required:
-            - code
-          properties:
-            code:
-              description: A code that indicates what went wrong.
-              example: IDEMPOTENCY_KEY_LOCKED
-              type: string
-              x-go-type: string
-              x-enumDescriptions:
-                IDEMPOTENCY_KEY_LOCKED: The provided idempotency key is currently being used by another request.  This can happen if there are multiple simultaneous requests with the same idempotency key. It is safe to retry the request.
-        - $ref: '#/components/schemas/Error'
-    ErrorConflict:
-      type: object
-      required:
-        - errors
-      properties:
-        errors:
-          description: A list of errors that occurred.
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorConflictError'
     PaycheckAttributes:
       type: object
       required:
@@ -2871,6 +2876,18 @@ components:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/AccountCreateError'
+    Conflict:
+      description: A conflict occurred with the current state of the resource
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorConflict'
+    ServiceUnavailable:
+      description: A service is temporarily unavailable. It is safe to retry the request.
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/ErrorUnexpected'
     Transfer200:
       description: Returns the newly created transfer object.
       content:
@@ -2889,12 +2906,6 @@ components:
         application/vnd.api+json:
           schema:
             $ref: '#/components/schemas/TransferCreateError'
-    Conflict:
-      description: A conflict occurred with the current state of the resource
-      content:
-        application/vnd.api+json:
-          schema:
-            $ref: '#/components/schemas/ErrorConflict'
     Paycheck200:
       description: Returns the paycheck object.
       content:
